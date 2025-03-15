@@ -61,13 +61,14 @@ ul {
 
 li {
 	float: left;
+	padding: 2px;
 }
 
 li a {
   display: block;
   color: #000000;
   text-align: center;
-  padding: 18px 16px;
+  padding: 16px 14px;
   text-decoration: none;
 }
 
