@@ -138,7 +138,7 @@ function copyTxt(idElem) {
   alert("Copied to clipboard: " + copyText.value);
 }
 function autoSizeOne() {
-  document.getElementById('copytxt').style.width = (copytxt.value.length) + 'ch';
+  document.getElementById('copytxt').style.width = ((copytxt.value.length) - 18) + 'ch';
 }
 
 window.onload = autoSizeOne();
