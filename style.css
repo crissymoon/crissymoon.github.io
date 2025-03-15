@@ -126,7 +126,7 @@ input {
 	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
 	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
 	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
-  width: fit-content;
+  width:40%;
   border: 0;
   padding: 1px;
 }
