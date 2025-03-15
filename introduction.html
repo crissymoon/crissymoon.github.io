@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- post 1 -->
+<h2 class="border_box_shadow_topic">Topic: AI</h2>
+
+<p class="border_box_shadow_p">
+Hello! I’m Crissy, and I’m delighted to welcome you to my portfolio and blog. I have always had a deep passion for computers, especially programming. I enjoy discovering innovative ways to streamline tasks, often reducing them to just a few clicks. Some time ago, I was introduced to a remarkable open-source AI system called OpenAI, which sparked my interest. I eagerly began utilizing the scripts provided upon signing up, and it has been an exciting journey ever since!
+<br><br>
+I did edit it somewhat to a simple reusable function.
+<br><br>
+</p>
+<div class="border_box_shadow_p" style="background-color: #000000;">
+<code>
+#basic Open AI Example, Currently running Python 3.13<br>
+#import<br>
+from openai import OpenAI
+<br><br>
+#https://openai.com/  <- create a account to get an api key<br>
+client = OpenAI(api_key="YOUR_API_KEY_GOES_HERE")
+<br><br>
+def open_ai(ask):<br>
+&nbsp&nbspcompletion = client.chat.completions.create(<br>
+&nbsp&nbsp&nbsp&nbspmodel="gpt-4o-mini",<br>
+&nbsp&nbsp&nbsp&nbspstore=True,<br>
+&nbsp&nbsp&nbsp&nbspmessages=[<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{"role": "user", "content": f"{ask}"}<br>
+&nbsp&nbsp&nbsp&nbsp]<br>
+&nbsp&nbsp)<br>
+&nbsp&nbspprint(completion.choices[0].message.content)
+<br><br>
+open_ai("What is AI?")
+</code>
+</div>
+
+
+<!-- post 2 -->
+<h2 class="border_box_shadow_topic">Read About. . .</h2>
+
+<p class="border_box_shadow_p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<!-- post 3 -->
+<h2 class="border_box_shadow_topic">Read About. . .</h2>
+
+<p class="border_box_shadow_p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+</html>

@@ -1,0 +1,144 @@
+
+<style>
+	
+body {
+	background-color: #faf9f6;
+}
+
+.border_box_shadow {
+	border: 1px solid #000000; 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.border_box_shadow_topic {
+	border: 1px solid #000000; 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: #e6ccff; 
+	text-align: center; 
+	padding: 15px;
+}
+.border_box_shadow_p {
+	border: 1px solid #000000; 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #d9b3ff;
+    padding: 15px;
+}
+.footer {
+  border: 1px solid #000000; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #8000ff;
+  color: #faf9f6;
+  text-align: center;
+}
+.border_box_shadow_code {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 15px;
+  background-color: #330066; 
+  border: 1px solid #000000; 
+}
+.img_center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+/* navbar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #8000ff;
+  border: 1px solid #000000; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  font-size: 18px;
+  padding: 3px;
+}
+
+li {
+  float: left;
+  padding-right: 3px;
+}
+
+li a {
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 18px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
+	background-image:    -moz-linear-gradient(top, #8000ff, #f2e6ff); /* For old Fx (3.6 to 15) */
+	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
+	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
+	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
+	opacity: 0.2;
+  box-shadow: 0 0 10px 5px #000;
+  border: 1px solid #000000; 
+}
+.active {
+	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
+	background-image:    -moz-linear-gradient(top, #8000ff, #f2e6ff); /* For old Fx (3.6 to 15) */
+	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
+	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
+	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
+  opacity: 0.2;
+  box-shadow: 0 0 10px 5px #000;
+  border: 1px solid #000000; 
+}
+.main_heading {
+	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
+	background-image:    -moz-linear-gradient(top, #8000ff, #f2e6ff); /* For old Fx (3.6 to 15) */
+	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
+	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
+	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
+	border: 1px solid #000000; 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	text-align: center; 
+	padding: 40px 0; 
+
+}
+.iframe_specs {
+	height: 80vh;
+	width: 100%;
+	border: 0;'
+	padding: 0;
+}
+
+code {
+  color: #ffffff;
+  padding: 2px;
+  font-size: 105%;
+}
+button {
+	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
+	background-image:    -moz-linear-gradient(top, #8000ff, #f2e6ff); /* For old Fx (3.6 to 15) */
+	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
+	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
+	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
+	border: 0;
+}
+input {
+	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
+	background-image:    -moz-linear-gradient(top, #8000ff, #f2e6ff); /* For old Fx (3.6 to 15) */
+	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
+	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
+	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
+  width: fit-content;
+  border: 0;
+  padding: 1px;
+}
+
+
+.spin-image {
+  animation: img-spin 10s linear infinite;
+}
+
+@keyframes img-spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+</style>
