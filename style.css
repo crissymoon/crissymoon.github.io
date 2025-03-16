@@ -211,4 +211,27 @@ input {
     font-size: 16px;
 }
 
+.divider {
+    height: 5px;
+    background: linear-gradient(to bottom, #8000ff, #ffffff, #8000ff);
+}
+
+.welcome {
+  width: 100px;
+  position: relative;
+  animation-name: welcome_move;
+  animation-duration: 5s;
+  animation-iteration-count: 5s;
+  text-align: center
+}
+
+@keyframes welcome_move {
+  0%   {color: #8000ff; left:-75px}
+  20%  {color: #000000; left:75px}
+  40%  {color: #8000ff; left:-75px}
+  60%  {color: #000000; left:75px;}
+  60%  {color: #8000ff; left:-75px;}
+  100% {color: #000000; left:0px;}
+}
+
 </style>
