@@ -24,31 +24,73 @@
   <!-- <li><a href="#contact">Downloads</a></li> -->
 </ul>
 
-<!-- ------------------------------------------------------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+
 
 
 
 <!-- body/iframe -->
 <!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
-<h2 class="border_box_shadow_topic">AI/Python Tutorial, Last Updated: 3/13/2025</h2>
+<h2 class="border_box_shadow_topic">Build a basic HTML webpage!, Last Updated: 3/13/2025</h2>
 
 
 <!-- intro -->
 <p class="border_box_shadow_p">
-Hello! This is my first post! I’m Crissy, and I’m delighted to welcome you to my portfolio/blog. I have always had a deep passion for computers, especially programming. I enjoy discovering innovative ways to streamline tasks, often reducing them to just a few clicks. Some time ago, I was introduced to a remarkable open-source AI system called OpenAI, which sparked my interest. I eagerly began utilizing the scripts provided upon signing up, and it has been an exciting journey ever since!
-<br><br>
-I did edit it somewhat to a simple reusable function.
+In this tutorial, I will present the complete code and review several tags and explanations related to creating a basic web page, focusing on the rows aspect. Developing a simple web page—often called the first "Hello World" program, webpage, or app in most tutorials—is a foundational step in any development journey and an excellent introduction for what lies ahead. In today’s world, there are numerous devices, and it’s important to note that your page may appear differently across various screens, particularly when delving into intricate details. So, being simple and somewhat basic is a great practice, but this is opinionated and depends on how much time a person has to update the site.
 </p>
 
 
 
 
+
+
+
+<!-- text area content -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<div class="border_box_shadow_code">
+  <!-- text area height is about 14-16px per row depending on fontsize my font size is 16px, but can vary some so fiqure a liitle more just in case; 40 rows times 16 = 640px, just set width to 90-100% -->
+<textarea id="resizehtmltext" style="height:600px">
+
+<!DOCTYPE html><html>
+
+<head>
+
+  <title>EDITZ - Build a basic HTML webpage! (Tutorial)</title>
+
+  <link rel="icon" type="image/x-icon" href="img/avatar.png"><!-- icon shown at top of browser -->
+
+  <meta http-equiv="Content-Type" content="text/html" charset=utf-8>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<!-- -------------------- -->
+<body><!-- -------------------- --><!-- this is a body opening tag -->
+<!-- -------------------- -->
+
+<h1>Welcome to a basic page! Lol!</h1>
+
+<!-- intro -->
+<p>This is basic content</p>
+
+<!-- -------------------- -->
+</body><!-- -------------------- --><!-- and this is the body closing tag -->
+<!-- -------------------- -->
+
+</html>
+
+</textarea>
+</div>
 <!-- ------------------------------------------------------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------------------------------------------------------ -->
 
+
+
+
+<br>
 
 <!-- footer -->
 <div class="footer">
@@ -57,5 +99,12 @@ I did edit it somewhat to a simple reusable function.
 
 </body>
 
+<script>
+function copy() {
+  let textarea = document.getElementById("textarea");
+  textarea.select();
+  document.execCommand("copy");
+}
+</script>
 
 </html>

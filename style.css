@@ -129,7 +129,8 @@ button {
 	background-image:     -ms-linear-gradient(top, #8000ff, #f2e6ff); /* For pre-releases of IE 10*/
 	background-image:      -o-linear-gradient(top, #8000ff, #f2e6ff); /* For old Opera (11.1 to 12.0) */
 	background-image:         linear-gradient(to bottom, #8000ff, #f2e6ff); /* Standard syntax; must be last */
-	border: 0;
+	border: 1px solid #000000;
+	border-radius: 3px;
 }
 input {
 	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
@@ -188,6 +189,16 @@ input {
 
 @keyframes t{
   90%,100% {width:100%}
+}
+
+#resizehtmltext { /* the height will be 12 * amount of lines in textbox, adjust height in html file */
+		background-color: #262626 !important;
+		color: #999999 !important;
+    display: block;
+    resize: none;
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 </style>
