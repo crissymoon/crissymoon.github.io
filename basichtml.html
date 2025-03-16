@@ -30,17 +30,23 @@
 
 <!-- body/iframe -->
 <!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
-<h2 class="border_box_shadow_topic">Build a basic HTML webpage!, Last Updated: 3/13/2025</h2>
+<h2 class="border_box_shadow_topic">Build a basic HTML webpage!, Last Updated: 3/16/2025</h2>
 
 
 <!-- intro -->
 <p class="border_box_shadow_p">
 In this tutorial, I will present the complete code and review several tags and explanations related to creating a basic web page, focusing on the rows aspect. Developing a simple web page—often called the first "Hello World" program, webpage, or app in most tutorials—is a foundational step in any development journey and an excellent introduction for what lies ahead. In today’s world, there are numerous devices, and it’s important to note that your page may appear differently across various screens, particularly when delving into intricate details. So, being simple and somewhat basic is a great practice, but this is opinionated and depends on how much time a person has to update the site.
+<br>
+<br>
+Here's a link to a printable simple HTML cheat sheet: <a href="https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf" target="_blank">https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf</a>
+<br>
+<br>
+It’s super simple, so printing or leaving it open on your device for reference is good. And then there is always Google. The wording of the search is the key, and usually, at the top, you will see the AI response. So try a search: <span style="color: #f20000"><u>HTML, Google how to place images on a webpage</u></span>. 
+<br>
+<br>
+Anyway, let’s get started! We will start with a basic template and add a few extras to it.
+
 </p>
-
-
-
-
 
 
 
@@ -82,6 +88,8 @@ In this tutorial, I will present the complete code and review several tags and e
 </html>
 
 </textarea>
+<br>
+<button onclick="copy()">Click here to copy</button>
 </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------------------------------------------------------ -->
@@ -89,9 +97,209 @@ In this tutorial, I will present the complete code and review several tags and e
 
 
 
+<br>
+<p class="border_box_shadow_p">
+Ok, so first, I want to explain the tags. If you see the <span style="color: #f20000"><b>&lthtml></b></span> and <span style="color: #f20000"><b>&lt/html></b></span>. Or the <span style="color: #f20000"><b>&lth1>, &lt/h2>, &ltp>, &lt/p>,</b></span> etc. it is pretty simple. Between the tags, it is as if you are ordering from the menu at your favorite restaurant. The tags are like talking to the waitstaff and explaining what you want to order. 
+<br>
+<br>
+Additional options can be added to each tag. For instance, <span style="color: #f20000"><b>&lttextarea style="height:600px"></b></span> is just <span style="color: #f20000"><b>&lttextarea></b></span> with some directions. So where it says “<span style="color: #f20000"><b>style=</b></span>,” we are saying this is how tall you want the text area. Very simple, especially with the style/CSS part of the tag. Once most of the language starts to become like the language you speak, the page will do, like I said earlier about the ordering concept. Add what you want to your burger. Lol!
+<br>
+<br>
+I also want to point out the <span style="color: #f20000"><b>&lt!-- comment about something --></b></span>. It is just like leaving a note for yourself or, potentially, if you are collaborating with another person on a project.
+<br>
+<br>
+Moving on, you can click the <span style="color: #f20000"><b>Click here to copy</b></span> button to copy the code and paste it into your favorite text editor. It will work in a basic notepad as well. You are just making sure to save it as “yourfile.html.” However, it is way better to use a source code text editor. If you don’t already have one, go to the <a href="links.html" target=”_blank”>Helpful Links</a></li> page and pick one or do a search for it on Google. <a href="https://www.sublimetext.com/download" target="_blank">Sublime Text</a> is my recommendation; it is free, and you will get a prompt sometimes asking for a donation if it is unregistered. However, it is very well worth donating, and even without it, there is no restriction on its use.
+<br>
+<br>
+<b>The rows aspect:</b> <br>
+This is pretty simple. It is just like you are reading this content right now. The words go left to right, and once the width of the line reaches the end of the window in your web browser, it goes to the next row. So, it's best to remember that you should start from the top and work your way down.
+<br><br>
+&nbsp&nbsp<b>Example</b> (kind of like a spreadsheet):<br><br>
+&nbsp&nbsp&nbsp&nbsp<b>Row 1:</b> Column 1, Column 2, Column 3, -><br>
+&nbsp&nbsp&nbsp&nbsp<b>Row 2:</b> Column 1, Column 2, Column 3, ->
+<br>
+<br>
+<br>
+The code above should be in your text/source code editor and saved to your device. All that's left to do is open it. It won't be anything spectacular at the moment, but the concept of putting information into the web browser is now a possibility &#128522;
+</p>
+<br>
+
+<div class="border_box_shadow_code"><img src="img/basic_html1.png" class="img_center"></div>
 
 <br>
 
+
+
+
+<!-- text area content -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<div class="border_box_shadow_code">
+  <!-- text area height is about 14-16px per row depending on fontsize my font size is 16px, but can vary some so fiqure a liitle more just in case; 40 rows times 16 = 640px, just set width to 90-100% -->
+<textarea id="resizehtmltext2" style="height:600px">
+
+<!DOCTYPE html><html>
+
+<head>
+  <!-- title of page on top of browser -->
+  <title>EDITZ - Build a basic HTML webpage! (Tutorial)</title>
+  <!-- link tags -->
+  <link rel="icon" type="image/x-icon" href="img/avatar.png"><!-- icon shown at top of browser -->
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- meta tags -->
+  <meta http-equiv="Content-Type" content="text/html" charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate"> -->
+  
+  <style>
+
+    body {
+        background-color: #faf9f6;
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    h1{
+        border: 1px solid #000000; 
+        background-color: #8000ff; 
+        text-align: center; 
+        padding: 70px 0; 
+    }
+
+    p {
+        border: 1px solid #000000; 
+        background-color: #e6ccff; 
+        text-align: center; 
+        padding: 35px;
+    }
+
+    .links_menu { /* This is a comment in CSS, also the links_menu can be changed to whatever your please such as .the_menu, .my_menu */
+        border: 1px solid #000000; 
+        background-color: #c203fc; /* choose color, https://www.google.com/search?q=html+color+picker */
+        text-align: center; 
+        padding: 35px;   
+    }
+
+  </style
+
+</head>
+
+<!-- -------------------- -->
+<body><!-- -------------------- --><!-- this is a body opening tag -->
+<!-- -------------------- -->
+
+<h1>Welcome to a basic page! Lol!</h1>
+
+<div class="links_menu">
+
+  <center>
+
+  <a href="https://www.google.com" target="_blank">Google</a>&ampnbsp&ampnbsp&ampnbsp <!-- this is just saying goto Google when a person clicks it -->
+ 
+  <a href="#home">Home</a>&ampnbsp&ampnbsp&ampnbsp <!-- all you have to do is replace #home with you main page. href="/" goes to main page, href="about.html" would goto about page -->
+ 
+  <a href="#about">About</a>&ampnbsp&ampnbsp&ampnbsp <!-- the &ampnbsp is a space; these tags could also be spaced by padding into styling section but just keeping simple for now -->
+
+  <!-- also you may have noticed no "_blank", the target = _blank just opens to new window while leaving it out stays in the same tab or window -->
+
+  </center>
+
+</div>
+
+<!-- intro -->
+<p>
+This is basic content
+<br>
+<br>
+<!-- https://loremipsum.io/   Lorem Ipsum generator, just a basic filler for testing purposes -->
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<br>
+<br>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<br>
+<br>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+</p>
+
+<br><br><br><br><br><br><br> <!-- this br tag just means goto next line -->
+
+<div class="footer">
+  <p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>
+</div>
+
+
+<!-- -------------------- -->
+</body><!-- -------------------- --><!-- and this is the body closing tag -->
+<!-- -------------------- -->
+
+<!-- I typically use this area for JavaScript, but you will see all different variations of code across the web, some may not even have body tags, etc. -->
+<!-- So just a little trial and error and testing on many browsers, and your phone -->
+
+
+</html>
+
+</textarea>
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------ -->
+<br>
+<button onclick="copy2()">Click here to copy</button>
+</div>
+<br>  
+<div class="border_box_shadow_code"><img src="img/basic_html2.png" class="img_center"></div>
+<br>
+<p class="border_box_shadow_p">
+Well, that's it for this tutorial. I will recap and offer a possible challenge and a few hints. I am also adding a feature to this page called down-to-earth definitions, which are just a simple way of defining terms.
+<br>
+<br>
+<b>Recap:</b>
+<br>
+The HTML code was entered into a text or source code editor. Various tags were employed throughout the organized code, reflecting the row concept. Comments were strategically placed within the coding to promote clarity and facilitate understanding of each element, ensuring that future work on the page aligns with the initial thought process leading to its publication. A degree of styling was applied to enhance the layout and structure of the provided data and content. While the resulting page may not be deemed “award-winning,” it maintains simplicity and responsiveness and offers substantial potential for future modifications.
+<br>
+<br>
+<b>Hints and Tips:</b>
+<br>
+Creating a comprehensive list of all desired features for your webpage, whether on paper or in a digital format such as, in a notepad or a word processing document—is always a great idea. The number of items required in a navigation bar or menu often necessitates various styles prioritizing aesthetic appeal, ensuring a balanced presentation while maintaining an organized layout. An excessive number of elements may lead to visual clutter. If it is essential to include numerous items due to advertising requirements or to adequately convey the subject matter, consider employing them row by row, utilizing varying colors that align with your established theme. Creating a separate page, like a “part two,” can also accommodate additional content. This analogy can be likened to a scenario in a living room with limited seating. If there are five seats for ten individuals, the environment can become cramped, detracting from the audience's ability to engage with the presented material. It is essential to recognize that multiple coding variations can achieve similar results. Strive for functionality over perfection, as the website can be seen as a unique expression of your vision. While I could elaborate further on this topic, I will conclude here with maintaining clarity and elegance while also emphasizing the importance of finding enjoyment in the process, ultimately enhancing the outcome and allowing for more innovative outcomes in the future.
+<br>
+<br>
+<br>
+<b>**Down-to-Earth Definitions**</b>
+<br><br>
+<b>Responsive:</b>&nbspThis basically just means your webpage will be able to shrink or grow when used on a mobile device or a larger desktop screen. Responsiveness is essential if you create a website for selling items or something highly utilized on mobile devices, like search websites—Google or Bing. No matter how small the screen is, it somehow works.<br><br>
+<b>Meta Tags:</b>&nbspVery simple! It is information that is like spoken to the web browser to handle many different actions, such as supporting Unicode or characters that are sometimes considered illegal. For example, characters that are not usually allowed in website usernames. Or the “viewport” meta tag, which is used mainly to make the page look better on a mobile device. It is included in the source code above, and that specific code arrangement is prevalent on webpages. It just fits everything better, considering the screen size.<br><br>
+
+Complete List of Meta HTML Tags: <a href="https://gist.github.com/whitingx/3840905" target="_blank">https://gist.github.com/whitingx/3840905</a>
+<br>
+<br>
+<br>
+<b>**Challenge(s)**</b>
+<br><br>
+The challenge for this project is to enhance it to the best of your ability. You may have noticed that the footer currently lacks styling. See if you can apply some CSS within the style tags to improve it. Additionally, exploring everything possible is an excellent approach to deepening your understanding. Writing and reading code, along with watching relevant YouTube videos, reading, or attempting tutorials, are effective ways to keep up with the ever-evolving landscape of programming methods, aside from formal education or training. Don't forget to try to incorporate images into the page (<span style="color: #f20000"><b>&ltimg src="img/avatar.png" width="200"></b></span>). I recommend creating a folder called “img” in the exact location as your website page—just drop an image in there and change the “avatar.png” to the name of the image. As a general starting point, sketching ideas with a pen and paper is helpful—then work toward something unique.
+<br>
+<br>
+Keep checking back for more content, or if you have anything you may like to see on here, email: <a href="mailto:crissymoon711@gmail.com" target="_top">CrissyMoon711@gmail.com</a>
+</p>
+
+
+<br>
 <!-- footer -->
 <div class="footer">
 	<p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>
@@ -101,9 +309,16 @@ In this tutorial, I will present the complete code and review several tags and e
 
 <script>
 function copy() {
-  let textarea = document.getElementById("textarea");
+  let textarea = document.getElementById("resizehtmltext");
   textarea.select();
   document.execCommand("copy");
+  alert("Copied to clipboard!");
+}
+function copy2() {
+  let textarea = document.getElementById("resizehtmltext2");
+  textarea.select();
+  document.execCommand("copy");
+  alert("Copied to clipboard!");
 }
 </script>
 

@@ -201,4 +201,14 @@ input {
     font-size: 16px;
 }
 
+#resizehtmltext2 { /* the height will be 12 * amount of lines in textbox, adjust height in html file */
+		background-color: #4d004d !important;
+		color: #999999 !important;
+    display: block;
+    resize: none;
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 </style>
