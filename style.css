@@ -214,6 +214,7 @@ input {
 .divider {
     height: 5px;
     background: linear-gradient(to bottom, #8000ff, #ffffff, #8000ff);
+    width: 100%;
 }
 
 .welcome {
