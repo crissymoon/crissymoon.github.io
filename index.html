@@ -32,9 +32,6 @@ While the name may not align with the website address above, EDITZ serves as a b
 This page is designed not only for my portfolio but also to be a resource for you. The <a href="links.html">Helpful Links</a> section contains various links to software and reputable technology-related sites. The <a href="projects.html">Projects</a> section showcases the innovative and unique initiatives I am pursuing and tutorials for enthusiasts. Additionally, as mentioned above, this page serves as a portfolio, so if you're interested in learning more about me, feel free to click on the <a href="about.html">About Me</a> section.
 <br>
 <br>
-I will be leaving the AI/Python tutorial below because AI is trending at the moment. It is also quick, enjoyable, a great starting point, and straightforward. Also, the project is lightweight and uses API instead of consuming a lot of resources on your device. In other words, most devices that use Mac, Linux, or Windows should be able to get it up and running extremely quickly. If you run into problems, email me the subject EDITZ and the tutorial you are working on, and I will be glad to share additional resources and even collaborate with you to get it up and running. With your permission, I will highlight your collaboration with the troubleshooting in case another person runs into complications.
-<br>
-<br>
 <br>
 Keep checking back for more content, or if you have anything you may like to see on here, email: <a href="mailto:crissymoon711@gmail.com" target="_top">CrissyMoon711@gmail.com</a>
 <br>
@@ -42,114 +39,8 @@ Keep checking back for more content, or if you have anything you may like to see
 </p>
 <div class="border_box_shadow_code"><img src="img/editor1.png" class="img_center"></div>
 <br>
-<br>
-<div class="divider"></div>
-<br>
-<h2 class="border_box_shadow_topic">AI/Python Tutorial, Was Posted On: 3/13/2025</h2>
+<!-- <div class="divider"></div> -->
 
-
-<!-- intro -->
-<p class="border_box_shadow_p">
-Hello! This is my first post! I’m Crissy, and I’m delighted to welcome you to my portfolio/blog. I have always had a deep passion for computers, especially programming. I enjoy discovering innovative ways to streamline tasks, often reducing them to just a few clicks. Some time ago, I was introduced to a remarkable open-source AI system called OpenAI, which sparked my interest. I eagerly began utilizing the scripts provided upon signing up, and it has been an exciting journey ever since!
-<br><br>
-I did edit it somewhat to a simple reusable function.
-</p>
-
-
-<!-- code input --><!-- Open AI Example -->
-<div class="border_box_shadow_code">
-<code>
-<span style="color: #909090"><i>#basic Open AI Example, Currently running Python 3.13<br> <!-- comment color -->
-#import</i></span><br>
-<span style="color: #952bff"><i>from</i></span> openai <span style="color: #952bff"><i>import</i></span> OpenAI <!-- purple #952bff' -->
-<br><br>
-<span style="color: #909090"><i>#<a style="color: #909090" href="https://openai.com/" target="_blank">https://openai.com/</a>  <- create a account to get an api key</i></span><br>
-client = <span style="color: #46a3ff">OpenAI(</span><span style="color: #ff8d1c"><b>api_key</b></span>=<span style="color: #ffff00">"YOUR_API_KEY_GOES_HERE"</span><span style="color: #46a3ff">)</span> <!-- blue #46a3ff --> <!-- orange #ff8d1c --><!-- yellow #ffff00 -->
-<br><br>
-<span style="color: #952bff">def</span> <span style="color: #46a3ff">open_ai(</span></span><span style="color: #ff8d1c"><b>ask</b></span><span style="color: #46a3ff">)</span>:<br>
-&nbsp&nbspcompletion = client.chat.completions<span style="color: #46a3ff">.create(</span><br>
-&nbsp&nbsp&nbsp&nbsp<span style="color: #ff8d1c"><b>model</b></span>=<span style="color: #ffff00">"gpt-4o-mini"</span>,<br>
-&nbsp&nbsp&nbsp&nbsp<span style="color: #ff8d1c"><b>store</b></span>=<span style="color: #f20000"><b>True</b></span>,<br><!-- red #f20000 -->
-&nbsp&nbsp&nbsp&nbsp<span style="color: #ff8d1c"><b>messages</b></span>=[<br>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<span style="color: #ffff00">"role"</span>: <span style="color: #ffff00">"user"</span>, <span style="color: #ffff00">"content"</span>: <span style="color: #952bff"><i>f</i></span><span style="color: #ffff00">"</span>{<span style="color: #ff8d1c"><b>ask</b></span>}<span style="color: #ffff00">"</span>}<span style="color: #909090"><i> #within the format string f"{ask}" it good to possibly throw in a ..{current_date}</i></span><br>
-&nbsp&nbsp&nbsp&nbsp]<br>
-&nbsp&nbsp<span style="color: #46a3ff">)</span><br>
-&nbsp&nbsp<span style="color: #46a3ff">print(completion.choices[</span><span style="color: #ff8d1c"><b>0</b></span><span style="color: #46a3ff">].message.content)</span>
-<br><br>
-<span style="color: #46a3ff">open_ai(<span style="color: #ffff00">"What is AI?"</span><span style="color: #46a3ff">)</span>
-</code>
-</div>
-
-
-<!-- downlod editor step 1 -->
-<p class="border_box_shadow_p">
-As I noted in one of the comments within the code example above, it is good to include the date (<a href="https://docs.python.org/3/library/datetime.html" target="_blank">https://docs.python.org/3/library/datetime.html</a>) because, at times, it will request it anyway.
-While numerous methods exist to fine-tune the AI, this approach is a solid starting point. Also, you can even ask OpenAI how to edit it to fit your needs, and the response will include details or even code to make whatever you want. So, stay tuned, and I will guide you through the steps to get this up and running on your device in no time.
-<br><br><br>
-<b>**First Step**</b> You will need a text editor.
-
-<br><br>I like Sublime, but there are several others available:
-<br><br><a href="https://www.sublimetext.com/download" target="_blank">Sublime Text</a>, <a href="https://code.visualstudio.com/download" target="_blank">Visual Studio Code</a>, <a href="https://notepad-plus-plus.org/downloads/" target="_blank">NotePad++</a>, <a href="https://brackets.io/?lang=en" target="_blank">Brackets</a>, and plenty more, but these are really good and free.
-<br><br><br><br>
-
-<b>**The Second Step**</b> <a href="https://www.python.org/downloads/" target="_blank">https://www.python.org/downloads/</a><br><br>
-
-<!-- WINDOWS -->
-<b>Windows:</b> Download <a href="https://www.python.org/downloads/" target="_blank">Python</a>!
-<br><br>
-&nbsp&nbsp&nbsp&nbspOnce you open it, the first prompt at the bottom will ask if you want to add python.exe to PATH, check it and use admin privileges. 
-<br><br>
-&nbsp&nbsp&nbsp&nbspThen, it is recommended that you click “Install Now” and keep pushing forward until it is completed without changing anything else.
-<br><br>
-<!-- MAC -->
-<b>Mac:</b> Open terminal (Press <span style="color: #f20000">"Cmd+Space"</span> to open the search, and type <span style="color: #f20000">terminal</span> and press enter). 
-<br><br>
-&nbsp&nbsp&nbsp&nbsp</b><button onclick="copyCurlCode()">Click here to copy -></button>&nbsp&nbsp<span style="color: #f20000">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </span>
-<br><br>
-&nbsp&nbsp&nbsp&nbspThen paste it in the terminal and click enter. Once <a href="https://brew.sh/" target="_blank">Homebrew</a>
- is installed, type: <span style="color: #f20000">brew install python</span> and click enter. 
-<br><br>
-&nbsp&nbsp&nbsp&nbspAfterward, you can use <span style="color: #f20000">python3 --version</span> in the terminal to verify the installation. Additionally, you can go to the Python webpage and download the universal installer.
-<br><br>
-<!-- LINUX -->
-<b>Linux:</b> Open the terminal (<span style="color: #f20000">Ctrl+Alt+T</span>) and type in <span style="color: #f20000">sudo apt update</span>. 
-<br><br>
-&nbsp&nbsp&nbsp&nbspThen, <span style="color: #f20000">sudo apt install python3</span>. Lastly, check to ensure it’s installed: <span style="color: #f20000">python3 --version</span>.
-<br><br><br><br>
-<b>**Step Three**</b>
-<br><br>
-Copy the code above and paste it into your text editor.
-</p>
-
-
-<!-- SUBLIME PIC -->
-<div class="border_box_shadow_code"><img src="img/sublime.png" class="img_center"></div>
-
-
-<!-- STEP FOUR -->
-<p class="border_box_shadow_p">
-<b>**Step Four**</b>
-<br><br>
-If you haven’t installed pip yet, then visit: <a href="https://pip.pypa.io/en/stable/installation/" target="_blank">https://pip.pypa.io/en/stable/installation/</a>
-<br><br>
-Open terminal, type: <span style="color: #f20000">pip install openai</span>
-<br><br>
-Once the download is complete, you are ready to roll!
-<br><br>
-You can go to File Explorer in the directory area, type <span style="color: #f20000">cmd</span> and click enter to open the prompt in that directory, press the start button on some text editors, or use Ctrl+B in Sublime Text.
-<br><br>
-In the terminal, type <span style="color: #f20000">python yourpythonfile.py</span> and click enter.
-<br><br>
-Also, you can eventually get creative with it using Tkinter to add GUI, which I will be going over on a separate page very soon, but I will include a screenshot below to give an idea.
-</p>
-
-
-
-<!-- OPENAI PIC -->
-<div class="border_box_shadow_code"><img src="img/runopenai.png" class="img_center"></div>
-<br>
-<!-- DOT PIC -->
-<div class="border_box_shadow_code"><img src="img/dot.png" class="img_center"></div>
 
 
 
