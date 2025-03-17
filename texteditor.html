@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head><title>EDITZ - Editor.py - A basic notepad/editor (Project)</title>
+<link rel="icon" type="image/x-icon" href="img/avatar.png">
+<link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Type" content="text/html" charset=utf-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
+</head>
+<body>
+
+<!-- heading -->
+<h1 class="main_heading"> <!-- the genderator to make this ascii art is https://fsymbols.com/generators/carty/ -->
+<span style="color: #952bff"><i>from</i></span> editz <span style="color: #952bff"><i>import</i></span> EDITZ
+</h1>
+
+<!-- navbar -->
+<ul>
+  <!-- <li><img class="spin-image" src="img/avatar.png" style="width: auto; height: 24px; padding: 14px 16px;"></li> -->
+  <li><a href="/">&nbsp&nbspHome&nbsp&nbsp</a></li>
+  <li><a href="projects.html">&nbsp&nbspProjects&nbsp&nbsp</a></li>
+  <li><a href="links.html">Helpful Links</a></li>
+  <li><a href="about.html">About Me</a></li>
+  <!-- <li><a href="#contact">Downloads</a></li> -->
+</ul>
+
+
+
+
+
+<!-- body/iframe -->
+<!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
+<h2 class="border_box_shadow_topic">Editor.py - A basic notepad/editor, Last Updated: 3/16/2025</h2>
+
+
+<!-- intro -->
+<p class="border_box_shadow_p">
+<br>
+Greetings,
+<br><br>
+I will incorporate this basic notepad/editor made using <a href="https://www.python.org/downloads/" target="_blank">Python</a> into the “dot.py” project. It will mainly handle a database of snippets and allow users to keep up with little notes for future reference. This application also has a docking system that allows users to keep up with everything at once—like a multi-tasking system. Although it is not in development to replace other editors, it is helpful when creating projects and finding errors. Once this starts collaborating with the AI Agent, errors will be slimmed down, and the process will significantly speed up, <i>even allowing to run code snippets from the application</i>.
+<br>
+<br>
+<br>
+<br>
+<b>**GUI**</b>
+<br>
+<br>
+The GUI is made in <a href="https://docs.python.org/3/library/tkinter.html" target="_blank">Tkinter</a>, which is included with the <a href="https://www.python.org/downloads/" target="_blank">Python Installation</a>, although many modifications were needed to make it look and function the way it does. The application will allow for changing everything to a person's desired colors, and eventually, it will have a lot of customizable features. However, some features are still in development, such as coloring the code, which is mainly done, but adding color is very helpful for readability. More features include the window always remaining on top and allowing a person to make a small snippet-sized window so that testing can be done along with working with the AI Agent to develop well-crafted and readable code. This all starts to allow for a combination of applications configured and designed to a person's needs.
+<br>
+<br>
+<br>
+<b>**Docking System**</b>
+<br>
+<br>
+This project creates a configuration file upon loading. Once loaded, it lists positions that allow the docking system to start docking on the right side of the screen. As one closes, it changes the position to off in the configuration file so that other windows can take the empty spaces.
+<br>
+<br>
+<br>
+<b>**Auto-save**</b>
+<br>
+<br>
+The editor will automatically save when it closes, and you can also save it by pressing Ctrl+S or using the menu at the top. Additionally, it is commented out for testing purposes, but the key binding will save when any changes are made. This ensures that no data is lost in case of a power surge, incorrect power off, etc. Something else in the works is the ability to store data for a while, allowing a user to open another window and surf back in time through all code changes. It will be like an insurance that nothing gets lost, especially once I get the AI Agent working correctly with GitHub push, pulls, etc. I am still working on a script that starts to teach the agent the user's style of coding and will work towards providing hints towards developing further on projects.
+<br>
+<br>
+<br>
+Keep checking back for more content, or if you have anything you may like to see on here, email: <a href="mailto:crissymoon711@gmail.com" target="_top">CrissyMoon711@gmail.com</a>
+<br>
+<br>
+See the screenshots below.
+</p>
+<br>
+<div class="border_box_shadow_code"><img src="img/editor1.png" class="img_center"></div>
+<br>
+<br>
+<div class="border_box_shadow_code"><img src="img/editor2.png" class="img_center"></div>
+<br>
+<br>
+<div class="border_box_shadow_code"><img src="img/editor3.png" class="img_center"></div>
+<br>
+<br>
+<div class="border_box_shadow_code"><img src="img/editor4.png" class="img_center"></div>
+<br>
+
+<!-- footer -->
+<div class="footer">
+	<p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>
+</div>
+
+</body>
+
+<script>
+function copy() {
+  let textarea = document.getElementById("resizehtmltext");
+  textarea.select();
+  document.execCommand("copy");
+  alert("Copied to clipboard!");
+}
+function copy2() {
+  let textarea = document.getElementById("resizehtmltext2");
+  textarea.select();
+  document.execCommand("copy");
+  alert("Copied to clipboard!");
+}
+</script>
+
+</html>
