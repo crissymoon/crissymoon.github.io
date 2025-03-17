@@ -121,7 +121,6 @@ li a:hover {
 code {
   color: #ffffff;
   padding: 2px;
-  font-size: 105%;
 }
 button {
 	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
