@@ -29,9 +29,7 @@ p {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .border_box_shadow_topic {
-  background:linear-gradient(100deg, #ff0099, #493240, #990099, #b6f, #50c878);
-  background-size:200% 200%;
-  animation:moveGradient 4s ease infinite;
+  background-color: #8600b3;
 	border: 0.5px solid #000000; 
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	text-align: center; 
@@ -60,7 +58,7 @@ p {
   border: 1px solid #000000; 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
-  color: #faf9f6;
+  color: #000000;
   text-align: center;
 }
 .border_box_shadow_code {
@@ -93,9 +91,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background:linear-gradient(100deg, #ff66c2, #2e1f28, #800080, #7000cc, #25743f);
-  background-size:200% 200%;
-  animation:moveGradient 4s ease infinite;
+  background-color: #730099;
   
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
