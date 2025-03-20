@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .email-signature {
+            font-family: Arial, sans-serif;
+            color:#333;
+            background-color:#f9f9f9;
+            padding:20px;
+            max-width:100%;
+            display:flex;
+            align-items:center;
+            border-radius:8px;
+            background:linear-gradient(45deg, #ff0099, #493240, #f6f, #b6f, #50c878);
+            background-size:200% 200%;
+            animation:moveGradient 4s ease infinite;
+        }
+
+        @keyframes moveGradient {
+
+          0% {background-position:0% 50%;}
+
+          50% {background-position:100% 50%;}
+
+          100% {background-position:0% 50%;}
+
+        }
+        .profile-picture {
+            border-radius:50%;
+            width:38%;
+            height:auto;
+            margin-right:20px;
+        }
+
+
+        .contact-info {
+            display:flex;
+            flex-direction:column;
+        }
+        .contact-info div {
+            margin:5px 0;
+        }
+        .icon {
+            width:16px;
+            height:16px;
+            margin-right:8px;
+            vertical-align:middle;
+            padding-bottom:2.5px;
+            padding-left:3px;
+        }
+        .pink {
+            color:#ffcce0;
+        }
+        a:link {
+            color:#ffcce0;
+            background-color:transparent;
+            text-decoration:none;
+        }
+
+            a:visited {
+            color:#ffcce0;
+            background-color:transparent;
+            text-decoration:none;
+        }
+
+            a:hover {
+            color:#800033;
+            background-color:transparent;
+            text-decoration:underline;
+        }
+
+            a:active {
+            color:#ffcce0;
+            background-color:transparent;
+            text-decoration:none;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div class="email-signature">
+        <img src="https://crissymoon.com/img/avatar.png" alt="Profile Picture" class="profile-picture">
+        <div class="contact-info">
+            <div><strong style="font-size:22px;color:#ffcce0;padding-bottom:8px;">Crissy Deutsch</strong>
+                <br><span style="font-size:18px;padding-top:12px;">🏳️‍⚧️</span><span style="color:#ffcce0;font-size:16px;padding-left:7px;">She/Her/Hers</span>
+            </div>
+            <div class="pink">
+                <img src="https://img.icons8.com/material-outlined/24/000000/phone.png" class="icon" alt="Phone"> 
+                <a href="tel: 562-219-8083">562-219-8083</a>
+            </div>
+            <div class="pink">
+                <img src="https://img.icons8.com/material-outlined/24/000000/marker.png" class="icon" alt="Location"> 
+                <a href="https://www.google.com/maps/place/Los+Angeles,+CA">Los Angeles, CA</a>
+            </div>
+            <div class="pink">
+                <img src="https://img.icons8.com/material-outlined/24/000000/web.png" class="icon" alt="Website"> 
+                <a href="https://crissymoon.com" class="pink">crissymoon.com</a>
+            </div>
+            <div class="pink">
+                <img src="https://img.icons8.com/material-outlined/24/000000/send-mass-email.png" class="icon" alt="Email"> 
+                <a href="mailto:crissymoon711@gmail.com" class="pink">crissymoon711@gmail.com</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
