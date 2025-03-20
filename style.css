@@ -1,9 +1,13 @@
 
 <style>
+
+html {
+  background-color: #000000 !important;
+}
 	
 body {
-	background-color: #faf9f6;
-	font-family: "Times New Roman", Times, serif;
+ background-color: #000;  
+ font-family: "Times New Roman", Times, serif;
 }
 
 h1 {
@@ -14,6 +18,7 @@ h2 {
   margin-top: 0;
   margin-bottom: 0;
 }
+
 p {
   margin-top: 0;
   margin-bottom: 0;
@@ -148,6 +153,7 @@ li a:hover {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	text-align: center; 
 	padding: 70px 0; 
+  margin-top: 0;
 }
 @keyframes moveGradient {
 
