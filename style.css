@@ -131,6 +131,7 @@ li a:hover {
     }
 }
 
+
 .active {
 	background-image: -webkit-linear-gradient(top, #8000ff, #f2e6ff); /* For Chrome and Safari */
 	background-image:    -moz-linear-gradient(top, #8000ff, #f2e6ff); /* For old Fx (3.6 to 15) */
