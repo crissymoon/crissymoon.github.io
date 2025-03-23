@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image slider - shopify type - crissymoon.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background:linear-gradient(100deg, #66003d, #493240, #660066, #2a004d, #50c878);
+            background-size:200% 200%;
+            animation:moveGradient 4s ease infinite;
+    
+        
+        }
+        @keyframes moveGradient {
+
+          0% {background-position:0% 50%;}
+
+          50% {background-position:100% 50%;}
+
+          100% {background-position:0% 50%;}
+
+        }
+        .slider {
+            position: relative;
+            max-width: 90vw;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .control {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+<center>
+<div class="slider" id="slider">
+    <div class="slides" id="slides">
+        <div class="slide"><img src="shop_site/shop1.png" alt="Image 1"></div>
+        <div class="slide"><img src="shop_site/shop2.png" alt="Image 2"></div>
+        <div class="slide"><img src="shop_site/shop3.png" alt="Image 3"></div>
+        <div class="slide"><img src="shop_site/shop4.png" alt="Image 4"></div>
+    </div>
+    <div class="controls">
+        <button class="control" onclick="prevSlide()">❮</button>
+        <button class="control" onclick="nextSlide()">❯</button>
+    </div>
+    <button class="fullscreen-btn" onclick="toggleFullScreen()">🗖</button>
+</div>
+</center>
+<script>
+    let currentIndex = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function updateSlidePosition() {
+        const offset = -currentIndex * 100;
+        slides.style.transform = 'translateX(' + offset + '%)';
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function toggleFullScreen() {
+        const slider = document.getElementById('slider');
+        if (!document.fullscreenElement) {
+            slider.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>
