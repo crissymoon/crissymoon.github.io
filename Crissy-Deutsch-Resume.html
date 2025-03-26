@@ -261,7 +261,43 @@ tool primarily focusing on interaction with &quot;Dot.py&quot; and Python. <br><
 
     </section>
 
+
+    <section class="experience">
+        <h3>READ MORE ABOUT ME - SCAN THE QR CODE BELOW</h3>
+        <br>
+        <div id="qrcode"></div>
+        
+        <br>
+    </section>
+
     
+
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<script>
+function generateQRCode() {
+  const qrText = "https://crissymoon.com/about.html";
+  const qrcodeDiv = document.getElementById("qrcode");
+
+  // Clear any existing QR code
+  qrcodeDiv.innerHTML = "";
+
+  // Create a new QR code object
+  const qrcode = new QRCode(qrcodeDiv, {
+    text: qrText,
+    width: 256,
+    height: 256,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H  // Error correction level (L, M, Q, H)
+  });
+}
+
+window.onload = function() {
+  generateQRCode();
+  console.log("QR Code Created");
+};
+</script>
 
 </body>
 </html>
