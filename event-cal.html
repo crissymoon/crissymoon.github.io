@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/avatar.png">
+    <title>EDITZ - Editable Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .calendar-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(90deg, #55b9f3 0%, #ffffff 50%, #f5a9b8 100%);
+            color: #333;
+        }
+        
+        .month-year {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .nav-buttons button {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #ddd;
+        }
+        
+        .day-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .calendar-day {
+            min-height: 80px;
+            padding: 5px;
+            background-color: white;
+            position: relative;
+        }
+        
+        .day-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .day-content {
+            width: 100%;
+            height: calc(100% - 25px);
+            resize: none;
+            border: 1px solid #eee;
+            padding: 3px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        .day-content:focus {
+            outline: 2px solid #55b9f3;
+            background-color: #f8fcff;
+        }
+        
+        .other-month {
+            background-color: #f9f9f9;
+            color: #aaa;
+        }
+        
+        .today {
+            background-color: #fff9e6;
+        }
+        
+        .today .day-number {
+            color: #e74c3c;
+        }
+        
+        /* Transgender theme colors */
+        .trans-pink {
+            background-color: #f5a9b8;
+        }
+        
+        .trans-blue {
+            background-color: #55b9f3;
+        }
+        
+        .trans-white {
+            background-color: #ffffff;
+        }
+        
+        /* Controls section */
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .controls select, .controls input {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .print-button {
+            background-color: #55b9f3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        
+        .print-button:hover {
+            background-color: #3aa8f0;
+        }
+        .large-transparent-input {
+            font-size: 28px;
+            text-align: center;
+            background: transparent;  /* Transparent background */
+            border: none;  /* Visible border (adjust as needed) */
+            border-width: 0;
+            outline: none;
+            padding: 10px;  /* Comfortable padding */
+            width: 100%;  /* Adjust width as needed */
+            color: #333;  /* Text color */
+            margin-bottom: 5px;
+           
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            
+            .calendar-container {
+                box-shadow: none;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
+            .day-content {
+                border: 1px solid #ddd;
+            }
+            .controls {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <select id="month-select">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+        
+        <select id="year-select"></select>
+         
+        <button class="print-button" onclick="window.print()">Print Calendar</button>
+    </div>
+
+
+    <div>
+        <input type="text" class="large-transparent-input" placeholder="Enter Title here...">
+    </div>
+    
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div class="month-year" id="current-month-year">Month Year</div>
+            <div class="nav-buttons">
+                <button id="prev-month">Previous</button>
+                <button id="today">Today</button>
+                <button id="next-month">Next</button>
+            </div>
+        </div>
+        
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- Day headers -->
+            <div class="day-header trans-pink">Sunday</div>
+            <div class="day-header trans-blue">Monday</div>
+            <div class="day-header trans-pink">Tuesday</div>
+            <div class="day-header trans-blue">Wednesday</div>
+            <div class="day-header trans-pink">Thursday</div>
+            <div class="day-header trans-blue">Friday</div>
+            <div class="day-header trans-pink">Saturday</div>
+            
+            <!-- Days will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize variables
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+            
+            // Populate year select (10 years back and 10 years forward)
+            const yearSelect = document.getElementById('year-select');
+            for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                yearSelect.appendChild(option);
+            }
+            yearSelect.value = currentYear;
+            
+            // Set month select to current month
+            document.getElementById('month-select').value = currentMonth;
+            
+            // Generate calendar
+            generateCalendar(currentMonth, currentYear);
+            
+            // Event listeners for navigation
+            document.getElementById('prev-month').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar();
+            });
+            
+            document.getElementById('next-month').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar();
+            });
+            
+            document.getElementById('today').addEventListener('click', function() {
+                currentDate = new Date();
+                currentMonth = currentDate.getMonth();
+                currentYear = currentDate.getFullYear();
+                updateCalendar();
+            });
+            
+            // Event listeners for select controls
+            document.getElementById('month-select').addEventListener('change', function() {
+                currentMonth = parseInt(this.value);
+                updateCalendar();
+            });
+            
+            document.getElementById('year-select').addEventListener('change', function() {
+                currentYear = parseInt(this.value);
+                updateCalendar();
+            });
+            
+            // Auto-save functionality
+            document.addEventListener('blur', function(e) {
+                if (e.target.classList.contains('day-content')) {
+                    const dayId = e.target.parentElement.getAttribute('data-day-id');
+                    localStorage.setItem(`calendar-${dayId}`, e.target.value);
+                }
+            }, true);
+            
+            function updateCalendar() {
+                document.getElementById('month-select').value = currentMonth;
+                document.getElementById('year-select').value = currentYear;
+                generateCalendar(currentMonth, currentYear);
+            }
+            
+            function generateCalendar(month, year) {
+                // Update month/year display
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                   "July", "August", "September", "October", "November", "December"];
+                document.getElementById('current-month-year').textContent = 
+                    `${monthNames[month]} ${year}`;
+                
+                // Get first day of month and total days
+                const firstDay = new Date(year, month, 1);
+                const startingDay = firstDay.getDay(); // 0-6 (Sun-Sat)
+                
+                // Get total days in month
+                const totalDays = new Date(year, month + 1, 0).getDate();
+                
+                // Get days from previous month to show
+                const prevMonthDays = new Date(year, month, 0).getDate();
+                
+                // Clear existing days (keep headers)
+                const calendarGrid = document.getElementById('calendar-grid');
+                while (calendarGrid.children.length > 7) {
+                    calendarGrid.removeChild(calendarGrid.lastChild);
+                }
+                
+                // Add days from previous month (if needed)
+                for (let i = 0; i < startingDay; i++) {
+                    const dayElement = createDayElement(
+                        prevMonthDays - startingDay + i + 1,
+                        month - 1,
+                        year,
+                        true
+                    );
+                    calendarGrid.appendChild(dayElement);
+                }
+                
+                // Add days from current month
+                const today = new Date();
+                for (let i = 1; i <= totalDays; i++) {
+                    const isToday = today.getDate() === i && 
+                                   today.getMonth() === month && 
+                                   today.getFullYear() === year;
+                    const dayElement = createDayElement(i, month, year, false, isToday);
+                    calendarGrid.appendChild(dayElement);
+                }
+                
+                // Calculate how many days from next month to show
+                const totalCells = Math.ceil((totalDays + startingDay) / 7) * 7;
+                const nextMonthDaysToShow = totalCells - (totalDays + startingDay);
+                
+                // Add days from next month (if needed)
+                for (let i = 1; i <= nextMonthDaysToShow; i++) {
+                    const dayElement = createDayElement(i, month + 1, year, true);
+                    calendarGrid.appendChild(dayElement);
+                }
+            }
+            
+            function createDayElement(day, month, year, isOtherMonth, isToday = false) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                if (isOtherMonth) dayElement.classList.add('other-month');
+                if (isToday) dayElement.classList.add('today');
+                
+                // Create unique ID for saving data
+                const dayId = `${year}-${month}-${day}`;
+                dayElement.setAttribute('data-day-id', dayId);
+                
+                // Day number
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'day-number';
+                dayNumber.textContent = day;
+                dayElement.appendChild(dayNumber);
+                
+                // Editable content area
+                const content = document.createElement('textarea');
+                content.className = 'day-content';
+                content.placeholder = '';
+                
+                // Load saved content if available
+                const savedContent = localStorage.getItem(`calendar-${dayId}`);
+                if (savedContent) {
+                    content.value = savedContent;
+                }
+                
+                // Auto-resize textarea
+                content.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+                
+                dayElement.appendChild(content);
+                
+                return dayElement;
+            }
+            
+            // Trigger input event on all textareas to set correct initial height
+            setTimeout(() => {
+                document.querySelectorAll('.day-content').forEach(textarea => {
+                    textarea.dispatchEvent(new Event('input'));
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
