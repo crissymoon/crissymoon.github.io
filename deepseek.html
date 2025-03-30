@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head><title>EDITZ - DeepSeek AI Using Python (Tutorial)</title>
+<link rel="icon" type="image/x-icon" href="img/avatar.png">
+<link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Type" content="text/html" charset=utf-8>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    <style>
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #000;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<!-- heading -->
+<h1 class="main_heading"> <!-- the genderator to make this ascii art is https://fsymbols.com/generators/carty/ -->
+<span style="color: #952bff"><i>from</i></span> editz <span style="color: #952bff"><i>import</i></span> EDITZ
+</h1>
+
+
+
+<!-- navbar -->
+<ul>
+  <!-- <li><img class="spin-image" src="img/avatar.png" style="width: auto; height: 24px; padding: 14px 16px;"></li> -->
+  <li><a href="/">&nbsp&nbspHome&nbsp&nbsp</a></li>
+  <li><a href="projects.html">&nbsp&nbspProjects&nbsp&nbsp</a></li>
+  <li><a href="links.html">Helpful Links</a></li>
+  <li><a href="about.html">About Me</a></li>
+  <!-- <li><a href="#contact">Downloads</a></li> -->
+</ul>
+
+
+
+
+<!-- body/iframe -->
+<!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
+<h2 class="border_box_shadow_topic">DeepSeek AI Tutorial Using Python, Last Updated: 3/29/2025</h2>
+
+
+<!-- intro -->
+<p class="border_box_shadow_p">
+In this tutorial, I'll be diving into <a href="https://www.deepseek.com/en" target="_blank">DeepSeek AI</a>
+ using Python. It's worth mentioning that DeepSeek AI does come with a cost, like $2.12, to start, which will last a long time and allow you to make something before moving forward with using it on a larger scale. I want to point out that AI is changing the game across all tech devices. As I progress with these tutorials and any other content on this portfolio page, I'll be highlighting how crucial it is to keep up with this technology and how it can significantly boost productivity. I plan to use <a href="https://prismjs.com/" target="_blank">Prism.js</a>
+ to make the code in this overview look nice and polished. 
+<br><br>
+A few people have asked me to add some other Python features to the code, like for and while loops and error handling, which are really important when working with APIs. I'm also planning to include a simplified explanation in this walkthrough, which will be helpful as the use of the Python programming language is currently growing quickly.
+<br><br>
+It's important to realize that some functions will work, no questions asked. Keeping a solid source code file or database with working scripts/snippets and the programming language version commented within is a good practice. The first step in creating any app is figuring out what you want it to do and sticking to that plan; otherwise, it might end up unfinished or never-ending.
+<br><br>
+Goal: Say hello to DeepSeek AI, and it’ll respond with a friendly greeting that includes a sense of a real-time reply without any hiccups. It’ll also have a way to stop and restart the app, plus options for asking more questions while showing all possible errors and running until a stop is requested. This will be used later to run quick tests on different AI models.
+<br><br>
+I'll drop the whole code down below, and then we can chat (w/AI) about how to get this done with some help from the AI model!
+<br><br>
+<b>Note(s):</b> 
+<br>
+The internet speed test is set to False within the code, as it will only be needed for testing in case of possible connectivity issues.
+<br>
+Just a heads up with this tutorial: it’s assumed that you’ve already got Python, PIP, and a source code editor set up on your system. If you haven’t, make sure to check out the first <a href="openai.html" target="_blank">OpenAI tutorial by clicking here</a>.
+<br><br>
+</p>
+
+
+
+<div class="border_box_shadow_code_2">  
+
+      <p style="color: red;">**dseek.py**
+        <button id="copyButton">Copy All Code to Clipboard</button><br>
+      </p>
+      
+
+<pre class="language-python"><code>
+#triple quote comment below
+"""
+Goals/Objectives:
+1. Get this code up and running on your own setup.
+2. Make sure the response feels like it's happening in real-time.
+3. Use this code to create something of your own.
+4. Work on managing all errors smoothly so that our application 
+   continues to run without interruptions when using the API.
+5. Dive into some fun techniques to help you spot errors quickly and easily!
+
+You can really explore and learn to create just about anything with this technology! 
+Just remember to use it wisely and have fun!
+"""
+
+#Greetings, Let's Explore AI!/Learn to code with AI!
+#the '#' means a comment and the 'contents of,' will not run with the code
+#03-29-2025 #Currently using Python 3.13.1 #AI Experimenting/Testing Enviornment
+#check your Python version in terminal #python --version #python3 --version
+#Download Python #https://www.python.org/downloads/
+#Download Text Editor #https://www.sublimetext.com/download
+#Install PIP #https://pypi.org/project/pip/ #https://pip.pypa.io/en/stable/installation/
+#get started using OpenAI/Python #https://crissymoon.com/openai.html
+
+#start coding :)
+#What is importing a module/library in Python?
+#get the current date and time
+from datetime import datetime
+#datetime https://docs.python.org/3/library/datetime.html
+
+import time, inspect, traceback, threading, os, sys, speedtest #pip install speedtest-cli
+#time https://docs.python.org/3/library/time.html
+#inspect https://docs.python.org/3/library/inspect.html
+#traceback https://docs.python.org/3/library/traceback.html
+#threading https://docs.python.org/3/library/threading.html
+#os https://docs.python.org/3/library/os.html
+#sys https://docs.python.org/3/library/sys.html
+#speedtest https://pypi.org/project/speedtest-cli/
+#be sure to make sure all of these are installed 
+#if not an error will be presented in the terminal
+#then just install the module/library using pip #pip install yourmoduleorlibrary
+
+
+#add module/library to easily copy text/string to clipboard
+import pyperclip #pip install pyperclip
+#pyperclip https://pypi.org/project/pyperclip/
+
+#import openai module/library which works for DeekSeek also
+from openai import OpenAI
+#openai https://pypi.org/project/openai/
+
+#change color of the terminal
+os.system('color F0') #https://ss64.com/nt/color.html
+
+#get and set current location
+#important - the practice is to always ask and only retrieve while the app is in use
+#but, in this case, this is just for testing purposes only
+import geocoder
+#geocoder https://pypi.org/project/geocoder/
+print("\nRetrieving location. . .")
+g = geocoder.ip('me') #once this code is up and running
+                      #try asking the AI Model: What is OOP in Python using a class?
+                      #vice versa: ask the same question w/o using a class?
+my_city = g.city  
+my_state = g.state
+print(f"Location set: {my_city}, {my_state}") #the f is a Python feature to easily
+                                              #add multiple variables & formatting to the string
+                                              #'format string'
+
+#create an animation in the command prompt while waiting on AI/API Response
+def retrieving_animation():
+    chars = ".`.`..." #create a list of characters to run through
+                      #spinning/loading effect would be  '|/-\\'
+    while not complete:
+        for char in chars:
+            sys.stdout.write(f"\r{char}  ") #\r means 'carriage return'
+                                            #or stays on the same line
+            sys.stdout.flush() #allows each character to be displayed right-away
+            time.sleep(0.1)
+
+def copy_to_clipboard(text): #this function is an attempt to reduce coding redundancy
+                             #for future development, of adding multiple AI Models
+                             #What is coding redundancy?
+                             #Just a little note: there are some parts of this code that are repetitive. 
+                             #It might be fun to see if you can simplify it! 
+                             #But remember not to spend too much time on it!
+                             #keep it light and breezy!
+    pyperclip.copy(text)
+    print("\nResponse copied to clipboard!") #\n means to goto the next line
+
+#triple quote comment below
+"""
+Just wanted to throw this in here in case the code gets super complicated 
+and you hit an error that's tough to track down. You can sprinkle this in 
+different parts of your code to check if it's getting to certain lines. 
+Sometimes, it's easier to just review the code and see how far you can get. 
+This can save a lot of time! 'print_line_num()'
+"""
+def print_line_num(*args, **kwargs): #What is ‘*args, **kwargs’ in Python?
+    frame = inspect.currentframe().f_back
+    the_line_number = frame.f_lineno
+    current_file_name = frame.f_code.co_filename
+    print(f"\n**MADE IT HERE**\nFile: {current_file_name}, \nLine: {the_line_number} ", end="")
+    print(*args, **kwargs)
+
+def internet_speedtest(): #this may be good to use in the event of a slow connection
+                          #or to indentify your internet speed
+    try:
+        st = speedtest.Speedtest()
+        st.get_best_server()
+        download_speed = st.download() / 1_000_000 #this calculation just converts the total to Mbps
+        upload_speed = st.upload() / 1_000_000
+
+        print(f"""
+**Internet Speed Test** 
+Download: {download_speed:.2f} Mbps
+Upload: {upload_speed:.2f} Mbps
+Ping: {st.results.ping:.2f} ms
+            """) #How to format a string in Python?
+
+        #try to check to see if your speed matches the common API speed requirements
+        if download_speed < 25: print(f"\nDownload speed may be too low and could create longer wait times!")
+        if upload_speed < 25: print(f"Upload speed may be too low and could create longer wait times!")
+    except Exception as e:
+        print(f"Error occurred from internet_speed_test() func: {e}") #e will show the error usually in a one-line response
+        traceback.print_exc() #still show all errors without the application quiting/breaking
+
+
+check_i_speed = False #switch to False for testing content details, or to turn off
+while check_i_speed:
+    complete = False #create boolean value for animation
+    #starts the animation thread
+    animation_thread = threading.Thread(target=retrieving_animation)
+    animation_thread.start()
+    print("\n. .\n. . .") #add some kind of something lol
+                          #make it seem not boring, or frozen, not working, etc.
+    print("One moment! Checking internet speed!")
+    internet_speedtest()
+    print(". . .\n. .")
+    #stop the thread/animation
+    complete = True
+    animation_thread.join()
+    print_line_num() #can use to see if the app is getting to a certain point #checking for errors
+    check_i_speed = False #stop the while loop
+    #although I could just comment out the funcs, it is becoming a good practice to be able to simply start/stop features
+    #kind of like using an on/off switch, either way this can speed up the progress of finding errors and further development
+
+
+#The system roles are simple and you can just ask the AI and it will provide you a suggestion for anything else specific
+#{"role": "system", "content": "You are a helpful assistant"}
+#{"role": "system", "content": "You are a helpful assistant specializing in Python programming."}
+#{"role": "system", "content": "You are a sarcastic AI."} #This makes the assistant respond sarcastically.
+#{"role": "system", "content": "You are a helpful medical assistant. Do not provide non-medical advice."}
+#{"role": "system", "content": "Respond only in JSON format."} #Forces structured output.
+#now variables will be created to assist the AI to return the response desired
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#above the time is being converted for the AI and looking below in the func it also includes the location
+assistant_type = "You are a helpful assistant."
+time_and_location = f"The current date and time is {current_time} and the current location is {my_city}, {my_state}."
+additional_info = "Answer as if you are aware of the time, date, and current loaction."
+#run the AI  ------------------- https://www.deepseek.com/en #<-- Make sure to get API Key
+#temperature settings
+#USE CASE   TEMPERATURE (for DeepSeek) #default is 1.0
+#Coding, Math   0.0
+#Data Cleaning, Data Analysis   1.0
+#General Conversation   1.3
+#Translation    1.3
+#Creative Writing, Poetry   1.5
+
+def deepseek(ask, temp):        
+        client = OpenAI(api_key="your-api-key-goes-here", base_url="https://api.deepseek.com")
+        response = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[
+                {"role": "system", "content": f"{assistant_type} {time_and_location} {additional_info}"}, 
+                {"role": "user", "content": f"{i}"},
+            ],
+            temperature=temp, stream=False
+        )   
+        response_str = f"\nResponse from Deepseek: {response.choices[0].message.content}\n"
+        copy_to_clipboard(response_str)
+        return response_str
+
+
+#print(f"{assistant_type} {time_and_location} {additional_info}") #using this to test the string
+
+
+start = True #in this case: switching to False will allow for testing of other components without starting the chat
+             #like what is seen in the commented 'print' above, verifying the string is correct for the system role
+while start: #can also just put while True: #yet when testing #this is good for testing in terminal
+
+    i = input("\nChat/Ask Question (type q to quit, r to restart): ")
+    if i == "q": 
+        #change color of terminal #switch back to og color
+        os.system('color 0F') #https://ss64.com/nt/color.html
+        quit() #or start = False
+
+    elif i == "r":
+        start = False
+        os.system("python dseek.py") #restart the app
+
+    else:
+        try:
+            complete = False #create boolean value for animation
+
+        
+            #starts the animation thread
+            animation_thread = threading.Thread(target=retrieving_animation)
+            animation_thread.start()
+
+            
+            #creates a variable to hold the time before making the ai request
+            start_time = time.time()
+            
+            #run the API for the AI Model
+            
+            ########################################################################################AI FUNC
+
+            print(deepseek(i, 0.0)) #i usually just use 0.0 for basic testing
+                                    #however the temp does make a difference
+                                    #for instance switch to 1.5 for poetry/creative writing
+                                    #print(deepseek(i, 1.5)) 
+                                    #print(deepseek("Write a poem about fun", 1.5))
+
+            ########################################################################################
+            
+            #stop the thread/animation
+            complete = True
+            animation_thread.join()
+
+            #calc the elapsed time and print
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            print(f"\n{elapsed_time} - seconds elapsed")
+            
+
+        except Exception as e:
+            traceback.print_exc() #still show all errors without the application quiting/breaking
+            print("1.0", f"\nPossbile Exception/Error: {e}\n")
+            #start = False
+
+#below we will be using triple quotes to make a multi-line comment
+"""
+We can make a few minor tweaks, and there might be some repeated code in what we’ve got.
+Let’s check out the challenges below and see if you can apply some programming techniques 
+or combine those two identical code sections into one function and tailor something to 
+assist with a task of your own.
+
+Remember, it’s okay not to strive for perfection! Don’t put too much pressure on yourself. 
+Simple, clean code is often more enjoyable to read and understand. 
+Trying to cater to every single programming principle can slow you down, so aim to keep 
+things as straightforward as possible. #What is an opinion? #don't come at me #lol
+Always consider how to handle errors, and think about explaining 
+your code to someone who’s new to programming. Happy coding!
+
+Challenges/Ask the AI model: 
+
+What are the SOLID programming principles in Python?
+
+When or when not to use a class in Python?
+
+In which scenarios is it best to use a for loop, recursion, or a while loop in Python?
+
+How do I incorporate GUI into my Python program?
+
+What is importing a module/library in Python?
+
+How to format a string in Python?
+
+What is a Boolean in Python?
+
+What is indentation in Python?
+
+Think of this script as a fun puzzle for your new project. 
+Why not give it a shot by removing all the comments while keeping everything nicely indented? 
+You might be surprised by how it turns out! 
+You can even create a personalized bot and use it as a tool to learn new languages. 
+Have fun with it!
+
+"""
+</code></pre>
+
+    <!-- Prism.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism.js Python language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+
+</div>
+
+<!-- <div class="border_box_shadow_code"><img src="img/dot.png" class="img_center"></div> -->
+
+<p class="border_box_shadow_p" style="border-top: 1px solid #000;">
+Alright, here we go! If you've successfully finished the basic <a href="openai.html" target="_blank">OpenAI tutorial</a> previously, you should be all set to run this code without any issues. Just make sure you've got all the necessary modules/libraries installed. Oh, and remember to check the internet speed setting—if it’s currently set to “False,” try switching it to “True.” Also, look for any parts of the code lacking comments and consider adding some! Creating a handy reference file/cheat sheet could significantly enhance your speed of developing applications.
+<br><br>
+If you need to chat with one of these AI models, ask away! If you encounter any errors, just let them know.<br>
+<a href="https://www.deepseek.com/en" target="_blank">DeepSeek AI</a>,&nbsp
+<a href="https://gemini.google.com/app" target="_blank">Gemini/Google's AI</a>,&nbsp
+<a href="https://openai.com/" target="_blank">OpenAI</a>
+
+<br><br><br>
+<b>**VERY IMPORTANT**</b>
+<br><br>
+Just a heads up: in the code above, where it says "your-api-key-goes-here," you'll want to swap that out with your actual API Key.
+
+
+<br><br><br>
+<b>**RECAP**</b>
+<br><br>
+We set out to create a real-time response system for the DeepSeek AI model, and it turned out to be quite an exciting journey! We started by asking ourselves important questions about what it takes to have a real-time conversation. For instance, knowing the current day and time and our location can be helpful.
+<br> 
+Since we're working with API usage, we also wanted to ensure we handle any errors that might pop up in our code. We decided that displaying all the errors for now was a good idea, as sometimes things can go wrong outside of the code itself with API usage. Ultimately, we were thrilled with the results—we interacted in real time!
+<br><br><br>
+
+<b>**Down-to-Earth Definitions**</b>
+<br><br>
+<b>Recursion:</b>&nbspA programming technique in which a function calls itself, either directly or indirectly, to tackle a problem. This approach simplifies a complex issue by breaking it down into smaller, more manageable sub-problems. It continues to do this until it arrives at a base case, which can be solved without additional recursion.<br><br>
+<b>While Loop:</b>&nbspA while loop is a key control structure in programming that enables a block of code to run repeatedly as long as a specific condition remains true. It's beneficial for tasks where the number of iterations isn't predetermined and relies on a changing condition.<br><br>
+<b>If Statement:</b>&nbspAn if statement is a basic control structure in programming that enables you to run a block of code based on the truth of a particular condition. It allows you to make decisions in your code, executing different actions depending on whether the condition evaluates to true or false.<br><br>
+
+
+</p>
+<div class="border_box_shadow_code"><img src="img/deepseekpic.png" class="img_center"></div>
+<!-- footer -->
+<div class="footer">
+	<p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>
+</div>
+
+    <script>
+        document.getElementById('copyButton').addEventListener('click', function() {
+            // Get all code elements
+            const codeElements = document.getElementsByTagName('code');
+            let allCodeText = '';
+            
+            // Concatenate all code content
+            for (let i = 0; i < codeElements.length; i++) {
+                allCodeText += codeElements[i].textContent + '\n\n';
+            }
+            
+            // Create temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = allCodeText;
+            document.body.appendChild(textarea);
+            
+            // Select and copy text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove temporary element
+            document.body.removeChild(textarea);
+            
+            // Provide feedback
+            alert('All code content has been copied to clipboard!');
+        });
+    </script>
+
+</body>
+
+</html>
