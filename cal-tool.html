@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head><title>EDITZ - Simple Calendar Tool</title>
+<link rel="icon" type="image/x-icon" href="img/avatar.png">
+<link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Type" content="text/html" charset=utf-8>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
+
+    <style>
+        .slider {
+            position: relative;
+            max-width: 100vw;
+            border: 1px solid #000000;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .control {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+<!-- heading -->
+<h1 class="main_heading"> <!-- the genderator to make this ascii art is https://fsymbols.com/generators/carty/ -->
+<span style="color: #952bff"><i>from</i></span> editz <span style="color: #952bff"><i>import</i></span> EDITZ
+</h1>
+
+
+
+<!-- navbar -->
+<ul>
+  <!-- <li><img class="spin-image" src="img/avatar.png" style="width: auto; height: 24px; padding: 14px 16px;"></li> -->
+  <li><a href="/">&nbsp&nbspHome&nbsp&nbsp</a></li>
+  <li><a href="projects.html">&nbsp&nbspProjects&nbsp&nbsp</a></li>
+  <li><a href="links.html">Helpful Links</a></li>
+  <li><a href="about.html">About Me</a></li>
+  <!-- <li><a href="#contact">Downloads</a></li> -->
+</ul>
+
+
+
+
+<!-- body/iframe -->
+<!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
+<h2 class="border_box_shadow_topic">Simple Calendar Tool, Last Updated: 3/30/2025</h2>
+
+
+<!-- intro -->
+<p class="border_box_shadow_p">
+<br>
+Greetings,
+<br><br>
+In this quick and friendly tutorial, I’m excited to explain how to use your browser's scale feature in the print settings to ensure your printout fits perfectly on one page. 
+To access the print option, right-click, hit Ctrl+P, or go to the menu button in the top right corner—on most browsers. 
+<br><br>
+If you're using the calendar tool, just click the print button, and the print settings will open for you right away! When you print, the options at the top of the calendar will disappear. This calendar is super simple to use: just click in the box for the day you wish to add an event, start typing, and it's there!
+<br><br>
+Once you're in the print settings, remember to click on "More settings" to see all your options available. Some browsers may just scroll down to the feature.
+You will find where it says scalable or scale, go to custom, or the portion where it has a number value, and adjust it lower or higher to fit your wishes.
+<br><br>
+For the best appearance, use the “Landscape” layout and “Letter” for the paper size. Make sure to click background graphics if you wish to use color. Uncheck headers and footers if wanted as well.
+<br><br>
+<b>Just a little tip:</b> This calendar tool works best with Google Chrome. 
+<br><br>
+One of the cool features is that your calendar will automatically save to your local storage, so you don’t have to worry about losing your progress on an accidental close. I’ve found that on Chrome, it stays saved for quite a while. Remember that clearing your history, cache, disk cleanup, or cookies might erase the content. This tool is perfect for creating a quick, one-page printable calendar. Remember, this is just designed for a quick, one-time calendar creation. If you want to incorporate this using a database of events, add users with the ability to log in, or do anything else you can imagine, just let me know. We can review what you are trying to implement, discuss the security needs, and find the best solution.
+<br><br>
+This calendar is responsive, so it will work on many different devices, including tablets and phones. I recommend flipping smaller devices sideways for the best visual presentation and simplicity of use.
+<br><br>
+Remember to kick off your calendar with a fun and catchy title at the top! Just click where it says, “Enter Title Here…” and start typing.
+<br><br>
+Take a look at the screenshots below! It'll help you identify which settings you might want to change. If necessary, click the arrows on the left and right of the image slider and toggle to full screen with the button at the top right.
+<br><br>
+<a href="event-cal.html" target="_blank">Click here to open the calendar tool!</a>
+<br>
+</p>
+
+
+
+
+<div class="border_box_shadow_code"> 
+<center>
+<div class="slider" id="slider">
+    <div class="slides" id="slides">
+        <div class="slide"><img src="cal_pics/cal1.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal2.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal3.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal4.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal5.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal6.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal7.PNG" alt="Image 1"></div>
+        <div class="slide"><img src="cal_pics/cal8.PNG" alt="Image 1"></div>
+        
+    </div>
+    <div class="controls">
+        <button class="control" onclick="prevSlide()">❮</button>
+        <button class="control" onclick="nextSlide()">❯</button>
+    </div>
+    <button class="fullscreen-btn" onclick="toggleFullScreen()">🗖</button>
+</div>
+</center>
+
+</div>
+
+<div class="border_box_shadow_code"><img src="cal_pics/cal9.PNG" class="img_center"></div>
+<!-- footer -->
+<div class="footer">
+	<p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>
+</div>
+
+</body>
+
+
+<script>
+    let currentIndex = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function updateSlidePosition() {
+        const offset = -currentIndex * 100;
+        slides.style.transform = 'translateX(' + offset + '%)';
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function toggleFullScreen() {
+        const slider = document.getElementById('slider');
+        if (!document.fullscreenElement) {
+            slider.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+
+</html>
