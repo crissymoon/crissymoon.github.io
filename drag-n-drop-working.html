@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="icon" type="image/x-icon" href="img/avatar.png">
+    <title>Towers of Hanoi</title>
+    <style>
+        body {
+            font-family: Times, sans-serif;
+            text-align: center;
+            background:linear-gradient(100deg, #66003d, #493240, #660066, #2a004d, #50c878);
+            background-size:200% 200%;
+            animation:moveGradient 4s ease infinite;
+            padding: 20px;
+        }
+        @keyframes moveGradient {
+
+          0% {background-position:0% 50%;}
+
+          50% {background-position:100% 50%;}
+
+          100% {background-position:0% 50%;}
+
+        }
+        .game-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fce8ec;
+            border: 1px solid #ccc; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .towers {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            position: relative;
+            height: 300px;
+        }
+        .tower {
+            width: 30%;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .pole {
+            width: 20px;
+            height: 100%;
+            background-color: #F8C3CC;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 0;
+        }
+        .base {
+            width: 100%;
+            height: 20px;
+            background-color: #F8C3CC;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 0;
+        }
+        .ring {
+            height: 30px;
+            border-radius: 15px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 10;
+            cursor: grab;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px black;
+        }
+        .ring.dragging {
+            opacity: 0.8;
+            cursor: grabbing;
+        }
+        .moves-counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .win-message {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+        button {
+            padding: 9.5px 15px;
+            background-color: #F5A9B8;
+            color: white;
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        button:hover {
+            background-color: #8FD3F8;
+        }
+        select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        h1 {
+            font-size: 4rem;
+            background: linear-gradient(90deg, #5BCEFA, #8FD3F8, #5BCEFA, #F5A9B8, #F8C3CC);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        #popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #F8C3CC;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        /* Overlay styling */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        /* Close button styling */
+        #close-btn {
+            font-size: 14px;
+            cursor: pointer;
+            
+        }
+
+        @media (max-width: 600px) {
+            #popup {
+                padding: 20px;
+            }
+        }
+        @media (max-width: 400px) {
+            #popup {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body><br><br>
+    <div class="game-container">
+
+        <h1>Towers of Hanoi</h1>
+        <div class="controls">
+            <label for="ringCount" style="color: #5BCEFA; font-weight: 700;">Number of rings:</label>
+            <select id="ringCount" style="background-color: #8FD3F8;">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+            <button id="startBtn">Start Game</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+        <div class="towers" id="towers"></div>
+        <div class="moves-counter"><span style="color: #5BCEFA; font-weight: 700;">Moves: <span id="moves">0</span></span></div>
+        <div class="win-message" id="winMessage"><span style="color: #5BCEFA;">Congratulations! You solved it!</span></div>
+        <p style="color: #F5A9B8;">Note: On mobile devices, instead of dragging and dropping, you just tap the rings and then the peg where you want to put it.</p>
+    </div>
+    <div id="overlay"></div>
+    <div id="popup">
+        
+        <h2>Recursion</h2>
+        <p style="text-align: left;">
+<span style="color: #8c8c8c;"><i>#solve in Python</i></span><br>
+def tower_of_hanoi(n, source="A", auxiliary="B", destination="C"):<br>
+&nbsp&nbsp&nbsp&nbspif n == 1:<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(f"Move disk 1 from {source} to {destination}")<br> 
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn<br> 
+&nbsp&nbsp&nbsp&nbsp<span style="color: #8c8c8c;"><i>#move n-1 disks from source to auxiliary peg</i></span><br>
+&nbsp&nbsp&nbsp&nbsptower_of_hanoi(n-1, source, destination, auxiliary)<br>
+&nbsp&nbsp&nbsp&nbsp<span style="color: #8c8c8c;"><i>#move the 'n' disk from source to destination</i></span><br>
+&nbsp&nbsp&nbsp&nbspprint(f"Move disk {n} from {source} to {destination}")<br>
+&nbsp&nbsp&nbsp&nbsp<span style="color: #8c8c8c;"><i>#the n-1 disks from auxiliary to destination peg</i></span><br>
+&nbsp&nbsp&nbsp&nbsptower_of_hanoi(n-1, auxiliary, source, destination)<br>
+<span style="color: #8c8c8c;"><i>#example usage #this is also what is considered a coding principle way</i></span><br>
+if __name__ == "__main__":<br>
+&nbsp&nbsp&nbsp&nbspnum_disks = int(input("Enter the number of disks: "))<br>
+&nbsp&nbsp&nbsp&nbsptower_of_hanoi(num_disks)
+        </p><br>
+        <center><span id="close-btn">- click here to close this window -<br><br>
+            (it is suggested to flip phone devices sideways<br> after closing this window)
+
+        </span><br></center>
+    </div>
+
+    <script>
+        // When the page loads, show the popup
+        window.onload = function() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        };
+        
+        // Close the popup when the close button is clicked
+        document.getElementById('close-btn').onclick = function() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        };
+        
+        // Close the popup when clicking outside of it
+        document.getElementById('overlay').onclick = function() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const towersContainer = document.getElementById('towers');
+            const ringCountSelect = document.getElementById('ringCount');
+            const startBtn = document.getElementById('startBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const movesDisplay = document.getElementById('moves');
+            const winMessage = document.getElementById('winMessage');
+            
+            let towers = [[], [], []];
+            let moves = 0;
+            let selectedRing = null;
+            let selectedTower = null;
+            let ringCount = 3;
+            const colors = [
+                '#5BCEFA', '#8FD3F8', '#F5A9B8', '#ec5f77', 
+                '#0e91d8', '#33FFF3', '#f7bbc7', '#8C33FF'
+            ];
+            
+            // Initialize the game
+            function initGame() {
+                ringCount = parseInt(ringCountSelect.value);
+                towers = [[], [], []];
+                moves = 0;
+                movesDisplay.textContent = moves;
+                winMessage.style.display = 'none';
+                
+                // Create rings on the first tower
+                for (let i = ringCount; i > 0; i--) {
+                    towers[0].push(i);
+                }
+                
+                renderTowers();
+            }
+            
+            // Render the towers and rings
+            function renderTowers() {
+                towersContainer.innerHTML = '';
+                
+                for (let i = 0; i < 3; i++) {
+                    const tower = document.createElement('div');
+                    tower.className = 'tower';
+                    tower.dataset.index = i;
+                    
+                    const pole = document.createElement('div');
+                    pole.className = 'pole';
+                    
+                    const base = document.createElement('div');
+                    base.className = 'base';
+                    
+                    tower.appendChild(pole);
+                    tower.appendChild(base);
+                    
+                    // Add rings to the tower
+                    towers[i].forEach(ringSize => {
+                        const ring = document.createElement('div');
+                        ring.className = 'ring';
+                        ring.dataset.size = ringSize;
+                        ring.style.width = `${ringSize * 30 + 40}px`;
+                        ring.style.backgroundColor = colors[ringSize - 1];
+                        ring.textContent = ringSize;
+                        ring.draggable = true;
+                        
+                        // Add drag events
+                        ring.addEventListener('dragstart', handleDragStart);
+                        ring.addEventListener('dragend', handleDragEnd);
+                        
+                        tower.appendChild(ring);
+                    });
+                    
+                    // Add drop events to tower
+                    tower.addEventListener('dragover', handleDragOver);
+                    tower.addEventListener('drop', handleDrop);
+                    tower.addEventListener('click', handleTowerClick);
+                    
+                    towersContainer.appendChild(tower);
+                }
+            }
+            
+            // Drag and drop handlers
+            function handleDragStart(e) {
+                const ringSize = parseInt(e.target.dataset.size);
+                const towerIndex = parseInt(e.target.parentElement.dataset.index);
+                
+                // Only allow dragging the top ring of a tower
+                if (towers[towerIndex][towers[towerIndex].length - 1] !== ringSize) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                selectedRing = ringSize;
+                selectedTower = towerIndex;
+                e.target.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', ''); // Required for Firefox
+                e.dataTransfer.effectAllowed = 'move';
+            }
+            
+            function handleDragEnd(e) {
+                e.target.classList.remove('dragging');
+            }
+            
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            }
+            
+            function handleDrop(e) {
+                e.preventDefault();
+                const targetTowerIndex = parseInt(e.currentTarget.dataset.index);
+                
+                if (selectedTower !== null && selectedRing !== null) {
+                    moveRing(selectedTower, targetTowerIndex);
+                }
+            }
+            
+            // Click handler for towers (alternative to drag and drop)
+            function handleTowerClick(e) {
+                const towerElement = e.currentTarget;
+                const towerIndex = parseInt(towerElement.dataset.index);
+                
+                if (selectedRing === null) {
+                    // Select the top ring of this tower
+                    if (towers[towerIndex].length > 0) {
+                        selectedRing = towers[towerIndex][towers[towerIndex].length - 1];
+                        selectedTower = towerIndex;
+                        towerElement.lastElementChild.style.border = '2px dashed black';
+                    }
+                } else {
+                    // Try to move the selected ring to this tower
+                    if (selectedTower !== towerIndex) {
+                        moveRing(selectedTower, towerIndex);
+                    }
+                    // Deselect
+                    document.querySelectorAll('.ring').forEach(ring => {
+                        ring.style.border = 'none';
+                    });
+                    selectedRing = null;
+                    selectedTower = null;
+                }
+            }
+            
+            // Move a ring from one tower to another
+            function moveRing(fromTowerIndex, toTowerIndex) {
+                const fromTower = towers[fromTowerIndex];
+                const toTower = towers[toTowerIndex];
+                
+                if (fromTower.length === 0) return;
+                
+                const ringSize = fromTower[fromTower.length - 1];
+                
+                // Check if move is valid
+                if (toTower.length === 0 || ringSize < toTower[toTower.length - 1]) {
+                    fromTower.pop();
+                    toTower.push(ringSize);
+                    moves++;
+                    movesDisplay.textContent = moves;
+                    renderTowers();
+                    
+                    // Check for win
+                    if (towers[2].length === ringCount) {
+                        winMessage.style.display = 'block';
+                    }
+                }
+            }
+            
+            // Event listeners
+            startBtn.addEventListener('click', initGame);
+            resetBtn.addEventListener('click', initGame);
+            
+            // Initialize the game on load
+            initGame();
+        });
+    </script>
+</body>
+</html>
