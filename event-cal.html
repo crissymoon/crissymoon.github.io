@@ -157,6 +157,22 @@
             margin-bottom: 5px;
            
         }
+        .notes-transparent-input {
+            font-size: 18px;
+            text-align: center;
+            background: transparent;  /* Transparent background */
+            border: none;  /* Visible border (adjust as needed) */
+            border-width: 0;
+            outline: none;
+            padding: 10px;  /* Comfortable padding */
+            width: 100%;  /* Adjust width as needed */
+            color: #333;  /* Text color */
+            margin-bottom: 5px;
+            overflow:hidden;
+            box-sizing: border-box;
+            display: flex;
+           
+        }
 
         @media print {
             body {
@@ -232,7 +248,8 @@
             
             <!-- Days will be inserted here by JavaScript -->
         </div>
-    </div>
+    </div><br>
+    <textarea type="text" class="notes-transparent-input" placeholder="Add Notes Here..."></textarea>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
