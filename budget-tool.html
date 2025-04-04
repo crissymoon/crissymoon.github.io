@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="img/avatar.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- FileSaver for Word -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <title>Budget-Tool</title>
+    <style>
+        @page {
+            size: letter portrait; /* Letter size (8.5x11 inches), portrait orientation */
+            margin: 0; /* Remove default margins */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f2f2f2;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .budget-section-hs {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .budget-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: 600;
+            margin-left: 1px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #e6ecff;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #e6ecff;           
+        }
+        input, select {
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+        button {
+            background: #6666ff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            
+            background-color: #e6ecff;
+            font-weight: 600;
+        }
+        .total-row {
+            font-weight: bold;
+            background: #f2f2f2;
+        }
+        .delete-btn {
+            background: #e74c3c;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+        .summary {
+            display: flex;
+            justify-content: space-between;
+         
+            font-size: 18px;
+        }
+        .positive {
+            color: #27ae60;
+        }
+        .negative {
+            color: #e74c3c;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #6666ff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .tbl-cate {
+
+        }
+        .tbl-disc {
+
+        }
+        .tbl-date {
+
+        }
+        .tbl-act {
+
+        }
+        .transactionTable {
+
+        }
+        .print-btn-top {
+
+        }
+        .pdf-btn {
+
+        }
+        .sns-btn {
+
+        }
+        .save-btn {
+
+        }
+        .top-info {
+            padding: 10px;
+        }
+        @media only screen and (max-width: 600px) {
+            .tbl-cate {
+                display: none;
+            }
+            .tbl-disc {
+                display: none;
+            }
+            .tbl-date {
+                display: none
+            }
+        }
+        @media print {
+            .budget-section-hs {
+                display: none !important;
+            }
+            .print-btn-top {
+                display: none !important;
+            }
+            .pdf-btn {
+                display: none !important;
+            }
+            .sns-btn {
+                display: none !important;
+            }
+            .save-btn {
+                display: none !important;
+            }
+            .top-info {
+                display: none !important;
+            }
+            body {
+                background: none;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+        .save-content {
+
+        }
+        .tool-btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 5px;              /* Space between items */
+        }
+
+
+    </style>
+</head>
+<body> 
+
+    <div class="tool-btns">
+   
+        <button class="print-btn-top" onclick="window.print()">Print Budget</button>
+
+        <button class="pdf-btn" onclick="saveDivAsPDF()">Save as PDF</button>
+        
+        <button class="sns-btn" onclick="saveAsWord()">Strip & Save - Doc</button>
+
+        <button class="save-btn" onclick="saveAsWord2()">Save as Word</button>
+
+    </div>
+
+        <p class="top-info">
+        **04-03-2025** Hey there! I’m excited to share this handy tool that saves time when formatting and making a simple expense sheet. It’s perfect for creating budget printables! Just a heads up: depending on your browser, your data might stick around for quite a while unless you clear your history. <br><br>
+The best part is you won’t have to start from scratch every time you accidentally close the window—you’ll be able to pick up right where you left off!
+<br><br>
+Here’s a quick guide to help you get started. You’ll find a handy ledger where you can easily input your categories. Select the correct value if you’re adding income or a payment you've received. If it’s an expense or a fee for something like bills or shopping, choose “expense.” And if you ever make a mistake, no worries! Just click the delete button to remove any incorrect entries. 
+Also, please note that this layout is responsive, which means some items in the transaction list might be hidden when viewed on the phone. If that happens, turn your device sideways for a complete view of all the details. This may also impact what prints from smaller mobile devices; it only prints what is shown. This is to allow the best functionality and visual presentation.
+<br><br>
+For your convenience, this document is designed to automatically adjust and format itself to fit a standard page when you click the print button. The print will only show the transactions and totals. When you choose to save, you have a few great options! You can strip everything down to just the text, which is super simple. If you’re looking for something easy to share without taking up much space, saving as a JPEG-PDF is a fantastic choice! And if you want to keep the styling for later edits, saving it to Word is the way to go.
+<br><br>
+If you encounter any errors or have ideas for new features, please don’t hesitate to let me know!<br><br>
+
+    </p>
+
+
+
+     <center>
+    
+    <div class="notification" id="saveNotification">Data saved!</div>
+    
+    <div class="budget-section-hs">
+        <h2>Add Income/Expense</h2>
+        <form id="budgetForm">
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" required>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <!-- <input type="text" id="category" required placeholder="e.g., Salary, Groceries, Rent"> -->
+                    <select id="category">
+                    <option value="communications-expense">Communications/Phone - Expense</option>
+                    <option value="entertainment-expense">Entertainment - Expense</option>
+                    <option value="food-expense">Food - Expense</option>
+                    <option value="housing-expense">Housing - Expense</option>
+                    <option value="internet-expense">Internet - Expense</option>
+                    <option value="legal-expense">Legal - Expense</option>
+                    <option value="repairs-expense">Repairs - Expense</option>
+                    <option value="transportation-expense">Transportation - Expense</option>
+                    <option value="utilities-expense">Utilities - Expense</option>
+                    <option value="other-expense">Other - Expense</option>
+
+                    <option value="assistance-payment">Assistance - Payment</option>
+                    <option value="employment-payment">Employment - Payment</option>
+                    <option value="non-taxed-payment">Non-Taxed/1099 - Payment</option>
+
+                    <option value="my-cash">Cash On Hand</option>
+                    <option value="my-savings">Savings</option>
+
+
+
+
+                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" min="0" step="0.01" required placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" id="description" placeholder="Additional details - Possibly Add Paid To Here">
+            </div>
+            <button type="submit">Add Transaction</button>
+        </form>
+    </div>
+</center>
+
+ <div id="save-content" class="save-content">
+<center>
+    <div class="budget-section">
+        <h2>My Budget/Transactions</h2>
+        <table id="transactionsTable" class="transactionTable">
+            <thead>
+                <tr>
+                    <th class="tbl-date">Date</th>
+                    <th>Type</th>
+                    <th class="tbl-cate">Category</th>
+                    <th class="tbl-disc">Description</th>
+                    <th>Amount</th>
+                    <th class="th-tbl-act" id="th-tbl-act">Action</th>
+                </tr>
+            </thead>
+            <tbody id="transactionsBody">
+                <!-- Transactions will be added here -->
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="budget-section">
+        <div class="summary">
+            <div>Total Income: <span id="totalIncome" class="positive">$0.00</span></div>
+            <div>Total Expenses: <span id="totalExpense" class="negative">$0.00</span></div>
+            <div>Balance: <span id="balance">$0.00</span></div>
+        </div>
+    </div>
+
+</center>
+</div>
+
+    <script> // Save as JPEG
+
+    function saveDivAsPDF() {
+      const element = document.getElementById('save-content');
+    
+      const opt = {
+        margin: 10,
+        filename: 'my-budget-pdf-jpeg.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      // New Promise-based usage:
+      html2pdf().set(opt).from(element).save();
+      
+    }
+    </script>
+
+    <script>
+        function saveAsWord2() {
+            // Get the HTML content you want to export
+            const content = document.querySelector('.save-content').innerHTML;
+            
+            // Create a Blob with the HTML content
+            const blob = new Blob([`
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" 
+                      xmlns:w="urn:schemas-microsoft-com:office:word" 
+                      xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Document</title>
+                    <style>
+                        @page {
+                            size: letter portrait; /* Letter size (8.5x11 inches), portrait orientation */
+                            margin: 0; /* Remove default margins */
+                        }
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            line-height: 1.6;
+                            background-color: #f2f2f2;
+                            margin: 0 auto;
+                            padding: 20px;
+                            color: #333;
+
+                        }
+                        h1 {
+                            color: #2c3e50;
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                        .budget-section-hs {
+                            background: #fff;
+                            border-radius: 8px;
+                            padding: 20px;
+                            margin-bottom: 20px;
+                            margin-top: 50px;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        }
+                        .budget-section {
+                            background: #fff;
+                            border-radius: 8px;
+                            padding: 20px;
+                            margin-bottom: 20px;
+                            
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        }
+                        .form-group {
+                            margin-bottom: 15px;
+                        }
+                        label {
+                            display: block;
+                            text-align: left;
+                            margin-bottom: 5px;
+                            font-weight: 600;
+                            margin-left: 1px;
+                        }
+                        input {
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            font-size: 16px;
+                            background-color: #e6ecff;
+                        }
+                        select {
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            font-size: 16px;
+                            background-color: #e6ecff;           
+                        }
+                        input, select {
+                            -webkit-box-sizing: border-box;
+                               -moz-box-sizing: border-box;
+                                    box-sizing: border-box;
+                        }
+                        button {
+                            background: #6666ff;
+                            color: white;
+                            border: none;
+                            padding: 10px 15px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            transition: background 0.3s;
+                        }
+                        button:hover {
+                            background: #2980b9;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 20px;
+                        }
+                        th, td {
+                            padding: 12px;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                        }
+                        th {
+                            
+                            background-color: #e6ecff;
+                            font-weight: 600;
+                        }
+                        .total-row {
+                            font-weight: bold;
+                            background: #f2f2f2;
+                        }
+                        .delete-btn {
+                            background: #e74c3c;
+                            padding: 5px 10px;
+                            font-size: 14px;
+                        }
+                        .delete-btn:hover {
+                            background: #c0392b;
+                        }
+                        .summary {
+                            display: flex;
+                            justify-content: space-between;
+                         
+                            font-size: 18px;
+                        }
+                        .positive {
+                            color: #27ae60;
+                        }
+                        .negative {
+                            color: #e74c3c;
+                        }
+                        .notification {
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: #6666ff;
+                            color: white;
+                            padding: 10px 20px;
+                            border-radius: 4px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                            display: none;
+                        }
+                        .tbl-cate {
+
+                        }
+                        .tbl-disc {
+
+                        }
+                        .tbl-date {
+
+                        }
+                        .transactionTable {
+
+                        }
+                        .print-btn-top {
+                  
+
+                        }
+                        @media only screen and (max-width: 600px) {
+                            .tbl-cate {
+                                display: none;
+                            }
+                            .tbl-disc {
+                                display: none;
+                            }
+                            .tbl-date {
+                                display: none
+                            }
+                        }
+                        @media print {
+                            .budget-section-hs {
+                                display: none !important;
+                            }
+                            .print-btn-top {
+                                display: none !important;
+                            }
+                            body {
+                                background: none;
+                                -webkit-print-color-adjust: exact;
+                                print-color-adjust: exact;
+                            }
+                            .page {
+                                margin: 0;
+                                box-shadow: none;
+                            }
+                        }
+                        .save-content {
+
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                </body>
+                </html>
+            `], { type: 'application/msword' });
+            
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'my-budget-word-with-styling.doc';
+            
+            // Trigger the download
+            document.body.appendChild(link);
+            link.click();
+            
+            // Clean up
+            document.body.removeChild(link);
+        }
+    </script>
+
+    <script>
+        function saveAsPDF() {
+
+    
+            const element = document.getElementById('save-content');
+            const opt = {
+                margin: 10,
+                filename: 'my-budget-pdf-jpeg.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().from(element).set(opt).save();
+
+
+        }
+
+        function saveAsWord() {
+
+            
+            const content = document.getElementById('save-content').innerHTML;
+            const blob = new Blob([`
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" 
+                      xmlns:w="urn:schemas-microsoft-com:office:word" 
+                      xmlns="http://www.w3.org/TR/REC-html40">
+                    <head>
+                        <meta charset="utf-8">
+                        <title>Word Document</title>
+                    </head>
+                    <body>${content}</body>
+                </html>
+            `], { type: 'application/msword' });
+            
+            saveAs(blob, 'my-budget-word-strip.doc');
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load data from local storage
+            loadData();
+            
+            // Set today's date as default
+            document.getElementById('date').valueAsDate = new Date();
+            
+            // Form submission
+            document.getElementById('budgetForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const type = document.getElementById('type').value;
+                const category = document.getElementById('category').value;
+                const amount = parseFloat(document.getElementById('amount').value);
+                const date = document.getElementById('date').value;
+                const description = document.getElementById('description').value;
+                
+                addTransaction(type, category, amount, date, description);
+                
+                // Reset form
+                this.reset();
+                document.getElementById('date').valueAsDate = new Date();
+                
+                // Show save notification
+                showNotification();
+            });
+        });
+        
+        function addTransaction(type, category, amount, date, description = '') {
+            // Create transaction object
+            const transaction = {
+                id: Date.now(), // Unique ID
+                type,
+                category,
+                amount,
+                date,
+                description
+            };
+            
+            // Get existing transactions
+            let transactions = JSON.parse(localStorage.getItem('budgetTransactions')) || [];
+            
+            // Add new transaction
+            transactions.push(transaction);
+            
+            // Save to local storage
+            localStorage.setItem('budgetTransactions', JSON.stringify(transactions));
+            
+            // Update UI
+            updateTransactionsList();
+            updateSummary();
+        }
+        
+        function deleteTransaction(id) {
+            // Get transactions
+            let transactions = JSON.parse(localStorage.getItem('budgetTransactions')) || [];
+            
+            // Filter out the transaction to delete
+            transactions = transactions.filter(transaction => transaction.id !== id);
+            
+            // Save to local storage
+            localStorage.setItem('budgetTransactions', JSON.stringify(transactions));
+            
+            // Update UI
+            updateTransactionsList();
+            updateSummary();
+            
+            // Show save notification
+            showNotification();
+        }
+        
+        function updateTransactionsList() {
+            const tbody = document.getElementById('transactionsBody');
+            tbody.innerHTML = '';
+            
+            // Get transactions
+            const transactions = JSON.parse(localStorage.getItem('budgetTransactions')) || [];
+            
+            if (transactions.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="6" style="text-align: center;">No transactions yet</td>';
+                tbody.appendChild(row);
+                return;
+            }
+            
+            // Sort by date (newest first)
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Add each transaction to the table
+            transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                
+                // Format date
+                const dateObj = new Date(transaction.date);
+                const formattedDate = dateObj.toLocaleDateString();
+                
+                // Format amount with 2 decimal places
+                const formattedAmount = transaction.amount.toFixed(2);
+                
+                row.innerHTML = `
+                    <td class="tbl-date">${formattedDate}</td>
+                    <td>${transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}</td>
+                    <td class="tbl-cate">${transaction.category}</td>
+                    <td class="tbl-disc">${transaction.description || '-'}</td>
+                    <td class="${transaction.type}">${transaction.type === 'income' ? '+' : '-'}$${formattedAmount}</td>
+                    <td class="tbl-act" id="tbl-act"><button id="delete-btn" class="delete-btn" onclick="deleteTransaction(${transaction.id})">Delete</button></td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        function updateSummary() {
+            const transactions = JSON.parse(localStorage.getItem('budgetTransactions')) || [];
+            
+            let totalIncome = 0;
+            let totalExpense = 0;
+            
+            transactions.forEach(transaction => {
+                if (transaction.type === 'income') {
+                    totalIncome += transaction.amount;
+                } else {
+                    totalExpense += transaction.amount;
+                }
+            });
+            
+            const balance = totalIncome - totalExpense;
+            
+            document.getElementById('totalIncome').textContent = `$${totalIncome.toFixed(2)}`;
+            document.getElementById('totalExpense').textContent = `$${totalExpense.toFixed(2)}`;
+            
+            const balanceElement = document.getElementById('balance');
+            balanceElement.textContent = `$${balance.toFixed(2)}`;
+            balanceElement.className = balance >= 0 ? 'positive' : 'negative';
+        }
+        
+        function loadData() {
+            updateTransactionsList();
+            updateSummary();
+        }
+        
+        function showNotification() {
+            const notification = document.getElementById('saveNotification');
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+    <script> // Hide/Show Element
+        function toggleVisibility(elementId) {
+            const element = document.getElementById(elementId);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        function startFunctionAfterDelay(callback, delay) {
+            setTimeout(callback, delay);
+        }
+    </script>
+
+</body>
+</html>
