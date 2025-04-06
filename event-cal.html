@@ -2,29 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <link rel="icon" type="image/x-icon" href="img/avatar.png">
     <title>EDITZ - Editable Calendar</title>
     <style>
-        body {
-            font-family: Times, sans-serif;
-            font-size: 22px;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
         
         .calendar-container {
+            font-family: Times, sans-serif;
+            font-size: 22px;
             max-width: 100%;
-            margin: 0 auto;
             background: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
             overflow: hidden;
             page-break-inside: avoid;
+            margin-bottom: 0;
         }
         
         .calendar-header {
+            font-family: Times, sans-serif;
+            font-size: 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,15 +34,7 @@
             font-size: 1.5em;
             font-weight: bold;
         }
-        
-        .nav-buttons button {
-            background: rgba(255,255,255,0.7);
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
-            margin: 0 5px;
-        }
+
         
         .calendar-grid {
             display: grid;
@@ -62,10 +51,12 @@
         }
         
         .calendar-day {
-            min-height: 80px;
+            
             padding: 5px;
             background-color: white;
             position: relative;
+            border: 1px solid #eee;
+            
         }
         
         .day-number {
@@ -77,16 +68,25 @@
         .day-content {
             width: 100%;
             height: calc(100% - 25px);
-            resize: none;
-            border: 1px solid #eee;
+
+
+            border: none;  /* Visible border (adjust as needed) */
+            border-width: 0;
+            outline: none;
+            
+            /* resize: none; */
+
+
+           /* border: 1px solid #eee; */
             padding: 3px;
             font-size: 0.9em;
             box-sizing: border-box;
             overflow: hidden;
+            outline: none;
         }
         
         .day-content:focus {
-            outline: 2px solid #55b9f3;
+            
             background-color: #f8fcff;
         }
         
@@ -96,11 +96,11 @@
         }
         
         .today {
-            background-color: #fff9e6;
+           /* background-color: #fff9e6; */
         }
         
         .today .day-number {
-            color: #e74c3c;
+          /*  color: #e74c3c; */
         }
         
         /* Transgender theme colors */
@@ -118,6 +118,8 @@
         
         /* Controls section */
         .controls {
+            font-family: Times, sans-serif;
+            font-size: 22px;
             margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
@@ -158,20 +160,14 @@
            
         }
         .notes-transparent-input {
-            font-size: 18px;
-            text-align: center;
-            background: transparent;  /* Transparent background */
-            border: none;  /* Visible border (adjust as needed) */
-            border-width: 0;
             outline: none;
-            padding: 10px;  /* Comfortable padding */
-            width: 100%;  /* Adjust width as needed */
-            color: #333;  /* Text color */
-            margin-bottom: 5px;
-            overflow:hidden;
-            box-sizing: border-box;
-            display: flex;
+            margin-top: 5px;
+            margin-left: 5px;
            
+        }
+
+        p {
+            margiin-top: 0;
         }
 
         @media print {
@@ -191,16 +187,21 @@
             }
             
             .day-content {
-                border: 1px solid #ddd;
+                resize: none;
+                border: none;  /* Visible border (adjust as needed) */
+                border-width: 0;
+                outline: none;
             }
             .controls {
                 display: none;
             }
         }
+
+
     </style>
 </head>
 <body>
-    <div class="controls">
+    <div class="controls" id="controls">
         <select id="month-select">
             <option value="0">January</option>
             <option value="1">February</option>
@@ -218,22 +219,28 @@
         
         <select id="year-select"></select>
          
-        <button class="print-button" onclick="window.print()">Print Calendar</button>
+        
+
+            <div class="nav-buttons">
+                
+                <button class="print-button" id="prev-month">Previous</button>
+                <button class="print-button" id="today">Today</button>
+                <button class="print-button" id="next-month">Next</button>
+
+                <!-- <button class="print-button" onclick="savePageToFile()">Save as Editz (HTML)</button> -->
+                <button class="print-button" onclick="window.print()">Print Calendar</button>
+            </div>
     </div>
 
-
+<div id="saveIT">
     <div>
-        <input type="text" class="large-transparent-input" placeholder="Enter Title here...">
+        <p type="text" contenteditable="true" class="large-transparent-input">Enter Title here...</p>
     </div>
     
     <div class="calendar-container">
         <div class="calendar-header">
             <div class="month-year" id="current-month-year">Month Year</div>
-            <div class="nav-buttons">
-                <button id="prev-month">Previous</button>
-                <button id="today">Today</button>
-                <button id="next-month">Next</button>
-            </div>
+
         </div>
         
         <div class="calendar-grid" id="calendar-grid">
@@ -248,8 +255,18 @@
             
             <!-- Days will be inserted here by JavaScript -->
         </div>
-    </div><br>
-    <textarea type="text" class="notes-transparent-input" placeholder="Add Notes Here..."></textarea>
+    </div>
+
+            <div contenteditable="true" class="notes-transparent-input">Add notes here...</div>
+
+</div>
+
+<!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW -->
+<!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW -->
+<!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW -->
+<!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW --><!-- JS BELOW -->
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -426,5 +443,61 @@
             }, 100);
         });
     </script>
+
+
+<script> // To Save for Editor
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+        function addNewElement() {
+
+
+            const div = document.getElementById('saveIT');
+
+
+            const newElement = document.createElement('p');
+            newElement.textContent = 'New element added at: ' + new Date().toLocaleTimeString();
+            div.appendChild(newElement);
+        }
+    
+        function savePageToFile() {
+            // Get the Element controls
+            const element = document.getElementById('controls');
+            element.style.display = "none";
+
+
+            // Get the complete HTML of the current page
+            const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            
+            // Prompt user for filename
+            const defaultName = 'page-' + new Date().toISOString().slice(0, 10) + '.html';
+            const fileName = prompt('Enter file name:', defaultName);
+            window.location.reload();
+            if (fileName) {
+                // Create a Blob with the HTML content
+                const blob = new Blob([html], { type: 'text/html' });
+                
+                // Create a download link
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName.endsWith('.html') ? fileName : fileName + '.html';
+                
+                // Trigger the download
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+
+               
+
+            }
+        }
+    </script>
+
+
 </body>
 </html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="status">Custom Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        .calendar-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        
+        .month-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        select, button {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: #8600b3;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        
+        button:hover {
+            background-color:  #ff3377;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+
+        
+        th {
+            background-color: #8600b3;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 100px;
+
+            vertical-align: top;
+            position: relative;
+        }
+
+        .day-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .other-month {
+            background-color: #f9f9f9;
+            color: #aaa;
+        }
+        
+        .today {
+            background-color: #e6f7ff;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            button {
+                display: none;
+            }
+            .calendar-header {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div class="month-selector">
+                <select id="month-select">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+                
+                <select id="year-select"></select>
+                
+                <button id="go-btn">Create</button>
+                <!-- <button onclick="setupColorPicker('th', null, 'background-color');">Change Cal-Top Color</button> -->
+               <button id="saveButton">Save as Editz (HTML)</button>
+                <button class="print-button" onclick="window.print()">Print</button>
+            </div>
+           
+           
+        </div>
+
+<div id="the-cal">
+ <center>
+        <h1 contenteditable="true">EZ-Calendar-Creator</h1>
+       
+ <h2 id="current-month-year">Month Year</h2> 
+</center>
+
+
+<!--
+            <thead>
+                
+                <tr>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+
+            </thead> -->
+
+     
+<div id="diff-cal-editit" contenteditable="true" data-save-id="diff-cal-editit">  
+        <table id="calendar">
+
+           <thead>
+                
+                <tr>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="calendar-body">
+                <!-- Calendar days will be inserted here by JavaScript -->
+            </tbody>
+            </div>
+        </table>
+    </div>
+
+
+</div>
+
+    <script> // Fill Text w/Template
+        document.getElementById('basicResume').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+                HTML CODE GOES HERE
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+        
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize year dropdown
+            const yearSelect = document.getElementById('year-select');
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+                
+                if (year === currentYear) {
+                    option.selected = true;
+                }
+            }
+            
+            // Initialize month dropdown to current month
+            const currentMonth = new Date().getMonth();
+            document.getElementById('month-select').value = currentMonth;
+            
+            // Generate calendar for current month/year
+            generateCalendar(currentMonth, currentYear);
+            
+            // Update calendar when Go button is clicked
+            document.getElementById('go-btn').addEventListener('click', function() {
+                const month = parseInt(document.getElementById('month-select').value);
+                const year = parseInt(document.getElementById('year-select').value);
+                generateCalendar(month, year);
+            });
+        });
+        
+        function generateCalendar(month, year) {
+            const calendarBody = document.getElementById('calendar-body');
+            const monthYearDisplay = document.getElementById('current-month-year');
+            
+            // Clear previous calendar
+            calendarBody.innerHTML = '';
+            
+            // Update month/year display
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"];
+            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+            
+            // Get first day of month and total days in month
+            const firstDay = new Date(year, month, 1);
+            const startingDay = firstDay.getDay(); // 0-6 (Sun-Sat)
+            
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Get days from previous month to show
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            
+            // Create calendar rows
+            let date = 1;
+            let prevMonthDate = prevMonthLastDay - startingDay + 1;
+            
+            for (let i = 0; i < 6; i++) {
+                // Stop if we've gone past the end of the month
+                if (date > daysInMonth && i > 0) break;
+                
+                const row = document.createElement('tr');
+                
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('td');
+                    
+                    if (i === 0 && j < startingDay) {
+                        // Days from previous month
+                        cell.innerHTML = `<div class="day-number">${prevMonthDate}</div>`;
+                        cell.classList.add('other-month');
+                        prevMonthDate++;
+                    } else if (date > daysInMonth) {
+                        // Days from next month
+                        const nextMonthDate = date - daysInMonth;
+                        cell.innerHTML = `<div class="day-number">${nextMonthDate}</div>`;
+                        cell.classList.add('other-month');
+                        date++;
+                    } else {
+                        // Current month days
+                        cell.innerHTML = `<div class="day-number">${date}</div>`;
+                        
+                        // Highlight today
+                        const today = new Date();
+                        if (date === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                            cell.classList.add('today');
+                        }
+                        
+                        date++;
+                    }
+                    
+                    row.appendChild(cell);
+                }
+                
+                calendarBody.appendChild(row);
+            }
+        }
+    </script>
+     <script> // Save an element
+        /**
+         * AutoSaveManager - A reusable class to handle auto-saving of editable content
+         */
+        class AutoSaveManager {
+            constructor(options = {}) {
+                // Default options
+                this.options = {
+                    storageKey: 'autoSaveData', // localStorage key
+                    debounceTime: 1000, // ms to wait after last keypress before saving
+                    statusElement: null, // Element to show save status
+                    ...options
+                };
+                
+                this.editableElements = [];
+                this.saveTimeout = null;
+                this.initialize();
+            }
+            
+            /**
+             * Initialize the manager
+             */
+            initialize() {
+                // Find all editable elements with data-save-id
+                this.editableElements = Array.from(document.querySelectorAll('[contenteditable][data-save-id]'));
+                
+                // Load saved content
+                this.loadContent();
+                
+                // Set up event listeners
+                this.setupEventListeners();
+            }
+            
+            /**
+             * Set up event listeners for editable elements
+             */
+            setupEventListeners() {
+                this.editableElements.forEach(element => {
+                    element.addEventListener('input', this.handleInput.bind(this));
+                });
+            }
+            
+            /**
+             * Handle input events with debouncing
+             */
+            handleInput() {
+                // Clear any pending save
+                if (this.saveTimeout) {
+                    clearTimeout(this.saveTimeout);
+                }
+                
+                // Show saving status
+                this.showStatus('Saving...');
+                
+                // Set new timeout for saving
+                this.saveTimeout = setTimeout(() => {
+                    this.saveContent();
+                    this.showStatus('All changes saved', true);
+                    
+                    // Hide status after 2 seconds
+                    setTimeout(() => {
+                        this.showStatus('');
+                    }, 2000);
+                }, this.options.debounceTime);
+            }
+            
+            /**
+             * Save all editable content to localStorage
+             */
+            saveContent() {
+                const saveData = {};
+                
+                this.editableElements.forEach(element => {
+                    const id = element.getAttribute('data-save-id');
+                    saveData[id] = element.innerHTML;
+                });
+                
+                localStorage.setItem(this.options.storageKey, JSON.stringify(saveData));
+            }
+            
+            /**
+             * Load saved content from localStorage
+             */
+            loadContent() {
+                const savedData = localStorage.getItem(this.options.storageKey);
+                
+                if (savedData) {
+                    try {
+                        const parsedData = JSON.parse(savedData);
+                        
+                        this.editableElements.forEach(element => {
+                            const id = element.getAttribute('data-save-id');
+                            if (parsedData[id]) {
+                                element.innerHTML = parsedData[id];
+                            }
+                        });
+                        
+                        this.showStatus('Loaded saved content', true);
+                    } catch (e) {
+                        console.error('Error loading saved content:', e);
+                    }
+                }
+            }
+            
+            /**
+             * Show status message
+             * @param {string} message - The status message
+             * @param {boolean} [success=false] - Whether to show as success
+             */
+            showStatus(message, success = false) {
+                if (!this.options.statusElement) return;
+                
+                const statusElement = typeof this.options.statusElement === 'string' 
+                    ? document.querySelector(this.options.statusElement)
+                    : this.options.statusElement;
+                
+                if (statusElement) {
+                    statusElement.textContent = message;
+                    statusElement.style.color = success ? '#4CAF50' : '#ff9800';
+                }
+            }
+            
+            /**
+             * Clear all saved data
+             */
+            clearSavedData() {
+                localStorage.removeItem(this.options.storageKey);
+                this.showStatus('Cleared saved data', true);
+                
+                // Hide status after 2 seconds
+                setTimeout(() => {
+                    this.showStatus('');
+                }, 2000);
+            }
+        }
+
+        // Initialize the AutoSaveManager when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const autoSaveManager = new AutoSaveManager({
+                statusElement: '#status' // Element to show status messages
+            });
+            
+            // Optional: Expose to window for debugging
+            window.autoSaveManager = autoSaveManager;
+        });
+    </script>
+        <script> // To Save Month Area
+        // Function to save content to localStorage
+        function saveContent() {
+            const content = document.getElementById('current-month-year').innerHTML;
+            localStorage.setItem('current-month-year', content);
+        }
+        
+        // Function to load content from localStorage
+        function loadContent() {
+            const savedContent = localStorage.getItem('current-month-year');
+            if (savedContent) {
+                document.getElementById('current-month-year').innerHTML = savedContent;
+            }
+        }
+        
+        // Load content when page loads
+        window.addEventListener('load', loadContent);
+        
+        // Save content when page is about to unload (closing or refreshing)
+        window.addEventListener('beforeunload', saveContent);
+        
+        // Optional: Auto-save periodically (every 5 seconds)
+        setInterval(saveContent, 5000);
+    </script>
+    <script>
+/**
+ * Sets up a color picker that changes the color of a specified element
+ * @param {string} elementSelector - CSS selector for the element to change color
+ * @param {string} [inputSelector] - Optional CSS selector for an input element to use as color picker
+ * @param {string} [property='color'] - CSS property to change ('color', 'background-color', etc.)
+ * @returns {void}
+ */
+function setupColorPicker(elementSelector, inputSelector, property = 'color') {
+  // If no input selector provided, create a color input element
+  let colorInput;
+  
+  if (!inputSelector) {
+    colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.style.position = 'fixed';
+    colorInput.style.top = '10px';
+    colorInput.style.right = '10px';
+    colorInput.style.zIndex = '1000';
+    document.body.appendChild(colorInput);
+  } else {
+    colorInput = document.querySelector(inputSelector);
+    if (!colorInput) {
+      console.error(`Input element with selector '${inputSelector}' not found`);
+      return;
+    }
+    colorInput.type = 'color';
+  }
+
+  // Get the target element
+  const targetElement = document.querySelector(elementSelector);
+  if (!targetElement) {
+    console.error(`Element with selector '${elementSelector}' not found`);
+    return;
+  }
+
+  // Set initial color from the element's current style
+  const initialColor = getComputedStyle(targetElement)[property];
+  colorInput.value = rgbToHex(initialColor) || '#000000';
+
+  // Add event listener
+  colorInput.addEventListener('input', function() {
+    targetElement.style[property] = this.value;
+  });
+
+  // Helper function to convert RGB to HEX
+  function rgbToHex(rgb) {
+    if (!rgb) return null;
+    
+    // Handle different RGB string formats
+    const rgbValues = rgb.match(/\d+/g);
+    if (!rgbValues || rgbValues.length < 3) return null;
+    
+    const [r, g, b] = rgbValues.map(Number);
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+  }
+}
+    </script>
+
+        <script>
+        document.getElementById('saveButton').addEventListener('click', function() {
+            // Get the HTML content of the div
+            const content = document.getElementById('contentToSave').outerHTML;
+
+            // Create a Blob with the HTML content
+            const blob = new Blob([content], { type: 'text/html' });
+
+            // Create a download link
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'saved_calendar.editz'; // File name
+
+            // Append the link to the body, click it, and then remove it
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    </script>
+
+    <script>
+        document.getElementById('saveButton').addEventListener('click', function() {
+            // Get the DIV content
+            const divContent = document.getElementById('the-cal').innerHTML;
+            
+            // Create a complete HTML document with the DIV content
+            const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Saved Content</title>
+
+
+
+    <style>
+
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+
+        
+        th {
+            background-color: #8600b3;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 100px;
+
+            vertical-align: top;
+            position: relative;
+        }
+
+        .day-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .other-month {
+            background-color: #f9f9f9;
+            color: #aaa;
+        }
+        
+        .today {
+            background-color: #e6f7ff;
+        }
+        
+    </style>
+
+
+
+</head>
+<body>
+${divContent}
+</body>
+</html>
+            `;
+            
+            // Ask for filename
+            const fileName = prompt("Enter a name for the HTML file:", "saved-content");
+            
+            if (fileName) {
+                // Create a Blob with the HTML content
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                
+                // Create a download link
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = fileName.endsWith('.html') ? fileName : fileName + '.html';
+                
+                // Trigger the download
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+            }
+        });
+    </script>
+
+</body>
+</html>

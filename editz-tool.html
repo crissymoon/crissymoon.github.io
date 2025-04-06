@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="img/avatar.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title id="status">EDITZ</title>
+    <style>
+        body {
+            font-family: Times, sans-serif;
+           
+        }
+        #editor {
+            border: 1px solid #000;
+            min-height: 300px;
+            padding: 10px;
+            margin-top: 10px;
+            outline: none;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 5px;              /* Space between items */
+            position: fixed;
+            top: 1;
+            left: 1;
+            border: 1px solid #000;
+            background: #e6e6e6; /* Optional: for better visibility */
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000; /* Ensures it stays above other content */
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .print-settings {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 5px;              /* Space between items */
+        }
+        .templates {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 5px;              /* Space between items */
+        }
+        .add-file {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 5px;              /* Space between items */
+        }
+        button, select {
+            padding: 5px 7px;
+            border-radius: 5px;
+            border: 1px solid #000;
+            height: 28px;
+        }
+        button:hover {
+            background-color: #e6e6e6;
+
+        }
+        .status-bar {
+            display: flex;
+            padding: 5px;
+            background-color: #e6e6e6;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+        .status {
+          
+           background: #f0f0f0;
+        }
+        .color-picker {
+            height: 28px;
+            width: 28px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        .line-spacing-control {
+            height: 28px;
+            padding-left: 2px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        hr {
+            
+            border-top: 1px solid #eee;
+
+        }
+        .resume-title {
+            text-align: center; 
+            padding-top: 175px; 
+            font-size: 36px;
+            margin-bottom: 20px;
+
+            font-weight: 700;
+
+        }
+        .load-html {
+            padding-left: 2px;
+            padding-right: 2px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 5px;              /* Space between items */
+
+        }
+        .load-html-btn {
+            padding-top: 2px;
+           
+            border-radius: 2px;
+            border: 1px solid #000;
+            height: 22px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            text-align: justify;
+
+        }
+
+    </style>
+
+
+        <style>
+        /* Style for the modal/popup */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4); /* Semi-transparent black */
+
+        }
+        
+        /* Modal content */
+        .modal-content {
+            border: 1px solid #000;
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+    </style>
+
+
+        <style>
+        .scale-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .scale-value {
+            width: 50px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #000;
+            padding-bottom: 5px;
+            padding-top: 5px;
+
+
+        }
+        .orient-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .btn-scale {
+            padding: 5px 7px;
+            border-radius: 5px;
+            border: 1px solid #000;
+            height: 28px;
+            cursor: pointer;
+        }
+        @media print {
+            .scale-control {
+                display: none;
+            }
+            .day-content {
+                resize: none;
+                border: none;  /* Visible border (adjust as needed) */
+                border-width: 0;
+                outline: none;
+            }
+            body {
+                transform: scale(var(--print-scale, 1));
+                transform-origin: top left;
+                width: calc(100% / var(--print-scale, 1));
+
+                            /* Default print style */
+            }
+                /* Default print style */
+
+    </style>
+    <style>
+        #emojiPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+           
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        
+        #emoji-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .emoji-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .emoji-btn:hover {
+            transform: scale(1.2);
+        }
+        
+    </style>
+
+
+</head>
+<body>
+    
+    <div class="toolbar">
+        <!-- <div class="status" id="status"></div> -->
+        <button id="selectDeleteBtn">Clear</button>
+        <button onclick="selectText()">Select All</button>
+        <button onClick="window.location.reload();">Reload</button>
+        <button id="undo" title="Undo (Ctrl+Z)">Undo</button>
+        <button id="redo" title="Redo (Ctrl+Y)">Redo</button>
+        <select id="fontFamily">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Verdana">Verdana</option>
+        </select>
+        
+        <select id="fontSize">
+            <option value="1">Small</option>
+            <option value="3" selected>Medium</option>
+            <option value="5">Large</option>
+            <option value="7">Extra Large</option>
+        </select>
+        <input type="color" id="textColor" class="color-picker" title="Text Color">
+
+        
+        <button id="boldBtn" title="Bold"><b>B</b></button>
+        <button id="italicBtn" title="Italic"><i>I</i></button>
+        <button id="underlineBtn" title="Underline"><u>U</u></button>
+        
+        <button id="alignLeft" title="Align Left">Align-Left</button>
+        <button id="alignCenter" title="Align Center">Center</button>
+        <button id="alignRight" title="Align Right">Align-Right</button>
+
+        <button onclick="insertHR()">Insert Line</button>
+        <button onclick="insertList('ul')">• List</button>
+        <button onclick="insertList('ol')">1. List</button>
+
+        <button onclick="insertHS1()">HS</button>
+        <button onclick="insertHL()">HL</button>
+
+         <button id="openPopup">Emojis</button>
+        
+
+        <!-- <div class="status">
+            Undo steps: <span id="undo-count">0</span> | 
+            Redo steps: <span id="redo-count">0</span>
+        </div> -->
+
+        <div class="line-spacing-control">
+            <label style="margin-top: 6px; padding-left: 5px; font-size: 15px; font-family: Times, sans-serif;" for="lineSpacing">Line Spacing:</label>
+            <select style="border: none;" id="lineSpacing" onchange="setLineSpacing(this.value)">
+                <option value="1">1.0</option>
+                <option value="1.2">1.2</option>
+                <option value="1.5">1.5</option>
+                <option value="1.8">1.8</option>
+                <option value="2">2.0</option>
+                <option value="2.5">2.5</option>
+            </select>
+        </div>
+        <!-- <button id="clearButton" class="hidden">Clear Content</button> -->
+
+
+        <button id="myBtn">Print</button>
+
+
+        </div>
+
+
+    <div class="resume-title">⭐__EDITZ__⭐</div>
+
+    <div class="templates">
+        <!-- RESUME TEMPLATES -->
+        <button id="fillButton">Business Resume</button>
+        <button id="basicResume">Basic Resume</button>
+        <button id="hospitalityBtn">Hospitality Resume</button>
+        <button id="constructionBTN">Construction Resume</button>
+        
+
+
+       
+        <!-- COVER LETTERS -->
+        <button id="coverL">Basic Cover Letter</button>
+        <button id="fancyCL">Fancy Cover Letter</button>
+
+        <button onclick="window.open('diff-cal-tool.html', '_blank')">Calendar Tool 1</button>
+        <button onclick="window.open('cal-tool.html', '_blank')">Calendar Tool 2</button>
+
+
+        <!-- SAVE AS -->
+        <button onclick="saveDivToPDF()">Save as PDF/png</button>
+        <button onclick="saveDivAsPDF()">Save as PDF/jpeg</button>
+        <button onclick="saveAsWord()">Save as Word</button>
+       <!-- <button onclick="toggleSpellCheck()">Toggle Spell Check</button> -->  
+    <div class="load-html">
+
+       <input type="file" id="fileInput" accept=".html,.htm" />
+
+
+       <button class="load-html-btn" onclick="loadFile()">Load Editz File</button>
+   </div>
+
+   <button id="saveButton">Save as Editz (HTML)</button>
+       
+
+    </div>
+
+
+
+
+    
+    <div id="editor" contenteditable="true" data-save-id="editor" spellcheck="true" data-gramm="true" data-gramm_editor="true" data-grammarly-shadow-root="true">
+        Start typing here... <b>testing</b>
+    </div>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    
+    <div class="modal-content">
+        <center><button class="refresh-btn" onclick="window.location.reload();">Click Here to Close This Window</button></center>
+        <!-- <span class="close">&times;</span> -->
+        <!-- <h2>Scale Before Print</h2> -->
+   
+     <div class="scale-control">
+        <p>Scale to fit page/pages:</p>
+        <button class="btn-scale" id="scale-down">-</button>
+        <div class="scale-value" id="scale-value">100%</div>
+        <button class="btn-scale" id="scale-up">+</button>
+        <button class="btn-scale" id="print-btn">Print</button>   
+
+    </div>
+
+
+
+    <center>
+        <p>For resumes the best settings to go with are 1.5 for line spacing, medium/large font size, and 80% for scale, but you can totally adjust things to suit your style.</p>
+
+        <p>Remember that when you open the print prompt, you should choose either Portrait or Landscape for the Layout.</p><p>
+        If needed check out the previous information provided for the event claendar which includes instructions with pictures explaining how to best print. <a href="cal-tool.html" target="_blank">Click here to check it out!</a> For the resumes is will be best to use Portrait, vice versa, the calendars require landscape. Also scaling is important as it can fit contents to one page if needed.
+        </p>
+        <button class="refresh-btn" onclick="window.location.reload();">Click Here to Close This Window</button>
+
+
+    </center>
+    
+    </div>
+
+
+</div>
+
+
+    <div id="emojiPopup">
+        <p>Just click on an emoji to add it!</p>
+
+
+    <div id="emoji-container">
+        <!-- Emoji buttons will be added here by JavaScript -->
+    </div>
+
+
+
+        <button id="closePopup">Close</button>
+    </div>
+
+
+<script>
+function insertHS1() {
+    insertHtmlAtSelection(`
+            <section>
+        <h2>Heading Special</h2>
+        <p>add summary/details. . .</p>
+    </section>
+    `);
+}
+
+
+function insertHL() {
+    insertHtmlAtSelection(`
+<div style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 3px;">Highlight background</div>
+    `);
+}
+</script>
+
+
+
+
+
+
+<script>
+function insertHtmlAtSelection(html) {
+    const selection = window.getSelection();
+    
+    if (selection.rangeCount) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        
+        const fragment = document.createDocumentFragment();
+        let node;
+        while ((node = div.firstChild)) {
+            fragment.appendChild(node);
+        }
+        
+        range.insertNode(fragment);
+        
+        // Move cursor to after the inserted content
+        range.setStartAfter(fragment.lastChild);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+}
+</script>
+    <script>
+        document.getElementById('openPopup').addEventListener('click', function() {
+            document.getElementById('emojiPopup').style.display = 'block';
+        });
+        
+        document.getElementById('closePopup').addEventListener('click', function() {
+            document.getElementById('emojiPopup').style.display = 'none';
+        });
+        
+        // Close popup when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('emojiPopup')) {
+                document.getElementById('emojiPopup').style.display = 'none';
+            }
+        });
+        
+        // Add click event to emojis
+        document.querySelectorAll('.emoji').forEach(emoji => {
+            emoji.addEventListener('click', function() {
+                alert('You selected: ' + this.textContent);
+            });
+        });
+    </script>
+
+
+    <script>
+        // List of emojis to display
+        const emojis = [  '😂', '❤️', '🤣', '👍', '😭', '🙏', '😘', '🥰', '😍', '😊',
+  '🎉', '🤔', '😁', '🔥', '💕', '😎', '✨', '😒', '👏', '😢',
+  '😜', '💯', '👀', '🙄', '🤷', '😳', '🤦', '🙌', '🤢', '😴',
+  '😅', '🤩', '😡', '🤮', '🤪', '😃', '👎', '😏', '🤗', '🤯',
+  '😱', '😤', '😋', '🥺', '😷', '🤧', '😇', '🥳', '🤠', '😈',
+  '💩', '👻', '🤘', '💪', '👊', '✌️', '🤝', '🙈', '🙉', '🙊',
+  '💖', '💔', '💘', '💝', '💓', '💗', '💞', '❣️', '💟', '🧡',
+  '💛', '💚', '💙', '💜', '🖤', '🤎', '🤍', '😺', '😸', '😹',
+  '😻', '😼', '😽', '🙀', '😿', '😾', '👶', '🧒', '👧', '🧑',
+  '👨', '🧔', '👩', '🧓', '👴', '👵', '👨‍⚕️', '👩‍⚕️', '👨‍🎓', '👩‍🎓',
+  '👨‍🏫', '👩‍🏫', '👨‍⚖️', '👩‍⚖️', '👨‍🌾', '👩‍🌾', '👨‍🍳', '👩‍🍳', '👨‍🔧', '👩‍🔧' ];
+        
+        const emojiContainer = document.getElementById('emoji-container');
+        const textDisplay = document.getElementById('editor');
+        
+        // Create a button for each emoji
+        emojis.forEach(emoji => {
+            const btn = document.createElement('button');
+            btn.className = 'emoji-btn';
+            btn.textContent = emoji;
+            btn.addEventListener('click', () => {
+                // Insert the emoji at the cursor position
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    range.deleteContents();
+                    range.insertNode(document.createTextNode(emoji));
+                    
+                    // Move cursor after the inserted emoji
+                    range.setStartAfter(range.endContainer);
+                    range.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                } else {
+                    // If no selection, just append the emoji
+                    textDisplay.textContent += emoji;
+                }
+                
+                // Focus the display div
+                textDisplay.focus();
+            });
+            emojiContainer.appendChild(btn);
+        });
+    </script>
+ <script src="https://cdn.grammarly.com/grammarly.min.js"></script>
+
+     <script>
+        function toggleSpellCheck() {
+            const div = document.getElementById('editor');
+            const status = document.getElementById('status');
+            
+            if (div.spellcheck) {
+                div.spellcheck = false;
+                status.textContent = 'Spell check is OFF';
+            } else {
+                div.spellcheck = true;
+                status.textContent = 'Spell check is ON';
+            }
+        }
+    </script>
+    
+    <script> // Save as Word
+        function saveAsWord() {
+            // Get the div content
+            const content = document.getElementById('editor').innerHTML;
+            
+            // Add HTML structure around the content
+            const html = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" 
+                      xmlns:w="urn:schemas-microsoft-com:office:word" 
+                      xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Document</title>
+                </head>
+                <body>${content}</body>
+                </html>
+            `;
+            
+            // Create a Blob with the HTML content
+            const blob = new Blob(['\ufeff', html], {
+                type: 'application/msword'
+            });
+            
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'document.doc';
+            
+            // Trigger download
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+    <script>
+    function selectText() {
+        const div = document.getElementById('editor');
+        
+        // Create a range object
+        const range = document.createRange();
+        range.selectNodeContents(div);
+        
+        // Get the selection object
+        const selection = window.getSelection();
+        
+        // Remove any existing selections
+        selection.removeAllRanges();
+        
+        // Add the new range
+        selection.addRange(range);
+    }
+
+    </script>
+
+    <script> // Save as JPEG
+
+    function saveDivAsPDF() {
+      const element = document.getElementById('editor');
+      element.style.border = "none";
+      const opt = {
+        margin: 10,
+        filename: 'my-resume-pdf-jpeg.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      // New Promise-based usage:
+      html2pdf().set(opt).from(element).save();
+      setTimeout(() => {
+      element.style.border = "1px solid #000";;
+    }, 2000);
+      
+    }
+    </script>
+    <script> // Save to PDF/img
+        function saveDivToPDF() {
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Get the div element
+            const element = document.getElementById('editor');
+            element.style.border = "none";
+            // Use html2canvas to capture the div as an image
+            html2canvas(element).then((canvas) => {
+                // Convert canvas to image data
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Calculate the PDF dimensions to maintain aspect ratio
+                const imgWidth = doc.internal.pageSize.getWidth() - 20;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                // Add the image to the PDF
+                doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+                
+                // Save the PDF
+                doc.save('my_resume-pdf-png.pdf');
+
+                window.location.reload();
+                
+            });
+            
+        }
+    </script>
+
+    <script> // Clear all text in editor
+        document.getElementById('selectDeleteBtn').addEventListener('click', function() {
+            // Select all text in the div
+            const div = document.getElementById('editor');
+            const range = document.createRange();
+            range.selectNodeContents(div);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            // Show confirmation dialog
+            if (confirm('Are you sure you want to clear all text?')) {
+                // Delete the content
+                div.textContent = '';
+            } else {
+                // Deselect if user cancels
+                selection.removeAllRanges();
+            }
+        });
+    </script>
+    
+    <script>// Tool for editable text
+        document.addEventListener('DOMContentLoaded', function() {
+            const editor = document.getElementById('editor');
+            const fontFamily = document.getElementById('fontFamily');
+            const fontSize = document.getElementById('fontSize');
+            const textColor = document.getElementById('textColor');
+
+            // Text color
+            textColor.addEventListener('input', function() {
+                document.execCommand('foreColor', false, this.value);
+                editor.focus();
+            });
+            
+            // Font family change
+            fontFamily.addEventListener('change', function() {
+                document.execCommand('fontName', false, this.value);
+                editor.focus();
+            });
+            
+            // Font size change
+            fontSize.addEventListener('change', function() {
+                document.execCommand('fontSize', false, this.value);
+                editor.focus();
+            });
+            
+            // Bold button
+            document.getElementById('boldBtn').addEventListener('click', function() {
+                document.execCommand('bold', false, null);
+                editor.focus();
+            });
+            
+            // Italic button
+            document.getElementById('italicBtn').addEventListener('click', function() {
+                document.execCommand('italic', false, null);
+                editor.focus();
+            });
+            
+            // Underline button
+            document.getElementById('underlineBtn').addEventListener('click', function() {
+                document.execCommand('underline', false, null);
+                editor.focus();
+            });
+            
+            // Alignment buttons
+            document.getElementById('alignLeft').addEventListener('click', function() {
+                document.execCommand('justifyLeft', false, null);
+                editor.focus();
+            });
+            
+            document.getElementById('alignCenter').addEventListener('click', function() {
+                document.execCommand('justifyCenter', false, null);
+                editor.focus();
+            });
+            
+            document.getElementById('alignRight').addEventListener('click', function() {
+                document.execCommand('justifyRight', false, null);
+                editor.focus();
+            });
+            
+            // Focus the editor when clicking anywhere in the editable area
+            editor.addEventListener('click', function() {
+                editor.focus();
+            });
+        });
+    </script>
+
+
+    <script> // Set Line Spacing
+        function formatText(command, value = null) {
+            document.execCommand(command, false, value);
+            document.getElementById('editor').focus();
+        }
+
+        function setLineSpacing(value) {
+            const editor = document.getElementById('editor');
+            editor.style.lineHeight = value;
+        }
+    </script>
+
+
+        <script> // Insert Line
+        function insertHR() {
+            const editor = document.getElementById('editor');
+            const selection = window.getSelection();
+            
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const hr = document.createElement('hr');
+                
+                // Insert HR at cursor position
+                range.deleteContents();
+                range.insertNode(hr);
+                
+                // Add a new paragraph after the HR for better UX
+                const newParagraph = document.createElement('p');
+                newParagraph.innerHTML = '<br>';
+                hr.parentNode.insertBefore(newParagraph, hr.nextSibling);
+                
+                // Move cursor to the new paragraph
+                const newRange = document.createRange();
+                newRange.setStart(newParagraph, 0);
+                newRange.setEnd(newParagraph, 0);
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            } else {
+                // If no selection, just append HR at the end
+                editor.appendChild(document.createElement('hr'));
+                editor.appendChild(document.createElement('p')).innerHTML = '<br>';
+            }
+            
+            editor.focus();
+        }
+    </script>
+
+    <script> // Undo/Redo
+        document.addEventListener('DOMContentLoaded', function() {
+            const editor = document.getElementById('editor');
+            const undoBtn = document.getElementById('undo');
+            const redoBtn = document.getElementById('redo');
+            const undoCountSpan = document.getElementById('undo-count');
+            const redoCountSpan = document.getElementById('redo-count');
+            
+            // Store editor states
+            let states = [editor.innerHTML];
+            let currentState = 0;
+            
+            // Update button states
+            function updateButtons() {
+                undoBtn.disabled = currentState === 0;
+                redoBtn.disabled = currentState === states.length - 1;
+                undoCountSpan.textContent = currentState;
+                redoCountSpan.textContent = states.length - currentState - 1;
+            }
+            
+            // Save state to history
+            function saveState() {
+                // If we're not at the end of history, remove future states
+                if (currentState < states.length - 1) {
+                    states = states.slice(0, currentState + 1);
+                }
+                
+                // Add new state
+                states.push(editor.innerHTML);
+                currentState++;
+                
+                // Limit history to 100 states (optional)
+                if (states.length > 100) {
+                    states.shift();
+                    currentState--;
+                }
+                
+                updateButtons();
+            }
+            
+            // Undo functionality
+            function undo() {
+                if (currentState > 0) {
+                    currentState--;
+                    editor.innerHTML = states[currentState];
+                    updateButtons();
+                }
+            }
+            
+            // Redo functionality
+            function redo() {
+                if (currentState < states.length - 1) {
+                    currentState++;
+                    editor.innerHTML = states[currentState];
+                    updateButtons();
+                }
+            }
+            
+            // Event listeners
+            editor.addEventListener('input', function() {
+                // Use setTimeout to ensure the content is updated before saving state
+                setTimeout(saveState, 0);
+            });
+            
+            undoBtn.addEventListener('click', undo);
+            redoBtn.addEventListener('click', redo);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    if (e.key === 'z') {
+                        e.preventDefault();
+                        undo();
+                    } else if (e.key === 'y') {
+                        e.preventDefault();
+                        redo();
+                    }
+                }
+            });
+            
+            // Initialize
+            updateButtons();
+        });
+    </script>
+
+    <script> // Insert List        
+        function insertList(type) {
+            document.execCommand(type === 'ol' ? 'insertOrderedList' : 'insertUnorderedList', false, null);
+            document.getElementById('editor').focus();
+        }
+        
+        function clearFormatting() {
+            document.execCommand('removeFormat', false, null);
+            document.getElementById('editor').focus();
+        }
+    </script>
+
+
+    <script> // Fill Text w/Template
+        document.getElementById('fillButton').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    <style>
+
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+        
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .job, .education {
+            margin-bottom: 15px;
+        }
+        
+        .job-title, .degree {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .company, .school {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .date {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Horizontal alignment (center, start, end, space-between, etc.) */
+            align-items: center;     /* Vertical alignment (center, start, end, stretch, etc.) */
+            gap: 10px;              /* Space between items */
+        }
+        
+        .skill {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>YOUR NAME</h1>
+        <div class="contact-info">
+            <span>your.email@example.com</span> | 
+            <span>(123) 456-7890</span> | 
+            <span>LinkedIn: linkedin.com/in/yourprofile</span> | 
+            <span>Portfolio: yourwebsite.com</span>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>PROFESSIONAL SUMMARY</h2>
+        <p>Detail-oriented professional with X years of experience in [your field]. Proven track record of [key achievement or skill]. Seeking to leverage my expertise in [relevant skills] to contribute to [type of company or role].</p>
+    </div>
+    
+    <div class="section">
+        <h2>WORK EXPERIENCE</h2>
+        
+        <div class="job">
+            <div class="job-title">Your Job Title</div>
+            <div class="company">Company Name | <span class="date">Month Year - Present</span></div>
+            <ul>
+                <li>Accomplishment or responsibility with measurable impact if possible (e.g., "Increased sales by 20%")</li>
+                <li>Key responsibility or achievement</li>
+                <li>Another significant contribution</li>
+            </ul>
+        </div>
+        
+        <div class="job">
+            <div class="job-title">Previous Job Title</div>
+            <div class="company">Previous Company | <span class="date">Month Year - Month Year</span></div>
+            <ul>
+                <li>Notable achievement or responsibility</li>
+                <li>Another key contribution</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>EDUCATION</h2>
+        <div class="education">
+            <div class="degree">Degree Name, Major</div>
+            <div class="school">University Name | <span class="date">Graduation Year</span></div>
+            <p>Honors or relevant coursework if applicable</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>SKILLS</h2>
+        <div class="skills-list">
+            <div class="skill">Skill 1</div>
+            <div class="skill">Skill 2</div>
+            <div class="skill">Skill 3</div>
+            <div class="skill">Skill 4</div>
+            <div class="skill">Skill 5</div>
+            <div class="skill">Skill 6</div>
+            <div class="skill">Skill 7</div>
+            <div class="skill">Skill 8</div>
+            <div class="skill">Skill 9</div>
+            <div class="skill">Skill 10</div>
+            <div class="skill">Skill 11</div>
+            <div class="skill">Skill 12</div>
+            <div class="skill">Skill 13</div>
+            <div class="skill">Skill 14</div>
+            <div class="skill">Skill 15</div>
+            <div class="skill">Skill 16</div>
+            <div class="skill">Skill 17</div>
+            <div class="skill">Skill 18</div>
+            <div class="skill">Skill 19</div>
+            <div class="skill">Skill 20</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>CERTIFICATIONS</h2>
+        <ul>
+            <li>Certification Name - Issuing Organization (Year)</li>
+            <li>Another Certification - Issuing Organization (Year)</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>PROJECTS</h2>
+        <div class="job">
+            <div class="job-title">Project Name</div>
+            <ul>
+                <li>Description of the project and your role</li>
+                <li>Technologies used or skills demonstrated</li>
+                <li>Outcome or impact of the project</li>
+        </ul>
+        </div>
+    </div>
+</body>
+</html>
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+            // Show the clear button and hide the fill button
+            document.getElementById('fillButton').classList.add('hidden');
+            document.getElementById('clearButton').classList.remove('hidden');
+        });
+        
+        document.getElementById('clearButton').addEventListener('click', function() {
+            // Clear the content area
+            document.getElementById('contentArea').innerHTML = '';
+            
+            // Show the fill button and hide the clear button
+            document.getElementById('fillButton').classList.remove('hidden');
+            document.getElementById('clearButton').classList.add('hidden');
+        });
+    </script>
+
+    <script> // Save an element
+        /**
+         * AutoSaveManager - A reusable class to handle auto-saving of editable content
+         */
+        class AutoSaveManager {
+            constructor(options = {}) {
+                // Default options
+                this.options = {
+                    storageKey: 'autoSaveData', // localStorage key
+                    debounceTime: 1000, // ms to wait after last keypress before saving
+                    statusElement: null, // Element to show save status
+                    ...options
+                };
+                
+                this.editableElements = [];
+                this.saveTimeout = null;
+                this.initialize();
+            }
+            
+            /**
+             * Initialize the manager
+             */
+            initialize() {
+                // Find all editable elements with data-save-id
+                this.editableElements = Array.from(document.querySelectorAll('[contenteditable][data-save-id]'));
+                
+                // Load saved content
+                this.loadContent();
+                
+                // Set up event listeners
+                this.setupEventListeners();
+            }
+            
+            /**
+             * Set up event listeners for editable elements
+             */
+            setupEventListeners() {
+                this.editableElements.forEach(element => {
+                    element.addEventListener('input', this.handleInput.bind(this));
+                });
+            }
+            
+            /**
+             * Handle input events with debouncing
+             */
+            handleInput() {
+                // Clear any pending save
+                if (this.saveTimeout) {
+                    clearTimeout(this.saveTimeout);
+                }
+                
+                // Show saving status
+                this.showStatus('Saving...');
+                
+                // Set new timeout for saving
+                this.saveTimeout = setTimeout(() => {
+                    this.saveContent();
+                    this.showStatus('All changes saved', true);
+                    
+                    // Hide status after 2 seconds
+                    setTimeout(() => {
+                        this.showStatus('');
+                    }, 2000);
+                }, this.options.debounceTime);
+            }
+            
+            /**
+             * Save all editable content to localStorage
+             */
+            saveContent() {
+                const saveData = {};
+                
+                this.editableElements.forEach(element => {
+                    const id = element.getAttribute('data-save-id');
+                    saveData[id] = element.innerHTML;
+                });
+                
+                localStorage.setItem(this.options.storageKey, JSON.stringify(saveData));
+            }
+            
+            /**
+             * Load saved content from localStorage
+             */
+            loadContent() {
+                const savedData = localStorage.getItem(this.options.storageKey);
+                
+                if (savedData) {
+                    try {
+                        const parsedData = JSON.parse(savedData);
+                        
+                        this.editableElements.forEach(element => {
+                            const id = element.getAttribute('data-save-id');
+                            if (parsedData[id]) {
+                                element.innerHTML = parsedData[id];
+                            }
+                        });
+                        
+                        this.showStatus('Loaded saved content', true);
+                    } catch (e) {
+                        console.error('Error loading saved content:', e);
+                    }
+                }
+            }
+            
+            /**
+             * Show status message
+             * @param {string} message - The status message
+             * @param {boolean} [success=false] - Whether to show as success
+             */
+            showStatus(message, success = false) {
+                if (!this.options.statusElement) return;
+                
+                const statusElement = typeof this.options.statusElement === 'string' 
+                    ? document.querySelector(this.options.statusElement)
+                    : this.options.statusElement;
+                
+                if (statusElement) {
+                    statusElement.textContent = message;
+                    statusElement.style.color = success ? '#4CAF50' : '#ff9800';
+                }
+            }
+            
+            /**
+             * Clear all saved data
+             */
+            clearSavedData() {
+                localStorage.removeItem(this.options.storageKey);
+                this.showStatus('Cleared saved data', true);
+                
+                // Hide status after 2 seconds
+                setTimeout(() => {
+                    this.showStatus('');
+                }, 2000);
+            }
+        }
+
+        // Initialize the AutoSaveManager when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const autoSaveManager = new AutoSaveManager({
+                statusElement: '#status' // Element to show status messages
+            });
+            
+            // Optional: Expose to window for debugging
+            window.autoSaveManager = autoSaveManager;
+        });
+    </script>
+
+    <script> // Print
+    function printDivContent(divId) {
+        var printContents = document.getElementById(divId).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+    </script>
+
+    <script> // Print Scale
+        let scale = 1;
+        const scaleValueElement = document.getElementById('scale-value');
+        const currentScaleDisplay = document.getElementById('current-scale-display');
+        
+        document.getElementById('scale-up').addEventListener('click', function() {
+            if (scale < 2) { // Limit maximum scale to 200%
+                scale += 0.1;
+                updateScale();
+            }
+        });
+        
+        document.getElementById('scale-down').addEventListener('click', function() {
+            if (scale > 0.5) { // Limit minimum scale to 50%
+                scale -= 0.1;
+                updateScale();
+            }
+        });
+        
+        document.getElementById('print-btn').addEventListener('click', function() {
+            // Apply scale to print
+            
+
+            var printContents = document.getElementById('editor').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+
+            document.body.style.setProperty('--print-scale', scale);
+            window.print();
+            window.location.reload();
+            //document.body.innerHTML = originalContents;
+
+        });
+        
+        function updateScale() {
+            const percentage = Math.round(scale * 100);
+            scaleValueElement.textContent = `${percentage}%`;
+            currentScaleDisplay.textContent = `${percentage}%`;
+        }
+    </script>
+
+    <script> // Modal/Popup
+    // Get the modal and button elements
+    const modal = document.getElementById("myModal");
+    const btn = document.getElementById("myBtn");
+    const span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    
+    // When the user clicks on (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+        
+    }
+    
+    // When the user clicks anywhere outside the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<script>
+  function hideElement() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+    <script> // Fill Text w/Template
+        document.getElementById('basicResume').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Labor Resume</title>
+    <style>
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .contact-info {
+            margin: 10px 0;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            background-color: #f2f2f2;
+            padding: 5px 10px;
+            border-left: 4px solid #333;
+        }
+        .job {
+            margin-bottom: 15px;
+        }
+        .job-title {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill {
+            background-color: #f2f2f2;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JOHN DOE</h1>
+        <div class="contact-info">
+            <p>123 Main Street • Anytown, ST 12345 • (555) 123-4567 • john.doe@email.com</p>
+        </div>
+    </header>
+
+    <section>
+        <h2>PROFESSIONAL SUMMARY</h2>
+        <p>Hardworking laborer with 5+ years of experience in construction and general labor. Physically fit with strong work ethic and ability to perform demanding tasks in various weather conditions. Reliable team player committed to workplace safety and efficiency.</p>
+    </section>
+
+    <section>
+        <h2>WORK EXPERIENCE</h2>
+        <div class="job">
+            <div class="job-title">
+                <span>Construction Laborer</span>
+                <span>2019 - Present</span>
+            </div>
+            <div>ABC Construction Company, Anytown, ST</div>
+            <ul>
+                <li>Assisted with various construction projects including framing, roofing, and concrete work</li>
+                <li>Operated and maintained tools and equipment</li>
+                <li>Loaded and unloaded building materials</li>
+                <li>Followed safety protocols and maintained clean worksite</li>
+                <li>Worked effectively with crew members to complete projects on schedule</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-title">
+                <span>Warehouse Associate</span>
+                <span>2017 - 2019</span>
+            </div>
+            <div>XYZ Distributors, Anytown, ST</div>
+            <ul>
+                <li>Loaded and unloaded delivery trucks</li>
+                <li>Organized inventory and maintained warehouse cleanliness</li>
+                <li>Operated pallet jack and forklift (certified)</li>
+                <li>Assisted with inventory counts and order preparation</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>SKILLS</h2>
+        <div class="skills-list">
+            <span class="skill">Heavy Lifting</span>
+            <span class="skill">Equipment Operation</span>
+            <span class="skill">Construction Knowledge</span>
+            <span class="skill">Physical Stamina</span>
+            <span class="skill">Teamwork</span>
+            <span class="skill">Safety Compliance</span>
+            <span class="skill">Basic Carpentry</span>
+            <span class="skill">Forklift Certified</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>EDUCATION & CERTIFICATIONS</h2>
+        <p><strong>High School Diploma</strong> - Anytown High School, 2016</p>
+        <p><strong>OSHA 10-Hour Construction Safety Certification</strong>, 2020</p>
+        <p><strong>Forklift Operator Certification</strong>, 2018</p>
+    </section>
+
+    <section>
+        <h2>REFERENCES</h2>
+        <p>Available upon request</p>
+    </section>
+</body>
+</html>
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+        
+    </script>
+</script>
+
+    <script> // Fill Text w/Template
+        document.getElementById('hospitalityBtn').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitality Professional Resume</title>
+    <style>
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .job-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .employer {
+            font-style: italic;
+        }
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>YOUR NAME</h1>
+    <div class="contact-info">
+        <p>Your Address | City, State ZIP | Phone: (123) 456-7890 | Email: your.email@example.com</p>
+    </div>
+
+    <div class="section">
+        <h2>PROFESSIONAL SUMMARY</h2>
+        <p>Dedicated hospitality professional with [X] years of experience in [specific areas, e.g., customer service, hotel operations, food and beverage]. Proven ability to deliver exceptional guest experiences while maintaining efficient operations. Skilled in [list key skills relevant to hospitality].</p>
+    </div>
+
+    <div class="section">
+        <h2>WORK EXPERIENCE</h2>
+        
+        <div class="job">
+            <div class="job-title">Job Title</div>
+            <div class="employer">Employer Name - City, State</div>
+            <div class="date">Month/Year - Present</div>
+            <ul>
+                <li>Provided exceptional customer service to guests, ensuring positive experiences and repeat business</li>
+                <li>Managed [specific responsibilities, e.g., front desk operations, reservations, guest complaints]</li>
+                <li>Trained and supervised [number] staff members in [specific area]</li>
+                <li>Implemented [specific initiative] that resulted in [specific positive outcome]</li>
+            </ul>
+        </div>
+        
+        <div class="job">
+            <div class="job-title">Previous Job Title</div>
+            <div class="employer">Previous Employer - City, State</div>
+            <div class="date">Month/Year - Month/Year</div>
+            <ul>
+                <li>Handled [specific responsibilities] with attention to detail and efficiency</li>
+                <li>Collaborated with team members to ensure smooth operations during peak hours</li>
+                <li>Recognized for [specific achievement or award]</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>EDUCATION</h2>
+        <div class="job-title">Degree or Certification</div>
+        <div class="employer">Institution Name - City, State</div>
+        <div class="date">Year</div>
+    </div>
+
+    <div class="section">
+        <h2>SKILLS</h2>
+        <ul>
+            <li>Customer Service Excellence</li>
+            <li>Hospitality Operations</li>
+            <li>Team Leadership</li>
+            <li>Conflict Resolution</li>
+            <li>Point of Sale Systems</li>
+            <li>Multilingual (if applicable)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>CERTIFICATIONS</h2>
+        <ul>
+            <li>Certification Name - Issuing Organization (Year)</li>
+            <li>Food Handler's Certificate (if applicable)</li>
+            <li>CPR/First Aid Certified (if applicable)</li>
+        </ul>
+    </div>
+</body>
+</html>
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+        
+    </script>
+
+    <script> // Fill Text w/Template
+        document.getElementById('constructionBTN').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Worker Resume</title>
+    <style>
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .job {
+            margin-bottom: 15px;
+        }
+        .job-title {
+            font-weight: bold;
+        }
+        .company {
+            font-style: italic;
+        }
+        .date {
+            color: #7f8c8d;
+        }
+        ul {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>John Doe</h1>
+    
+    <div class="contact-info">
+        <p>123 Main Street, Anytown, ST 12345 | (555) 123-4567 | john.doe@email.com</p>
+    </div>
+    
+    <div class="section">
+        <h2>Professional Summary</h2>
+        <p>Skilled construction worker with 5+ years of experience in residential and commercial construction projects. Proficient in framing, concrete work, roofing, and general site maintenance. Strong knowledge of construction safety protocols and ability to operate various construction equipment.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Skills</h2>
+        <ul>
+            <li>Blueprint reading</li>
+            <li>Framing and drywall installation</li>
+            <li>Concrete pouring and finishing</li>
+            <li>Roofing and siding installation</li>
+            <li>Heavy equipment operation</li>
+            <li>OSHA safety compliance</li>
+            <li>Power tool operation</li>
+            <li>Site preparation and cleanup</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>Work Experience</h2>
+        
+        <div class="job">
+            <div class="job-title">Construction Laborer</div>
+            <div class="company">ABC Construction Company, Anytown, ST</div>
+            <div class="date">June 2019 - Present</div>
+            <ul>
+                <li>Assisted in framing residential and commercial structures</li>
+                <li>Operated power tools including nail guns, circular saws, and drills</li>
+                <li>Performed concrete work including pouring, finishing, and curing</li>
+                <li>Maintained clean and safe job sites according to OSHA standards</li>
+            </ul>
+        </div>
+        
+        <div class="job">
+            <div class="job-title">General Laborer</div>
+            <div class="company">XYZ Builders, Othertown, ST</div>
+            <div class="date">March 2017 - May 2019</div>
+            <ul>
+                <li>Assisted with site preparation and cleanup</li>
+                <li>Loaded and unloaded construction materials</li>
+                <li>Supported various trades including carpenters and electricians</li>
+                <li>Learned basic construction techniques and safety procedures</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Education & Certifications</h2>
+        <ul>
+            <li>High School Diploma - Anytown High School, 2016</li>
+            <li>OSHA 10-Hour Construction Safety Certification, 2018</li>
+            <li>Forklift Operator Certification, 2019</li>
+        </ul>
+    </div>
+</body>
+</html>
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+    </script> 
+    <script> // Fill Text w/Template
+        document.getElementById('coverL').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Cover Letter</title>
+    <style>
+        .header {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .contact-info {
+
+            margin-bottom: 20px;
+        }
+        .date {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .recipient {
+            margin-bottom: 20px;
+        }
+        .salutation {
+            margin-bottom: 10px;
+        }
+        .content {
+            margin-bottom: 20px;
+        }
+        .closing {
+            margin-top: 40px;
+        }
+        .signature {
+            margin-top: 50px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Your Full Name</h1>
+        <div class="contact-info">
+            <p>Your City, State ZIP Code • (123) 456-7890 • youremail@email.com</p>
+            <p>Date: 04/03/2025</p>
+        </div>
+    </div>
+                <br>
+
+    <div class="recipient">
+        <p>Hiring Manager's Name, Company Name</a>
+        <p>Company Address</p>
+        <p>Position: Waitstaff</p>
+    </div>
+                <br>
+
+    <div class="salutation">
+        <p>Dear [Hiring Manager's Name],</p>
+    </div>
+
+    <div class="content">
+        <p>I am excited to apply for the [Position Name] position at [Company Name]. With [X years] of experience in [relevant field/industry], I am confident in my ability to contribute effectively to your team and help [specific company goal or project].</p>
+        
+        <p>In my current role as [Current/Most Recent Position] at [Current Company], I [describe a key achievement or responsibility that's relevant to the new position]. This experience has equipped me with [specific skills] that align well with the requirements for this role.</p>
+        
+        <p>What particularly excites me about [Company Name] is [specific aspect of the company - their mission, projects, culture, etc.]. I admire how [specific example of company achievement or value], and I would welcome the opportunity to contribute to [specific area where you can add value].</p>
+        
+        <p>Some highlights of my qualifications include:</p>
+        <ul>
+            <li>[Relevant skill/achievement #1 with quantifiable results if possible]</li>
+            <li>[Relevant skill/achievement #2 with quantifiable results if possible]</li>
+            <li>[Relevant skill/achievement #3 with quantifiable results if possible]</li>
+        </ul>
+        
+        <p>I would appreciate the opportunity to discuss how my skills and experiences align with the needs of your team. I am available at your convenience for an interview and can be reached at [your phone number] or [your email]. Thank you for your time and consideration—I look forward to the possibility of contributing to [Company Name].</p>
+    </div>
+                <br>
+    <div class="closing">
+        <p>Sincerely,</p>
+    </div>
+
+    <div class="signature">
+        <p>Your Full Name</p>
+    </div>
+</body>
+</html>
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+        
+    </script> 
+
+    <script> // Fill Text w/Template
+        document.getElementById('fancyCL').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Cover Letter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+        
+        .letter-container {
+            background-color: white;
+            padding: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid #2c3e50;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            text-align: right;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .date {
+            margin-bottom: 30px;
+            color: #666;
+        }
+        
+        .recipient {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 30px 0 15px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .signature {
+            margin-top: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+        }
+        
+        .signature-line {
+            width: 200px;
+            height: 1px;
+            background-color: #2c3e50;
+            margin: 5px 0 20px 0;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container">
+        <div class="header">
+            <div>
+                <div class="name">YOUR NAME</div>
+                <div>Professional Title</div>
+            </div>
+            <div class="contact-info">
+                <div>Your Address</div>
+                <div>City, State ZIP Code</div>
+                <div>Phone: (123) 456-7890</div>
+                <div>Email: your.email@example.com</div>
+                <div>LinkedIn: linkedin.com/in/yourprofile</div>
+            </div>
+        </div>
+        
+        <div class="date">[Current Date]</div>
+        
+        <div class="recipient">
+            <div>Hiring Manager's Name</div>
+            <div>Company Name</div>
+            <div>Company Address</div>
+            <div>City, State ZIP Code</div>
+        </div>
+        
+        <h2>Dear [Hiring Manager's Name],</h2>
+        
+        <p>I am excited to apply for the [Position Name] position at [Company Name]. With [X years] of experience in [relevant field/industry], I have developed the skills and expertise that make me a strong candidate for this role. My background in [specific skills or experiences] aligns perfectly with the requirements of this position.</p>
+        
+        <h2>Why I'm a Great Fit</h2>
+        
+        <p>In my current role at [Current Company], I [describe a major accomplishment or responsibility]. This experience has honed my ability to [specific skill relevant to the job]. For example, [provide a specific example of how you used this skill to achieve results].</p>
+        
+        <p>What excites me most about the opportunity at [Company Name] is [specific aspect of the company or role that appeals to you]. I'm particularly impressed by [something specific about the company's work, culture, or achievements], and I would welcome the chance to contribute to [specific project or goal].</p>
+        
+        <h2>What I Bring to Your Team</h2>
+        
+        <p>My colleagues would describe me as [positive professional trait] with a talent for [relevant skill]. I thrive in environments that require [specific qualities needed for the job], and I'm confident I could bring value to your team by [how you would contribute].</p>
+        
+        <p>I would welcome the opportunity to discuss how my skills and experiences align with your needs. Thank you for your time and consideration—I look forward to the possibility of contributing to your team at [Company Name].</p>
+        
+        <div class="signature">
+            <div>Sincerely,</div>
+            <div class="signature-line"></div>
+            <div>Your Name</div>
+        </div>
+        
+        <div class="footer">
+            <div>This cover letter was crafted specifically for [Company Name]</div>
+        </div>
+    </div>
+</body>
+</html>
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+        
+    </script>
+
+ 
+    <script>
+        function loadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const contentDiv = document.getElementById('editor');
+            
+            // Check if a file was selected
+            if (fileInput.files.length === 0) {
+                contentDiv.innerHTML = '<p style="color:red;">Please select an HTML file first.</p>';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            
+            // Verify the file is HTML
+            if (!file.name.endsWith('.html') && !file.name.endsWith('.htm')) {
+                contentDiv.innerHTML = '<p style="color:red;">Please select a valid HTML file (.html or .htm).</p>';
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Insert the loaded content into the div
+                contentDiv.innerHTML = e.target.result;
+            };
+            
+            reader.onerror = function() {
+                contentDiv.innerHTML = '<p style="color:red;">Error reading the file.</p>';
+            };
+            
+            // Read the file as text
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
+    <script>
+        document.getElementById('saveButton').addEventListener('click', function() {
+            // Get the DIV content
+            const divContent = document.getElementById('editor').innerHTML;
+            
+            // Create a complete HTML document with the DIV content
+            const htmlContent = `
+${divContent}
+            `;
+            
+            // Ask for filename
+            const fileName = prompt("Enter a name for the HTML file:", "saved-content");
+            
+            if (fileName) {
+                // Create a Blob with the HTML content
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                
+                // Create a download link
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = fileName.endsWith('.html') ? fileName : fileName + '.html';
+                
+                // Trigger the download
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+            }
+        });
+    </script>
+  
+  
+<!--
+    <script> // Fill Text w/Template
+        document.getElementById('basicResume').addEventListener('click', function() {
+            // HTML content to be inserted
+            const htmlContent = `
+                HTML CODE GOES HERE
+            `;
+            
+            // Insert the HTML into the content area
+            document.getElementById('editor').innerHTML = htmlContent;
+            
+        });
+        
+    </script>     -->
+
+</body>
+</html>
