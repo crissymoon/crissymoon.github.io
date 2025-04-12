@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/avatar.png">
+
     <title id="status">Custom Calendar</title>
     <style>
         body {
@@ -12,14 +13,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+           
             box-sizing: border-box;
+
         }
         
         .calendar-container {
-            width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
+         
+     
+        
         }
         
         .calendar-header {
@@ -29,13 +31,14 @@
             margin-bottom: 20px;
             padding: 5px;
             background-color: #f0f0f0;
-            border-radius: 5px;
+           
+            border: 1px solid #ccc;
         }
         
         .month-selector {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
         }
         
         select, button {
@@ -68,13 +71,13 @@
             color: white;
             padding: 12px;
             text-align: center;
+            border: 1px solid #ccc;
         }
         
         td {
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             padding: 10px;
-            height: 100px;
-
+            height: 80px;
             vertical-align: top;
             position: relative;
         }
@@ -85,12 +88,13 @@
         }
         
         .other-month {
-            background-color: #f9f9f9;
+            
             color: #aaa;
+            border: 1px solid #ccc;
         }
         
         .today {
-            background-color: #e6f7ff;
+            /* background-color: #e6f7ff; */
         }
         
         @media print {
@@ -169,13 +173,13 @@
            <thead>
                 
                 <tr>
-                    <th>Sunday</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
+                    <th>&nbsp&nbsp&nbspSunday&nbsp&nbsp&nbsp</th>
+                    <th>&nbsp&nbsp&nbspMonday&nbsp&nbsp&nbsp</th>
+                    <th>&nbsp&nbspTuesday&nbsp&nbsp</th>
                     <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
+                    <th>&nbspThursday&nbsp</th>
+                    <th>&nbsp&nbsp&nbspFriday&nbsp&nbsp&nbsp</th>
+                    <th>&nbspSaturday&nbsp</th>
                 </tr>
 
             </thead>
@@ -183,7 +187,7 @@
             <tbody id="calendar-body">
                 <!-- Calendar days will be inserted here by JavaScript -->
             </tbody>
-            </div>
+            
         </table>
     </div>
 
@@ -559,16 +563,22 @@ function setupColorPicker(elementSelector, inputSelector, property = 'color') {
 <html>
 <head>
     <meta charset="UTF-8">
+
     <title>Saved Content</title>
 
 
 
     <style>
+        .the-cal {
+         
+            margin: 20px auto;
 
+        }
         
         table {
             width: 100%;
             border-collapse: collapse;
+            
             
         }
 
@@ -578,13 +588,13 @@ function setupColorPicker(elementSelector, inputSelector, property = 'color') {
             color: white;
             padding: 12px;
             text-align: center;
+            border: 1px solid #ccc;
         }
         
         td {
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             padding: 10px;
             height: 100px;
-
             vertical-align: top;
             position: relative;
         }
@@ -595,12 +605,13 @@ function setupColorPicker(elementSelector, inputSelector, property = 'color') {
         }
         
         .other-month {
-            background-color: #f9f9f9;
+            
             color: #aaa;
+            border: 1px solid #ccc;
         }
         
         .today {
-            background-color: #e6f7ff;
+            /* background-color: #e6f7ff; */
         }
         
     </style>
@@ -615,7 +626,7 @@ ${divContent}
             `;
             
             // Ask for filename
-            const fileName = prompt("Enter a name for the HTML file:", "saved-content");
+            const fileName = prompt("Enter a name for the HTML file:", "editz-tool-cal");
             
             if (fileName) {
                 // Create a Blob with the HTML content
