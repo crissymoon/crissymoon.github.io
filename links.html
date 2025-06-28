@@ -2,10 +2,99 @@
 <html>
 <head><title>EDITZ - Helpful Links</title>
 <link rel="icon" type="image/x-icon" href="img/avatar.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3.1&t=20250627">
 <meta http-equiv="Content-Type" content="text/html" charset=utf-8>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
+<style>
+  .link-card {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .link-title {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff; /* Changed to white text */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: transparent; /* Removed background */
+    border-left: 3px solid #66ff99;
+    border-bottom: 1px solid rgba(102, 255, 153, 0.3); /* Subtle bottom border */
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.7); /* Text shadow for readability */
+    letter-spacing: 0.5px;
+    box-shadow: none; /* Removed box shadow */
+  }
+  
+  .link-title:hover {
+    transform: translateX(5px);
+    color: #7bffaa; /* Changed hover color to green */
+    text-shadow: 0 0 5px rgba(102, 255, 153, 0.8), 0 0 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 15px rgba(102, 255, 153, 0.2);
+  }
+  
+  .link-description {
+    margin-top: 10px;
+    line-height: 1.6;
+    display: none;
+    color: #e0e0e0; /* Light gray text for better readability */
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05); /* Subtle background for better contrast */
+    border-radius: 4px;
+    font-size: 1.05rem; /* Increased from 0.95rem to 1.05rem */
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
+  .read-more-link {
+    color: #66ff99;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .read-more-link:hover {
+    color: #ff9933;
+  }
+  
+  /* Make link titles white with higher specificity */
+  .border_box_shadow_p .link-card .link-title,
+  .link-card .link-title,
+  a.link-title {
+    color: #ffffff !important; /* Force white text */
+    -webkit-text-fill-color: #ffffff !important; /* For WebKit browsers */
+    text-decoration: none !important;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.7); /* Enhance text shadow for readability */
+  }
+  
+  /* Keep the hover state working with the green color */
+  .border_box_shadow_p .link-card .link-title:hover,
+  .link-card .link-title:hover,
+  a.link-title:hover {
+    color: #7bffaa !important; /* Keep the green hover color */
+    -webkit-text-fill-color: #7bffaa !important;
+  }
+</style>
+
+<script>
+function toggleDescription(element) {
+  const description = element.previousElementSibling;
+  
+  if (description.style.display === "none" || !description.style.display) {
+    description.style.display = "block";
+    element.textContent = "Read less";
+  } else {
+    description.style.display = "none";
+    element.textContent = "Read more";
+  }
+}
+</script>
 </head>
 <body>
 
@@ -27,90 +116,257 @@
 <!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
 <h2 class="border_box_shadow_topic">Helpful Links</h2>
 <!-- intro -->
-<p class="border_box_shadow_p">
-<a href="https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf" target="_blank"><b>A Simple HTML Cheat Sheet</b></a>
-<br><br>
-This document serves as a link to a straightforward HTML tag cheat sheet intended for your reference.
-<br><br>
+<div class="border_box_shadow_p">
 
-<a href="https://brackets.io/?lang=en" target="_blank"><b>Brackets</b></a>
-<br><br>
-Brackets is a modern text editor designed for web designers and front-end developers. With its intuitive visual tools and preprocessor support, it simplifies designing directly in the browser, making your workflow more efficient and enjoyable.
-<br><br>
+  <!-- Alphabetically ordered link cards -->
+  
+  <div class="link-card">
+    <a href="https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf" target="_blank" class="link-title">A Simple HTML Cheat Sheet</a>
+    <div class="link-description">This document serves as a link to a straightforward HTML tag cheat sheet intended for your reference.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://angular.io/" target="_blank" class="link-title">Angular</a>
+    <div class="link-description">Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Developed and maintained by Google, Angular provides a comprehensive solution for rapid front-end development. Its component-based architecture, powerful templating system, and built-in support for forms, routing, and HTTP communication make it suitable for enterprise-level applications. Angular's extensive tooling includes a CLI that automates common development tasks like project scaffolding, testing, and deployment.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://gist.github.com/whitingx/3840905" target="_blank"><b>Complete List of Meta HTML Tags</b></a>
-<br><br>
-This is a comprehensive list of meta tags, which serve as instructions for web browsers to manage various functions, such as supporting Unicode or handling characters that are typically deemed illegal. For instance, certain characters that are generally not permitted in website usernames. Additionally, the "viewport" meta tag is primarily utilized to enhance the appearance of a webpage on mobile devices. This tag is included in the source code mentioned above, and its specific arrangement is commonly found on webpages, as it optimally adjusts to the screen size for a better user experience.
-<br><br>
+  <div class="link-card">
+    <a href="https://getbootstrap.com/" target="_blank" class="link-title">Bootstrap</a>
+    <div class="link-description">Bootstrap is the world's most popular front-end framework for building responsive, mobile-first websites. Developed by Twitter, it provides a comprehensive collection of pre-designed components, including navigation bars, buttons, forms, cards, and modals that can be easily customized. Bootstrap's grid system simplifies layout design across various screen sizes, while its JavaScript plugins add interactive elements without requiring extensive coding. The framework significantly speeds up development time and ensures consistent design across web applications.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://dictionaryapi.dev/" target="_blank"><b>Free Dictionary API</b></a>
-<br><br>
-As noted on their website: “Dictionary API is—and always will be—free.” The organization's mission is to offer users a robust API that enables the development of innovative games, educational applications, and cutting-edge speech and text technologies. This approach may also be utilized to define terms effectively.
-<br><br>
+  <div class="link-card">
+    <a href="https://brackets.io/?lang=en" target="_blank" class="link-title">Brackets</a>
+    <div class="link-description">Brackets is a modern text editor designed for web designers and front-end developers. With its intuitive visual tools and preprocessor support, it simplifies designing directly in the browser, making your workflow more efficient and enjoyable.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://gist.github.com/whitingx/3840905" target="_blank" class="link-title">Complete List of Meta HTML Tags</a>
+    <div class="link-description">This is a comprehensive list of meta tags, which serve as instructions for web browsers to manage various functions, such as supporting Unicode or handling characters that are typically deemed illegal. For instance, certain characters that are generally not permitted in website usernames. Additionally, the "viewport" meta tag is primarily utilized to enhance the appearance of a webpage on mobile devices.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://www.geeksforgeeks.org/" target="_blank"><b>GeeksforGeeks</b></a>
-<br><br>
-This website offers a wide range of tutorials covering various fields, such as development, computer programming, and data science. It caters to everyone from beginners to enthusiasts looking to deepen their understanding.
-<br><br>
+  <div class="link-card">
+    <a href="https://css-tricks.com/" target="_blank" class="link-title">CSS-Tricks</a>
+    <div class="link-description">CSS-Tricks is a website dedicated to teaching all things web design and development, with a particular focus on CSS techniques. Founded by Chris Coyier, the site offers articles, tutorials, videos, and code snippets that range from basic concepts to advanced techniques. CSS-Tricks is known for its clear explanations of complex topics, practical solutions to common design challenges, and its extensive collection of CSS snippets and patterns that can be incorporated into your own projects.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://www.docker.com/" target="_blank" class="link-title">Docker</a>
+    <div class="link-description">Docker is a platform that enables developers to build, share, and run applications in containers. Containers package code and dependencies together, ensuring that software works uniformly regardless of where it's deployed. This solves the "it works on my machine" problem by providing consistency across development, testing, and production environments. Docker's lightweight containers start instantly and use fewer resources than virtual machines, making application deployment more efficient. Its vast ecosystem includes Docker Hub, a repository of container images, and Docker Compose for defining multi-container applications.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://brew.sh/" target="_blank"><b>Homebrew</b></a>
-<br><br>
-Homebrew is a free and open-source package manager specifically designed for macOS. It facilitates the installation and management of various applications and tools. It provides a means to install software unavailable through Apple, including development tools, security utilities, and data manipulation packages.
-<br><br>
+  <div class="link-card">
+    <a href="https://expressjs.com/" target="_blank" class="link-title">Express.js</a>
+    <div class="link-description">Express.js is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. As the de facto standard server framework for Node.js, Express simplifies the process of building APIs and web applications with its intuitive routing system, middleware support, and template engine integration. Its unopinionated approach gives developers the freedom to structure applications as they see fit, while its extensive middleware ecosystem enables quick addition of common web development functionalities like authentication, CORS support, and request parsing.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://loremipsum.io/" target="_blank"><b>Lorem Ipsum Generator</b></a>
-<br><br>
-Lorem ipsum is a standard form of placeholder text that plays an essential role in the design process. Widely adopted across graphic design, publishing, and marketing industries, this imitation text allows professionals to create mockups and layouts without the distraction of actual content. By utilizing Lorem ipsum, designers can concentrate on crucial visual elements such as typography, spacing, and overall composition, thereby ensuring that the final output is aesthetically pleasing and effectively conveys the intended message.
-<br><br>
+  <div class="link-card">
+    <a href="https://www.figma.com/" target="_blank" class="link-title">Figma</a>
+    <div class="link-description">Figma is a cloud-based design tool that's revolutionizing how teams collaborate on interface design. Unlike traditional design software, Figma works entirely in the browser, allowing real-time collaboration where multiple designers can work simultaneously on the same file. Its vector networks provide more flexible drawing capabilities than traditional vector tools, while its component system makes managing design systems straightforward. Figma includes powerful prototyping features that allow designers to create interactive mockups without additional tools, bridging the gap between design and development.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://notepad-plus-plus.org/downloads/" target="_blank"><b>NotePad++</b></a>
-<br><br>
-Notepad++ is a free source code editor for Windows that supports multiple programming languages. It's also licensed under the GNU General Public License, which makes it accessible to everyone.
-<br><br>
+  <div class="link-card">
+    <a href="https://firebase.google.com/" target="_blank" class="link-title">Firebase</a>
+    <div class="link-description">Firebase is Google's platform for developing mobile and web applications. It provides a comprehensive suite of backend services including real-time database, authentication, cloud storage, hosting, and cloud functions. Firebase's real-time database synchronizes data across clients instantly, while its authentication system supports multiple sign-in methods including email/password, phone, and social media accounts. With Firebase Analytics, developers can track user behavior and application performance. Its serverless architecture eliminates the need for backend infrastructure management, allowing developers to focus on building features rather than maintaining servers.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://dictionaryapi.dev/" target="_blank" class="link-title">Free Dictionary API</a>
+    <div class="link-description">As noted on their website: "Dictionary API is—and always will be—free." The organization's mission is to offer users a robust API that enables the development of innovative games, educational applications, and cutting-edge speech and text technologies. This approach may also be utilized to define terms effectively.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://openai.com/" target="_blank"><b>OpenAI</b></a>
-<br><br>
-OpenAI is a leading artificial intelligence (AI) research organization dedicated to ensuring that AI benefits all of humanity. Founded in December 2015 by notable technological figures, including Elon Musk, Sam Altman, Greg Brockman, Ilya Sutskever, John Schulman, and Wojciech Zaremba, OpenAI began as a nonprofit. However, it later adopted a "capped-profit" model to attract necessary investment while prioritizing its mission of promoting safe AI development. The organization is known for developing advanced AI technologies, such as large language models like GPT (Generative Pre-trained Transformer), which powers applications like ChatGPT. OpenAI’s research and development efforts span various fields, including natural language processing, reinforcement learning, and robotics, with a primary focus on creating AI systems that are safe, ethical, and beneficial to society. The overarching goal of OpenAI is to advance AI responsibly, ensuring its positive impact on society and minimizing the risk of harmful outcomes.
-<br><br>
+  <div class="link-card">
+    <a href="https://www.geeksforgeeks.org/" target="_blank" class="link-title">GeeksforGeeks</a>
+    <div class="link-description">This website offers a wide range of tutorials covering various fields, such as development, computer programming, and data science. It caters to everyone from beginners to enthusiasts looking to deepen their understanding.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://git-scm.com/" target="_blank" class="link-title">Git</a>
+    <div class="link-description">Git is the industry-standard distributed version control system that tracks changes in source code during software development. Created by Linus Torvalds for Linux kernel development, Git allows multiple developers to work simultaneously on a project without overwriting each other's changes. Its branching and merging capabilities enable feature development, bug fixes, and experimentation without affecting the main codebase. Git's speed, data integrity, and support for non-linear workflows have made it essential for both small projects and large-scale software development.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://pip.pypa.io/en/stable/installation/" target="_blank"><b>Pip</b></a>
-<br><br>
-Created in 2008, pip—short for “pip Install Packages”—has become the standard tool for securely installing Python packages and their dependencies. Most recent distributions of Python come with pip preinstalled, and Python versions 2.7.9 and 3.4 and later include pip by default.
-<br><br>
+  <div class="link-card">
+    <a href="https://github.com/" target="_blank" class="link-title">GitHub</a>
+    <div class="link-description">GitHub is the industry-standard platform for code hosting, version control, and collaboration. It allows developers to work together on projects from anywhere in the world, track changes, manage issues, and deploy applications. With features like pull requests, code reviews, and project boards, GitHub streamlines the development workflow for teams of all sizes. The platform hosts millions of public repositories, making it an invaluable resource for open-source projects and learning from others' code.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://graphql.org/" target="_blank" class="link-title">GraphQL</a>
+    <div class="link-description">GraphQL is a query language for APIs and a runtime for executing those queries with your existing data. Developed by Facebook in 2015, GraphQL addresses limitations of traditional REST APIs by allowing clients to request exactly the data they need, no more and no less. This reduces over-fetching and under-fetching of data, improving application performance. GraphQL's strongly-typed schema provides clear contracts between client and server, enabling better tooling and developer experiences. Its introspection capabilities allow clients to discover API capabilities, while its single endpoint architecture simplifies API management.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://www.python.org/downloads/" target="_blank"><b>Python</b></a>
-<br><br>
-Python is a robust programming language known for its high speed and compatibility with various systems. It is user-friendly and exhibits a gentle learning curve, making it appealing to both beginners and experienced developers.
-<br><br>
+  <div class="link-card">
+    <a href="https://www.heroku.com/" target="_blank" class="link-title">Heroku</a>
+    <div class="link-description">Heroku is a cloud platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. With support for various programming languages like Ruby, Java, PHP, Python, Node.js, and Go, Heroku allows developers to deploy applications without worrying about infrastructure management. Its Git-based workflow makes deployment as simple as pushing code to a repository, while its add-on marketplace provides easy integration with databases, monitoring tools, and other services. Heroku's containerized architecture, using Dynos, ensures applications are isolated, secure, and can scale horizontally with minimal configuration.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://brew.sh/" target="_blank" class="link-title">Homebrew</a>
+    <div class="link-description">Homebrew is a free and open-source package manager specifically designed for macOS. It facilitates the installation and management of various applications and tools. It provides a means to install software unavailable through Apple, including development tools, security utilities, and data manipulation packages.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://www.sublimetext.com/download" target="_blank"><b>Sublime Text</b></a>
-<br><br>
-This source code editor is my preferred option for a variety of tasks. Sublime Text has undergone enhancements to utilize the GPU on Linux, Mac, and Windows systems to render its interface. This upgrade offers a seamless user experience at resolutions of up to 8K while consuming less power than previous versions. The file tab functionality has been refined, facilitating effortless split views, and these enhancements extend throughout the interface, including built-in commands. Features like the sidebar, tab bar, Goto Anything, Goto Definition, and auto-complete have all been improved to enable more intuitive and straightforward code navigation. Furthermore, the syntax highlighting engine has seen significant advancements, introducing functionalities that accommodate non-deterministic grammars, multi-line constructs, lazy embeds, and syntax inheritance. Memory utilization has been optimized, resulting in faster load times.
-<br><br>
+  <div class="link-card">
+    <a href="https://jquery.com/" target="_blank" class="link-title">jQuery</a>
+    <div class="link-description">jQuery is a fast, small, and feature-rich JavaScript library that simplifies HTML document traversal, event handling, animation, and Ajax interactions. Released in 2006, jQuery revolutionized web development by abstracting browser inconsistencies and providing an intuitive API for DOM manipulation. Its "write less, do more" philosophy has made it one of the most popular JavaScript libraries, used by approximately 70% of the top 10 million websites. Despite the rise of modern frameworks like React and Vue, jQuery remains relevant for quick prototyping, enhancing existing sites, and situations where a full framework would be excessive.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://docs.python.org/3/library/tkinter.html" target="_blank"><b>Tkinter</b></a>
-<br><br>
-The tkinter package serves as the primary interface in Python for the Tcl/Tk graphical user interface (GUI) toolkit. This versatile toolkit is widely utilized for creating desktop applications and is available on a variety of operating systems, including macOS and most Unix platforms, in addition to being fully supported on Windows systems. With tkinter, developers can easily design user-friendly interfaces that incorporate buttons, text fields, and other interactive elements, making it an essential tool for both beginners and experienced programmers looking to create visually appealing applications.
-<br><br>
+  <div class="link-card">
+    <a href="https://kubernetes.io/" target="_blank" class="link-title">Kubernetes</a>
+    <div class="link-description">Kubernetes, often abbreviated as K8s, is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. Originally developed by Google and now maintained by the Cloud Native Computing Foundation, Kubernetes abstracts away infrastructure complexities, allowing developers to focus on application logic. Its key features include service discovery, load balancing, storage orchestration, automated rollouts and rollbacks, and self-healing capabilities. Kubernetes has become the industry standard for container orchestration, supported by all major cloud providers and enterprise IT vendors.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
+  <div class="link-card">
+    <a href="https://loremipsum.io/" target="_blank" class="link-title">Lorem Ipsum Generator</a>
+    <div class="link-description">Lorem ipsum is a standard form of placeholder text that plays an essential role in the design process. Widely adopted across graphic design, publishing, and marketing industries, this imitation text allows professionals to create mockups and layouts without the distraction of actual content. By utilizing Lorem ipsum, designers can concentrate on crucial visual elements such as typography, spacing, and overall composition.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://code.visualstudio.com/download" target="_blank"><b>Visual Studio Code</b></a><br><br>
-Utilize your preferred shell, whether it is zsh, PowerShell, or Git Bash, all within the integrated development environment (IDE). Execute and troubleshoot your code without exiting the editor, which offers built-in support for Git and various other source control providers. Execute tools and analyze their outcomes directly from within Visual Studio Code. Safeguard your modifications with automatically tracked local history to prevent loss of work. Your chosen theme serves as an extension of your personal identity; enhance your editor with customized elements that reflect your style—this includes an optimized experience for screen readers, high-contrast themes, and navigation via keyboard only. Furthermore, you can access your code from any device, whether it be a mobile phone, tablet, or desktop computer, ensuring flexibility and convenience.
-<br><br>
+  <div class="link-card">
+    <a href="https://developer.mozilla.org/en-US/" target="_blank" class="link-title">MDN Web Docs</a>
+    <div class="link-description">Mozilla Developer Network (MDN) provides comprehensive, accurate, and accessible documentation for web technologies including HTML, CSS, and JavaScript. Unlike many resources, MDN offers in-depth explanations with practical examples, browser compatibility information, and best practices. Created and maintained by Mozilla with contributions from the developer community, MDN has become the definitive reference for web developers. Its detailed API documentation and interactive examples make it invaluable for both learning and day-to-day development work.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
 
-<a href="https://www.w3schools.com/" target="_blank"><b>W3Schools</b></a>
-<br><br>
-W3Schools offers a wide range of services and products for beginners and professionals,
-Helping millions of people every day learn and master new skills—this is like a huge database of everything related to coding.
-<br><br>
-</p>
+  <div class="link-card">
+    <a href="https://www.mongodb.com/" target="_blank" class="link-title">MongoDB</a>
+    <div class="link-description">MongoDB is a document-oriented NoSQL database program that uses JSON-like documents with optional schemas. Unlike traditional relational databases, MongoDB's flexible data model enables developers to store data in a way that aligns with object-oriented programming. This makes development faster and more intuitive, especially for applications with evolving data requirements. MongoDB excels at handling large volumes of diverse data types and offers horizontal scaling through sharding. Its comprehensive ecosystem includes MongoDB Atlas (cloud database service), Compass (GUI), and Realm (mobile database and synchronization platform).</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://nodejs.org/" target="_blank" class="link-title">Node.js</a>
+    <div class="link-description">Node.js is a JavaScript runtime built on Chrome's V8 engine that allows developers to execute JavaScript code outside a web browser. This enables creating server-side applications with JavaScript, unifying web development under a single language. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications. Its package ecosystem, npm, is the largest collection of open-source libraries in the world, providing ready-made solutions for almost any programming challenge.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://notepad-plus-plus.org/downloads/" target="_blank" class="link-title">NotePad++</a>
+    <div class="link-description">Notepad++ is a free source code editor for Windows that supports multiple programming languages. It's also licensed under the GNU General Public License, which makes it accessible to everyone.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://www.npmjs.com/" target="_blank" class="link-title">npm</a>
+    <div class="link-description">npm (Node Package Manager) is the default package manager for Node.js and the world's largest software registry. With over 1.3 million packages, it provides developers access to countless reusable code components. npm's command-line interface simplifies dependency management, allowing developers to easily install, update, and remove packages. Its package.json file serves as a project manifest, documenting dependencies and enabling consistent installations across different environments. Beyond its technical capabilities, npm has fostered a collaborative development culture where developers routinely share and improve upon each other's work.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://openai.com/" target="_blank" class="link-title">OpenAI</a>
+    <div class="link-description">OpenAI is a leading artificial intelligence (AI) research organization dedicated to ensuring that AI benefits all of humanity. Founded in December 2015 by notable technological figures, including Elon Musk, Sam Altman, Greg Brockman, Ilya Sutskever, John Schulman, and Wojciech Zaremba, OpenAI began as a nonprofit. However, it later adopted a "capped-profit" model to attract necessary investment while prioritizing its mission of promoting safe AI development. The organization is known for developing advanced AI technologies, such as large language models like GPT (Generative Pre-trained Transformer), which powers applications like ChatGPT. OpenAI's research and development efforts span various fields, including natural language processing, reinforcement learning, and robotics, with a primary focus on creating AI systems that are safe, ethical, and beneficial to society. The overarching goal of OpenAI is to advance AI responsibly, ensuring its positive impact on society and minimizing the risk of harmful outcomes.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://pip.pypa.io/en/stable/installation/" target="_blank" class="link-title">Pip</a>
+    <div class="link-description">Created in 2008, pip—short for "pip Install Packages"—has become the standard tool for securely installing Python packages and their dependencies. Most recent distributions of Python come with pip preinstalled, and Python versions 2.7.9 and 3.4 and later include pip by default.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://www.postgresql.org/" target="_blank" class="link-title">PostgreSQL</a>
+    <div class="link-description">PostgreSQL is a powerful, open-source object-relational database system with over 30 years of active development. Known for its reliability, feature robustness, and performance, PostgreSQL has earned a strong reputation for data integrity and correctness. Unlike many database systems, it's fully ACID compliant and adheres closely to SQL standards. PostgreSQL's advanced features include complex queries, foreign keys, triggers, updatable views, and transactional integrity, along with extensibility through custom functions, operators, and data types. Its active community ensures regular updates, security patches, and extensive documentation.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://www.python.org/downloads/" target="_blank" class="link-title">Python</a>
+    <div class="link-description">Python is a robust programming language known for its high speed and compatibility with various systems. It is user-friendly and exhibits a gentle learning curve, making it appealing to both beginners and experienced developers.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://reactjs.org/" target="_blank" class="link-title">React</a>
+    <div class="link-description">React is a JavaScript library developed by Facebook for building user interfaces, particularly single-page applications. Its component-based architecture allows developers to create reusable UI elements that manage their own state, resulting in more maintainable and predictable code. React's virtual DOM implementation optimizes rendering performance by minimizing direct manipulation of the DOM. The library's declarative approach makes it easier to debug and understand code, while its robust ecosystem includes tools like Redux for state management and React Native for mobile development.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://redis.io/" target="_blank" class="link-title">Redis</a>
+    <div class="link-description">Redis (Remote Dictionary Server) is an open-source, in-memory data structure store that can be used as a database, cache, message broker, and streaming engine. Known for its exceptional performance, Redis stores all data in memory, achieving sub-millisecond response times. It supports diverse data structures including strings, hashes, lists, sets, sorted sets, streams, and more. Redis's versatility extends to various use cases such as caching, session storage, real-time analytics, and message queuing. Its persistence options allow data to survive restarts, while its clustering capability enables horizontal scaling across multiple nodes.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://sass-lang.com/" target="_blank" class="link-title">Sass</a>
+    <div class="link-description">Sass (Syntactically Awesome Style Sheets) is a CSS preprocessor that extends the capabilities of standard CSS. It introduces programming features like variables, nested rules, mixins, functions, and inheritance, making stylesheets more maintainable and reusable. Sass offers two syntaxes: the original indented syntax (.sass) and the more widely used SCSS syntax (.scss), which is a superset of CSS. By organizing CSS into modular components and enabling mathematical operations, Sass helps developers manage complex stylesheets in large projects. It compiles to standard CSS that works in all browsers, bridging the gap between programming concepts and web styling.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://stackoverflow.com/" target="_blank" class="link-title">Stack Overflow</a>
+    <div class="link-description">Stack Overflow is the largest community-driven Q&amp;A platform for programmers. With millions of questions and answers, it's often the first stop when troubleshooting code issues. The site's reputation system ensures high-quality answers rise to the top, while its extensive tagging system makes finding relevant information straightforward. Whether you're debugging a complex problem or learning a new language, Stack Overflow's vast knowledge base and active community make it an essential resource for developers at all levels.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://www.sublimetext.com/download" target="_blank" class="link-title">Sublime Text</a>
+    <div class="link-description">This source code editor is my preferred option for a variety of tasks. Sublime Text has undergone enhancements to utilize the GPU on Linux, Mac, and Windows systems to render its interface. This upgrade offers a seamless user experience at resolutions of up to 8K while consuming less power than previous versions. The file tab functionality has been refined, facilitating effortless split views, and these enhancements extend throughout the interface, including built-in commands. Features like the sidebar, tab bar, Goto Anything, Goto Definition, and auto-complete have all been improved to enable more intuitive and straightforward code navigation. Furthermore, the syntax highlighting engine has seen significant advancements, introducing functionalities that accommodate non-deterministic grammars, multi-line constructs, lazy embeds, and syntax inheritance. Memory utilization has been optimized, resulting in faster load times.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://tailwindcss.com/" target="_blank" class="link-title">Tailwind CSS</a>
+    <div class="link-description">Tailwind CSS is a utility-first CSS framework that takes a fundamentally different approach to web styling. Instead of providing pre-designed components, Tailwind offers low-level utility classes that let you build custom designs without leaving your HTML. This approach reduces the need for custom CSS, keeps your stylesheets smaller, and enables rapid UI development through composition rather than configuration. Tailwind's built-in responsive design system makes creating mobile-friendly layouts straightforward, while its JIT (Just-In-Time) compiler generates only the CSS you actually use, resulting in minimal file sizes for production.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://docs.python.org/3/library/tkinter.html" target="_blank" class="link-title">Tkinter</a>
+    <div class="link-description">The tkinter package serves as the primary interface in Python for the Tcl/Tk graphical user interface (GUI) toolkit. This versatile toolkit is widely utilized for creating desktop applications and is available on a variety of operating systems, including macOS and most Unix platforms, in addition to being fully supported on Windows systems. With tkinter, developers can easily design user-friendly interfaces that incorporate buttons, text fields, and other interactive elements, making it an essential tool for both beginners and experienced programmers looking to create visually appealing applications.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://www.typescriptlang.org/" target="_blank" class="link-title">TypeScript</a>
+    <div class="link-description">TypeScript is a superset of JavaScript that adds static typing to the language, developed and maintained by Microsoft. By allowing developers to define types for variables, function parameters, and return values, TypeScript catches errors at compile time rather than runtime. Its type inference system means you don't always have to explicitly declare types, maintaining JavaScript's flexibility while adding safety. TypeScript's tooling provides excellent autocompletion, navigation, and refactoring capabilities in modern IDEs, significantly improving developer productivity on large codebases.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://code.visualstudio.com/download" target="_blank" class="link-title">Visual Studio Code</a>
+    <div class="link-description">Utilize your preferred shell, whether it is zsh, PowerShell, or Git Bash, all within the integrated development environment (IDE). Execute and troubleshoot your code without exiting the editor, which offers built-in support for Git and various other source control providers. Execute tools and analyze their outcomes directly from within Visual Studio Code. Safeguard your modifications with automatically tracked local history to prevent loss of work. Your chosen theme serves as an extension of your personal identity; enhance your editor with customized elements that reflect your style—this includes an optimized experience for screen readers, high-contrast themes, and navigation via keyboard only. Furthermore, you can access your code from any device, whether it be a mobile phone, tablet, or desktop computer, ensuring flexibility and convenience.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://vuejs.org/" target="_blank" class="link-title">Vue.js</a>
+    <div class="link-description">Vue.js is a progressive JavaScript framework for building user interfaces and single-page applications. Created by Evan You, Vue combines the best aspects of other frameworks while remaining lightweight and approachable. Its incrementally adoptable architecture allows developers to integrate Vue into existing projects one component at a time, unlike all-or-nothing frameworks. Vue's template syntax is intuitive for those familiar with HTML, while its reactive data binding system automatically updates the DOM when the underlying data changes. With an emphasis on simplicity and flexibility, Vue has gained popularity among developers seeking a balance between functionality and ease of use.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://www.w3schools.com/" target="_blank" class="link-title">W3Schools</a>
+    <div class="link-description">W3Schools offers a wide range of services and products for beginners and professionals, helping millions of people every day learn and master new skills—this is like a huge database of everything related to coding.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+  <div class="link-card">
+    <a href="https://webpack.js.org/" target="_blank" class="link-title">Webpack</a>
+    <div class="link-description">Webpack is a static module bundler for modern JavaScript applications. It analyzes your project's dependency graph and bundles modules into optimized packages for the browser. Webpack's core strength is its ability to process not just JavaScript but also CSS, images, fonts, and other assets through loaders and plugins. This enables practices like code splitting, which improves application load times by delivering code only when needed. Webpack's hot module replacement feature enhances the development experience by updating modules in the browser without requiring a full refresh, while its extensive configuration options provide flexibility for projects of all sizes.</div>
+    <span class="read-more-link" onclick="toggleDescription(this)">Read more</span>
+  </div>
+
+</div>
 <!-- footer -->
 <div class="footer">
   <p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>

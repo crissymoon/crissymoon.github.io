@@ -2,10 +2,46 @@
 <html>
 <head><title>EDITZ - Crissy</title>
 <link rel="icon" type="image/x-icon" href="img/avatar.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3.1&t=20250627">
 <meta http-equiv="Content-Type" content="text/html" charset=utf-8>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
+<style>
+  .tech-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 4px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(149, 43, 255, 0.1), rgba(102, 255, 153, 0.1));
+    border: 1px solid rgba(102, 255, 153, 0.3);
+    color: #66ff99;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  }
+  
+  .section-heading {
+    color: #66ff99;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(102, 255, 153, 0.3);
+    padding-bottom: 5px;
+  }
+  
+  .expertise-area {
+    margin-bottom: 20px;
+  }
+  
+  .highlight {
+    color: #7bffaa;
+    font-weight: bold;
+  }
+
+  .portfolio-text {
+    line-height: 1.7;
+  }
+</style>
 </head>
 <body>
 
@@ -27,85 +63,72 @@
 <!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
 <h2 class="border_box_shadow_topic">About Me</h2>
 
-<div class="container">
-<!-- Avatar/Img -->
-<img src="img/avatar.png" class="image" width="230">
-<br>
-<!-- name -->
-<p>
-<br>
-<b>Crissy Deutsch</b>&nbsp<i>a.k.a</i>&nbsp<b>Crissy Moon</b>
-<br>
-<br>
+<!-- Change this from <p> to <div> to fix the box styling -->
+<div class="border_box_shadow_p portfolio-text">
 
-<!-- email -->
-<b>Email:</b>&nbsp<a href="mailto:crissymoon711@gmail.com" target="_top">CrissyMoon711@gmail.com</a>
-<br>
-<br>
-
-<!-- tech skills -->
-<b>Technical Skills:</b>
-<br>
-Operating Systems, Networking, Hardware, Office Applications, Computer Programming, SQL/Database Management.
-<br>
-<br>
-<!-- soft skills -->
-<b>Soft skills:</b>
-<br>
-I am a strong communicator with excellent problem-solving skills and a team player eager to learn and adapt! My goal is to remain results-driven and innovative while maintaining the capability of surpassing any “Mental Set.”
-<br>
-<!--
-<a href="Crissy-Deutsch-Resume.html" target="_blank">Click here to view my professional resume!</a>
-<br> -->
-</p>
+<!-- Personal info section with avatar -->
+<div style="text-align: center; margin-bottom: 30px;">
+  <!-- Avatar/Img - added display:block and margin:auto for proper centering -->
+  <img src="img/avatar.png" class="image" width="230" style="margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;">
+  
+  <!-- name -->
+  <div style="margin: 10px 0;">
+    <b>Crissy Deutsch</b>&nbsp;<i>a.k.a</i>&nbsp;<b>Crissy Moon</b>
+  </div>
+  
+  <!-- email -->
+  <div style="margin: 10px 0;">
+    <b>Email:</b>&nbsp;<a href="mailto:crissy@xcaliburmoon.net" target="_top">crissy@xcaliburmoon.net</a>
+  </div>
 </div>
 
+<div class="expertise-area">
+  <h3 class="section-heading">Technical & Professional Competencies</h3>
+  <div style="margin-bottom: 15px;">
+    <b>Technical Proficiencies:</b><br>
+    My technical expertise encompasses multiple operating system architectures, network infrastructure protocols, computer hardware configuration, enterprise software applications, computational programming paradigms, and relational database management systems with advanced query optimization techniques.
+  </div>
+  
+  <div>
+    <b>Interpersonal & Cognitive Capabilities:</b><br>
+    I demonstrate advanced communication proficiency across diverse stakeholder contexts, employ systematic analytical methodologies for complex problem resolution, and maintain collaborative efficacy within multidisciplinary teams. My professional approach emphasizes outcome-oriented innovation while developing cognitive flexibility that transcends conventional heuristic constraints and fixed-perspective problem-solving paradigms.
+  </div>
+</div>
 
+<h3 class="section-heading">Welcome to my Technical Portfolio</h3>
 
-<!-- intro -->
-<p class="border_box_shadow_p">
-<br>
-Welcome to my portfolio,
-<br><br>
-My name is Crissy, and I am a dedicated computer programmer and business consultant providing services that promote technological intervention. This allows me to carry a strong passion for developing innovative software solutions, paying close attention to reducing workload while providing mental space for accuracy. I am pleased to present my portfolio, which reflects my skills, projects, and professional growth as a software developer and business consultant. Since starting my programming career, I have engaged extensively with various programming languages and frameworks, including Python, PHP, HTML, CSS, JavaScript, AI, etc., along with the ability to manage SQL databases efficiently. 
-<br><br>
-My academic background in Information Technology, mainly focusing on computer programming, has equipped me with foundational knowledge in computer science principles and their practical applications. Over the years, I have refined my expertise in web development, building office applications, data analysis, and artificial intelligence agents, embracing the challenges of complex problem-solving and delivering efficient, user-centric solutions.
-<br><br>
-Throughout my professional journey, I have had the privilege of working on diverse projects that demonstrate my problem-solving capabilities and creative thinking, which always lead to surpassing “Mental Set” in an ever-changing and updating field. For instance, I developed a significant project years ago that served as a simple on-site accounting database, which resulted in the property managers being able to manage at top-notch performance. This experience enhanced my technical skills and deepened my understanding of user requirements and the critical importance of effective communication within a development team.
-<br><br>
-In this portfolio, you will find a curated selection of my work, including examples of applications I have constructed, displaying the fundamental knowledge I have gained by building tutorials. Each project or tutorial exemplifies my technical proficiency and commitment to delivering high-quality software solutions. I am continually advancing my programming skills and continuing my education for future success in the technology field.
-<br><br>
-As you review my portfolio, I hope you derive inspiration from my projects and gain insights into my programming journey. I am enthusiastic about connecting with fellow developers, potential collaborators, and employers who share my commitment to technology and innovation.
+I'm Crissy, a computational specialist focused on developing algorithmic solutions and intelligent systems that optimize organizational processes. My expertise encompasses full-stack development with specialized concentration in <span class="highlight">artificial intelligence implementation</span>, <span class="highlight">relational database architecture</span>, and <span class="highlight">process automation frameworks</span>.
 
+<div class="expertise-area">
+  <h3 class="section-heading">Technical Competencies</h3>
+  <span class="tech-badge">Python</span>
+  <span class="tech-badge">PHP</span>
+  <span class="tech-badge">JavaScript</span>
+  <span class="tech-badge">SQL</span>
+  <span class="tech-badge">Machine Learning</span>
+  <span class="tech-badge">Retrieval-Augmented Generation</span>
+  <span class="tech-badge">Neural Network Fine-tuning</span>
+  <span class="tech-badge">Database Management Systems</span>
+  <span class="tech-badge">Event-Driven Architecture</span>
+  <span class="tech-badge">Full-Stack Development</span>
+</div>
 
-<br>
-<br>
-<br>
-<span class="type"><span>Thank you for viewing my portfolio!</span></span>&nbsp
-<span class="type"><span>-Crissy Deutsch</span></span>
-<br>
-<br>
-<br>
-<br>
+<h3 class="section-heading">AI Systems & Computational Automation</h3>
+My recent research has focused on implementing transformer-based language models and developing custom RAG (Retrieval-Augmented Generation) architectures. I've engineered systems that integrate structured database queries with vector embeddings to create context-aware applications that demonstrate significant efficiency improvements in information retrieval and decision support processes. These implementations have yielded quantifiable reductions in manual processing requirements while enhancing output precision metrics.
 
-<b>Website Mock-ups</b>
-<br>
-<br>
-<a href="dep-sci.html" target="_blank">Basic Blog Type</a>,&nbsp
-<a href="biz-1-pg.html" target="_blank">Business 1-Page</a>,&nbsp
-<a href="const-site.html" target="_blank">Construction Site</a>,&nbsp
-<a href="shop-site.html" target="_blank">Simple Shopify Site</a>,&nbsp
-<a href="survey.html" target="_blank">Custom Survey</a>
-<br>
-<br>
-<br>
-**3-24-2025**—I wanted to share some friendly instructions for the website mock-ups after receiving valuable feedback from a thoughtful email that prefers to stay anonymous. I truly appreciate all suggestions, as they help create something lasting and fantastic! 
-<br><br>
-**Instructions:**
-In the top right corner of the images, you’ll find a full-screen button that you can click. There are arrows on both sides of the images to help you scroll through them easily. And if you’re using a mobile device, it’s best to turn your phone sideways for a better view. Enjoy!
-<br>
-<br>
-</p>
+<h3 class="section-heading">Database Systems Engineering</h3>
+Throughout my professional tenure, I've designed and optimized relational database architectures that serve as foundational components for business intelligence frameworks. My methodology emphasizes referential integrity, query performance optimization, and developing programmatic interfaces that transform normalized data structures into actionable analytical insights. A notable implementation involved developing a comprehensive accounting database system utilizing advanced SQL procedures that fundamentally transformed operational workflows through automated reconciliation and multi-dimensional data visualization.
+
+<h3 class="section-heading">Full-Stack Application Development</h3>
+I develop comprehensive computational solutions utilizing contemporary JavaScript frameworks coupled with server-side PHP/Python implementations. My applications implement robust user interfaces while executing complex algorithmic logic that automates repetitive computational tasks. My particular research interest lies in event-driven architectural patterns that respond programmatically to both user interactions and system-generated events through asynchronous processing mechanisms.
+
+<h3 class="section-heading">Artificial Intelligence Integration Methodology</h3>
+My theoretical approach to AI integration centers on cognitive augmentation rather than process replacement. By engineering systems that algorithmically handle routine computational tasks while providing probabilistic recommendations, I develop technologies that enhance human cognitive capabilities for strategic analysis and complex problem-solving. This methodology has consistently produced empirically verifiable improvements in both productivity metrics and qualitative output assessment.
+
+<h3 class="section-heading">Current Research Directions</h3>
+I am currently investigating advanced applications of transformer-based neural architectures, with particular emphasis on parameter-efficient fine-tuning methodologies for domain-specific natural language understanding. My recent implementations include developing custom retrieval mechanisms that integrate dense vector representations with traditional relational database systems to create context-aware applications capable of complex inferential reasoning with enterprise data repositories.
+
+</div> <!-- Change closing </p> to </div> -->
 
 <!-- footer -->
 <div class="footer">

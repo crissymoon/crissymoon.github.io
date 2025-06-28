@@ -1,17 +1,123 @@
 <!DOCTYPE html>
 <html>
-<head><title>EDITZ - Projects</title>
+<head>
+<title>EDITZ - Projects</title>
 <link rel="icon" type="image/x-icon" href="img/avatar.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3.1&t=20250627">
 <meta http-equiv="Content-Type" content="text/html" charset=utf-8>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
 </head>
+<style>
+  .list-items {
+    list-style: none !important;
+    padding: 0;
+    margin: 0 0 25px 0;
+    line-height: 1.8;
+    text-align: left !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .list-items li {
+    display: block !important;
+    width: 100% !important;
+    margin: 8px 0 !important;
+    clear: both !important;
+    text-align: left !important;
+    padding-left: 15px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .list-items li:first-child {
+    border-top: 0 !important;
+    margin-top: 10px !important; /* Added top margin */
+    padding-top: 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+  
+  .border_box_shadow_p .list-items {
+    border-top: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .border_box_shadow_p .list-items a {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    color: blue !important;
+    text-decoration: underline !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline !important;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    font-weight: normal !important;
+    border-radius: 0 !important;
+    filter: none !important;
+    text-align: left !important;
+  }
+  
+  .border_box_shadow_p .list-items a:hover {
+    background: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  
+  .border_box_shadow_p .list-items:before,
+  .border_box_shadow_p .list-items:after {
+    display: none !important;
+    content: none !important;
+    height: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+  
+  .border_box_shadow_p .list-items li:first-child:before,
+  .border_box_shadow_p .list-items li:first-child:after {
+    display: none !important;
+    content: none !important;
+    height: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+  
+  .border_box_shadow_p .list-items li:first-child {
+    border-top-width: 0 !important;
+    border-top-style: none !important;
+    border-top-color: transparent !important;
+    margin-top: 10px !important; /* Added top margin */
+    padding-top: 0 !important;
+    background: transparent !important;
+  }
+  
+  .read-more-link {
+  color: #66ff99;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 5px;
+}
+.definition-item {
+  margin-bottom: 15px;
+}
+</style>
 <body>
 
 
 <!-- heading -->
-<h1 class="main_heading"> <!-- the genderator to make this ascii art is https://fsymbols.com/generators/carty/ -->
+<h1 class="main_heading">
 <span style="color: #952bff"><i>from</i></span> editz <span style="color: #952bff"><i>import</i></span> EDITZ
 </h1>
 
@@ -23,85 +129,193 @@
   <li><a href="about.html">About Me</a></li>
 </ul>
 
-<!-- body/iframe -->
-<!-- <iframe class="iframe_specs" src="introduction.html"></iframe> -->
+
+
 <h2 class="border_box_shadow_topic">Projects/Tutorials</h2>
 <!-- intro -->
-<p class="border_box_shadow_p">
+<div class="border_box_shadow_p" style="line-height: 1.6; font-size: clamp(0.95rem, 2.5vw, 1.05rem);">
 <!-- Projects -->
-<b>Projects</b>
-<br>
-<br>
-<a href="data-services.html">Data Services</a> - Relational Data, Data Accuracy, and Work Redundancy Due To Tech!<br><br>
-<a href="dot.html">Dot.py - Personal AI Assistant</a><br><br>
-<a href="texteditor.html">Editor.py - A basic notepad/editor</a><br><br>
+<h3 style="color: #ff3399; margin: 0 0 15px 0; font-size: 1.2rem;">Projects</h3>
+<ul class="list-items">
+  <li style="margin-left: 8px; margin-top: 10px;">
+    <a href="dot.html">Dot.py - Personal AI Assistant</a>
+  </li>
+  <li style="margin: 8px 0;">
+   <a href="texteditor.html">Editor.py - Basic notepad/text editor</a>
+  </li>
+</ul>
 
-<br>
 
+<h3 style="color: #3399ff; margin: 25px 0 15px 0; font-size: 1.2rem;">Tutorials</h3>
+<ul class="list-items">
+  <li style="margin-left: 8px; margin-top: 10px;">
+    <a href="basichtml.html">Build a basic HTML webpage</a>
+  </li>
+  <li style="margin: 8px 0;">
+    <a href="deepseek.html">DeepSeek AI Tutorial Using Python</a>
+  </li>
+  <li style="margin: 8px 0;">
+    <a href="openai.html">OpenAI Tutorial - Python</a>
+  </li>
+</ul>
 
-<b>Tutorials</b>
-<br>
-<br>
-<a href="basichtml.html">Build a basic HTML webpage!</a><br><br>
-<a href="deepseek.html">DeepSeek AI Tutorial Using Python</a> - Greetings, Let's Explore AI!/Learn to code with AI!.  . .<br><br>
-<a href="openai.html">OpenAI Turotial - Python</a><br><br>
+<h3 style="color: #ff9933; margin: 30px 0 15px 0; font-size: 1.2rem;">Tools</h3>
 
-<br>
-
-<b>Tools</b>
-<br><br>
-<a href="https://xcaliburmoon.net/fp_calc/computing.php" target="_blank">Computing CO2 Calc</a>
-<br><br>
-A simple and easy-to-use computer calculator that empowers you to quickly determine how much CO2 emissions can be saved by considering hardware usage, all backed by a list of credible references.
-<br><br>
-<a href="https://xcaliburmoon.net/qrcode.html" target="_blank">Simple QR Code Creator → https://xcaliburmoon.net/qrcode.html</a>
-<br><br>
-This is a simple tool. It was created to test the new data services project, but I thought it would be cool to share it here.
-<br><br>
-<a href="budget-tool.html" target="_blank">Budget Tool</a>
-<br><br>
-I’m excited to share this handy tool that saves time when formatting and making a simple expense sheet. It’s perfect for creating budget printables!
-<br><br>
-<a href="editz-tool.html" target="_blank">Document Type Editor</a>
-<br><br>
-Check out this cool and easy-to-use editor! It has templates for things like resumes and a calendar, plus a bunch of styling options to help you whip up any kind of content or documents you need. 
-<br><br>
-<a href="cal-tool.html">Simple Calendar Tool</a>
-<br><br>
-An easy-to-use calendar creation tool! If you need to whip up a one-page printable calendar quickly, this is the perfect solution. Want something a bit more advanced? If you're looking for features like a login system, tracking events for future reference, or more customization options, <a href="mailto:crissymoon711@gmail.com" target="_top">email me</a>, and we can chat about it.
-<br><br>
-<a href="drag-n-drop-working.html" target="_blank">Towers of Hanoi</a>
-<br><br>
-It is a fun tool to learn about recursion and data structuring in computer science and programming. When you dive into this tool, you will find a simple recursive technique written in Python—when the tool loads. Instead of going through a long tutorial, which can be extensively detailed, I would love to share a fantastic YouTube channel that covers topics related to computer science. Enjoy exploring! Check out the Computerphile channel: <a href="https://www.youtube.com/@Computerphile" target="_blank">https://www.youtube.com/@Computerphile</a>
-
-<br><br><br>
-<b>Website Mock-ups</b>
-<br>
-<br>
-<a href="dep-sci.html" target="_blank">Basic Blog Type</a>,&nbsp
-<a href="biz-1-pg.html" target="_blank">Business 1-Page</a>,&nbsp
-<a href="const-site.html" target="_blank">Construction Site</a>,&nbsp
-<a href="shop-site.html" target="_blank">Simple Shopify Site</a>,&nbsp
-<a href="survey.html" target="_blank">Custom Survey</a>
-<br>
-<br>
-<br>
-<br>
+<ul class="list-items">
+  <li style="margin: 8px 0;"><a href="https://markettrending.net/public_acct/" target="_blank">Accounting App</a></li>
+  <li style="margin: 8px 0;"><a href="https://xcaliburmoon.net/fp_calc/computing.php" target="_blank">Computing CO2 Calc</a></li>
+  <li style="margin: 8px 0;"><a href="https://xcaliburmoon.net/qrcode.html" target="_blank">Simple QR Code Creator</a></li>
+  <li style="margin: 8px 0;"><a href="editz-tool.html" target="_blank">Document Type Editor</a></li>
+  <li style="margin: 8px 0;"><a href="cal-tool.html">Simple Calendar Tool</a></li>
+  <li style="margin: 8px 0;"><a href="drag-n-drop-working.html" target="_blank">Towers of Hanoi</a></li>
+</ul>
+<h3 style="color: #9966ff; margin: 30px 0 15px 0; font-size: 1.2rem;">Website Templates</h3>
+<ul class="list-items">
+  <li style="margin: 8px 0;"><a href="dep-sci.html">Basic Blog Type</a></li>
+  <li style="margin: 8px 0;"><a href="biz-1-pg.html">Business 1-Page</a></li>
+  <li style="margin: 8px 0;"><a href="const-site.html">Construction Site</a></li>
+  <li style="margin: 8px 0;"><a href="shop-site.html">Simple Shopify Site</a></li>
+  <li style="margin: 8px 0;"><a href="survey.html">Custom Survey</a></li>
+</ul>
 
 
 
-<b>Down-to-Earth Definitions</b>
-<br><br>
-<b>Recursion:</b>&nbspA programming technique in which a function calls itself, either directly or indirectly, to tackle a problem. This approach simplifies a complex issue by breaking it down into smaller, more manageable sub-problems. It continues to do this until it arrives at a base case, which can be solved without additional recursion.<br><br>
-<b>While Loop:</b>&nbspA while loop is a key control structure in programming that enables a block of code to run repeatedly as long as a specific condition remains true. It's beneficial for tasks where the number of iterations isn't predetermined and relies on a changing condition.<br><br>
-<b>If Statement:</b>&nbspAn if statement is a basic control structure in programming that enables you to run a block of code based on the truth of a particular condition. It allows you to make decisions in your code, executing different actions depending on whether the condition evaluates to true or false.<br><br>
-<b>Responsive:</b>&nbspThis basically just means your webpage will be able to shrink or grow when used on a mobile device or a larger desktop screen. Responsiveness is essential if you create a website for selling items or something highly utilized on mobile devices, like search websites—Google or Bing. No matter how small the screen is, it somehow works.<br><br>
-<b>Meta Tags:</b>&nbspVery simple! It is information that is like spoken to the web browser to handle many different actions, such as supporting Unicode or characters that are sometimes considered illegal. For example, characters that are not usually allowed in website usernames. Or the “viewport” meta tag, which is used mainly to make the page look better on a mobile device. It is included in the source code above, and that specific code arrangement is prevalent on webpages. It just fits everything better, considering the screen size.<br><br>
+<h3 style="color: #ffcc33; margin: 30px 0 20px 0; font-size: clamp(1.1rem, 3vw, 1.3rem); border-bottom: 2px solid rgba(255, 204, 51, 0.3); padding-bottom: 8px;">📖 Programming Definitions</h3>
 
-Complete List of Meta HTML Tags: <a href="https://gist.github.com/whitingx/3840905" target="_blank">https://gist.github.com/whitingx/3840905</a>
-<br>
+<div class="definition-item">
+  <b>Variable:</b>&nbsp;Like a labeled box where you store things to use later. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">You put a value in the box (like a number or text), give it a name, and can grab that value whenever you need it. Just like how you might label a box "Winter Clothes" to find your sweaters easily.</span>
+</div><br>
 
-</p>
+<div class="definition-item">
+  <b>Function:</b>&nbsp;A mini-recipe that does one specific job when called. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Instead of writing the same steps over and over, you create one recipe and just say "do that thing" whenever needed. Like having a coffee-making routine - you don't think about each step, you just "make coffee."</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Recursion:</b>&nbsp;Like those Russian nesting dolls - the same pattern repeating at different sizes. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">A function that calls itself to solve smaller versions of the same problem. It's like looking up a word in a dictionary, but that definition contains another word you need to look up, and so on until you understand everything.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>While Loop:</b>&nbsp;A "keep doing this until I tell you to stop" instruction. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like telling someone "keep stirring the sauce until it thickens" - you don't know exactly how long it will take, but you know when to stop. Great for situations where you need to repeat something an unknown number of times.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>If Statement:</b>&nbsp;A fork in the road for your code. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">It checks a condition and chooses which path to take. Just like how you might check the weather: "If it's raining, take an umbrella. Otherwise, leave it at home." Computers make thousands of these simple decisions to create complex behavior.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Array:</b>&nbsp;A row of boxes, numbered from zero, that hold related items. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like an egg carton where each slot is numbered and holds one item. Perfect for when you need an ordered collection of things, like a shopping list, where you can say "give me item #3" and get exactly what you want.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Object:</b>&nbsp;A container that groups related information with labels. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like a business card with fields for name, phone, and email. Instead of keeping track of separate pieces of data, you bundle them together in a way that makes sense, like keeping all information about a person or product in one place.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>API:</b>&nbsp;A menu of services another program offers you. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like a restaurant menu - you don't need to know how they cook the food, you just need to know what you can order. APIs let your program use services from other programs without understanding their inner workings.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Bug:</b>&nbsp;When your code does something you didn't expect. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like following a cake recipe but forgetting to add sugar - the result isn't what you wanted. Bugs happen because computers do exactly what you tell them, not what you meant to tell them. Finding and fixing bugs (debugging) is a huge part of programming.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Responsive:</b>&nbsp;A website that adapts to fit any screen size. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like water taking the shape of whatever container it's in. Whether someone views your site on a phone, tablet, or desktop, everything rearranges itself to look good and work properly, providing a good experience for all users.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Meta Tags:</b>&nbsp;Notes for browsers and search engines, not humans. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like the nutrition facts label on food - most people don't read it, but it contains important information. Meta tags tell search engines what your page is about, how to display it in search results, and give browsers special instructions about how to handle the page.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>For Loop:</b>&nbsp;A "do this X times exactly" instruction. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like saying "stir the cake mix 50 times" - you know exactly how many times to repeat. For loops are perfect when you need to do something a specific number of times, like processing each item in a shopping list or counting from 1 to 10.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Boolean:</b>&nbsp;A simple yes/no or true/false value. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like a light switch that can only be on or off. Booleans help make decisions in code: "Is the user logged in? Yes or no?" They're the simplest form of data but incredibly useful for controlling which parts of your code run.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>String:</b>&nbsp;A piece of text stored in your program. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Think of it like a pearl necklace, with each character as a pearl strung together in order. Strings hold everything from user names to paragraphs of text, and come with special tools to search, modify, and combine them.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Database:</b>&nbsp;A digital filing cabinet for your data. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like an organized library where information is stored in a structured way so you can find exactly what you need quickly. Instead of digging through a pile of papers, you can ask specific questions: "Show me all customers who spent over $100 last month."</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Framework:</b>&nbsp;A pre-built house that needs decorating. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Instead of building everything from scratch, a framework gives you the walls, roof, and foundation - you just add the furniture and décor. Frameworks like React or Django handle the complex parts so you can focus on the unique features of your application.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Library:</b>&nbsp;A collection of tools you can borrow. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like borrowing a hammer instead of making one yourself. Libraries contain pre-written code that solves common problems, saving you time and effort. Want to create charts? There's probably a library for that, with all the complicated math already figured out.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Algorithm:</b>&nbsp;A recipe for solving a specific problem. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Just like a cooking recipe with clear steps: "First chop onions, then sauté until golden." Algorithms are step-by-step instructions to accomplish tasks like sorting a list of names or finding the shortest route between two places.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Debugging:</b>&nbsp;Playing detective with your code. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like troubleshooting why your car won't start. You look for clues, test different parts, and narrow down the problem until you find what's wrong. Debugging often takes more time than writing the initial code, and requires patience and methodical thinking.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Class:</b>&nbsp;A blueprint for creating related objects. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like a cookie cutter that ensures all cookies have the same basic shape. A class defines what properties and abilities objects will have. For example, a "Car" class might specify that every car object needs a color, model, and the ability to drive.</span>
+</div><br>
+
+<div class="definition-item">
+  <b>Inheritance:</b>&nbsp;When one type of thing inherits traits from another. <span class="read-more-link" onclick="toggleReadMore(this)">Read more</span>
+  <span class="extended-content" style="display: none;">Like how a smartphone is a "phone plus extra features." In code, a "SportsCar" class might inherit all the basic properties of a "Car" class, while adding its own special features like "turboCharge()". This lets you reuse code instead of starting from scratch.</span>
+</div><br>
+
+<script>
+function toggleReadMore(element) {
+  // Find the parent definition item, regardless of where the link currently is
+  var definitionItem = element.closest('.definition-item');
+  var content = definitionItem.querySelector('.extended-content');
+  
+  // If we can't find the content, exit
+  if (!content) return;
+  
+  if (content.style.display === "none" || !content.style.display) {
+    // Show the extended content
+    content.style.display = "inline";
+    // Change the link text to "Read less"
+    element.textContent = "Read less";
+    // Move the link to the end of the content
+    content.appendChild(element);
+  } else {
+    // Hide the extended content
+    content.style.display = "none";
+    // Change the link text to "Read more"
+    element.textContent = "Read more";
+    // Move the link back after the initial text
+    var initialTextEnd = content.previousSibling;
+    definitionItem.insertBefore(element, content);
+  }
+}
+</script>
+
+</div>
 <!-- footer -->
 <div class="footer">
 	<p style="padding: 10px;">This website content is protected by copyright &copy; 2025 __EDITZ__</p>

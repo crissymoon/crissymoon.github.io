@@ -3,7 +3,7 @@
 <head>
 <title>EDITZ</title>
 <link rel="icon" type="image/x-icon" href="img/avatar.png">
-<link rel="stylesheet" href="style.css?v=3.0&t=20250627">
+<link rel="stylesheet" href="style.css?v=3.1&t=20250627">
 <meta http-equiv="Content-Type" content="text/html" charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache; no-store; must-revalidate">
@@ -28,6 +28,318 @@
               -webkit-hyphens: auto;
               hyphens: auto;
             }
+          .list-items {
+              list-style-type: none !important;
+              padding: 0 !important;
+              margin: 0 0 25px 0 !important;
+              line-height: 1.8 !important;
+              text-align: left !important;
+              background: transparent !important;
+              border: none !important;
+              border-top: 0 !important;
+              box-shadow: none !important;
+              outline: none !important;
+          }
+          
+          .list-items li {
+              display: block !important;
+              width: 100% !important;
+              margin: 8px 0 !important;
+              clear: both !important;
+              text-align: left !important;
+              padding-left: 15px !important;
+              background: transparent !important;
+              border: none !important;
+              box-shadow: none !important;
+              outline: none !important;
+          }
+          
+          .list-items a {
+              background: none !important;
+              border: none !important;
+              box-shadow: none !important;
+              text-shadow: none !important;
+              padding: 0 !important;
+              margin: 0 !important;
+              display: inline !important;
+              animation: none !important;
+              transition: none !important;
+              transform: none !important;
+              font-weight: normal !important;
+              border-radius: 0 !important;
+              filter: none !important;
+              text-align: left !important;
+          }
+  
+  /* Add these additional styles to completely remove any background from first list item */
+  .list-items li:first-child {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Make sure any potential pseudo-elements are also disabled */
+  .list-items li:first-child:before,
+  .list-items li:first-child:after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Target the border-box-shadow container as well */
+  .border_box_shadow_p .list-items li:first-child {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  /* Super aggressive styling to remove any possible background from first list item */
+  .list-items li:first-child,
+  .border_box_shadow_p .list-items li:first-child,
+  ul.list-items li:first-child,
+  .list-items > li:first-child {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    background-position: 0 0 !important;
+    background-size: 0 0 !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-origin: padding-box !important;
+    background-clip: border-box !important;
+    border: none !important;
+    border-width: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-color: transparent !important;
+    border-style: none !important;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    outline: none !important;
+    text-shadow: none !important;
+  }
+  
+  /* Target absolutely all pseudo-elements */
+  .list-items li:first-child:before,
+  .list-items li:first-child:after,
+  .border_box_shadow_p .list-items li:first-child:before,
+  .border_box_shadow_p .list-items li:first-child:after,
+  ul.list-items li:first-child:before,
+  ul.list-items li:first-child:after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  /* Nuclear option to eliminate any possible background on first list items */
+  .list-items li:first-child,
+  .list-items > li:first-child,
+  .border_box_shadow_p .list-items li:first-child,
+  ul.list-items li:first-child,
+  body .list-items li:first-child,
+  html .list-items li:first-child {
+    position: relative !important;
+    z-index: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    background-position: 0 0 !important;
+    background-size: 0 0 !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-origin: padding-box !important;
+    background-clip: border-box !important;
+    border: 0 none transparent !important;
+    border-width: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+    border-color: transparent !important;
+    border-style: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    margin: 8px 0 !important;
+    padding: 0 0 0 15px !important;
+    outline: none !important;
+    opacity: 1 !important;
+  }
+  
+  /* Clear any ::before or ::after content */
+  .list-items li:first-child::before,
+  .list-items li:first-child::after,
+  .border_box_shadow_p .list-items li:first-child::before,
+  .border_box_shadow_p .list-items li:first-child::after,
+  ul.list-items li:first-child::before,
+  ul.list-items li:first-child::after {
+    display: none !important;
+    visibility: hidden !important;
+    content: none !important;
+    content: "" !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    z-index: -1 !important;
+  }
+  
+  /* Special style to handle parent containers */
+  .border_box_shadow_p {
+    position: relative !important;
+    z-index: 0 !important;
+  }
+  
+  /* Override for all list items */
+  .list-items li {
+    background: transparent !important;
+  }
+  
+  /* Ultra-specific styling to target exactly the XcaliburMoon list items */
+  .border_box_shadow_p ul.list-items li,
+  .border_box_shadow_p ul.list-items li:first-child,
+  body .border_box_shadow_p ul.list-items li,
+  html body .border_box_shadow_p ul.list-items li {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Remove any possible gradient overlays */
+  .border_box_shadow_p ul.list-items li:before,
+  .border_box_shadow_p ul.list-items li:after {
+    content: none !important;
+    display: none !important;
+    opacity: 0 !important;
+    background: none !important;
+    background-image: none !important;
+    background-color: transparent !important;
+  }
+  
+  /* Clear any inherited backgrounds from parent elements */
+  .border_box_shadow_p {
+    background-clip: padding-box !important;
+  }
+  
+  /* Final nuclear solution for list backgrounds */
+  body div.border_box_shadow_p ul.list-items li,
+  html body div.border_box_shadow_p ul.list-items li:first-child,
+  div.border_box_shadow_p ul.list-items li:nth-child(1) {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    background-position: initial !important;
+    background-size: initial !important;
+    background-repeat: initial !important;
+    background-origin: initial !important;
+    background-clip: initial !important;
+    background-attachment: initial !important;
+    border: 0 none transparent !important;
+    border-width: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    filter: none !important;
+  }
+  
+  /* Remove any inherited backgrounds from direct parent */
+  div.border_box_shadow_p {
+    background-clip: padding-box !important;
+  }
+  
+  /* Ensure direct parent elements don't contribute */
+  body div.border_box_shadow_p ul.list-items {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+  
+  /* Clean, simple styling that works in projects.html */
+  .list-items {
+    list-style: none !important;
+    padding: 0;
+    margin: 0 0 25px 0;
+    line-height: 1.8;
+    text-align: left !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .list-items li {
+    display: block !important;
+    width: 100% !important;
+    margin: 8px 0 !important;
+    clear: both !important;
+    text-align: left !important;
+    padding-left: 15px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .list-items li:first-child {
+    border-top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border: none !important;
+  }
+  
+  /* Target the specific XcaliburMoon list with !important and inline styles */
+  .border_box_shadow_p h4 + ul.list-items,
+  .border_box_shadow_p h4 + ul.list-items li {
+    position: relative !important;
+    z-index: auto !important;
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    -webkit-background-image: none !important;
+    -moz-background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Remove any possible gradients, overlays, or decorative elements */
+  .border_box_shadow_p h4 + ul.list-items::before,
+  .border_box_shadow_p h4 + ul.list-items::after,
+  .border_box_shadow_p h4 + ul.list-items li::before,
+  .border_box_shadow_p h4 + ul.list-items li::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+  }
 </style>
 </head>
 <body>
@@ -64,25 +376,25 @@
 
   <h4 style="color: #ffcc33; margin: 30px 0 15px 0; font-size: clamp(1rem, 2.8vw, 1.3rem); text-align: left; box-sizing: border-box;">Current Projects</h4>
   
-  <ul style="list-style: none; padding: 0; margin: 0 0 20px 0; font-size: clamp(0.95rem, 2.5vw, 1.05rem); line-height: 1.8; box-sizing: border-box;">
-    <li style="margin: 8px 0;">
-    <a href="https://xcaliburmoon.net/" target="_blank" style="color: #66ff99; text-decoration: underline;">XcaliburMoon</a>
-    </li>
-    <li style="margin: 8px 0;">
-    <a href="https://markettrending.net/public_acct/" target="_blank" style="color: #66ff99; text-decoration: underline;">MarketTrending</a>
-    </li>
-    <li style="margin: 8px 0;">
+  <ul class="list-items" style="background: transparent !important; background-image: none !important; border-top: none !important; padding-top: 0 !important; border: none !important;">
+  <li style="background: transparent !important; background-image: none !important; background-color: transparent !important; border: none !important; box-shadow: none !important; margin-top: 5px !important; padding-top: 0 !important; position: relative;">
+    <a href="https://xcaliburmoon.net/" target="_blank" style="color: #66ff99; text-decoration: underline; background: none !important;">XcaliburMoon</a>
+  </li>
+  <li style="background: transparent !important; background-image: none !important; background-color: transparent !important; border: none !important; box-shadow: none !important;">
+    <a href="https://markettrending.net/public_acct/" target="_blank" style="color: #66ff99; text-decoration: underline;">Accounting App</a>
+  </li>
+  <li style="background: transparent !important; background-image: none !important; background-color: transparent !important; border: none !important; box-shadow: none !important; margin: 8px 0;">
     <a href="https://howdymail.net/" target="_blank" style="color: #66ff99; text-decoration: underline;">HowdyMail</a>
-    </li>
-    <li style="margin: 8px 0;">
+  </li>
+  <li style="background: transparent !important; background-image: none !important; background-color: transparent !important; border: none !important; box-shadow: none !important; margin: 8px 0;">
     <a href="https://avacorp.org/" target="_blank" style="color: #66ff99; text-decoration: underline;">AvaCorp</a>
-    </li>
-    <li style="margin: 8px 0;">
+  </li>
+  <li style="background: transparent !important; background-image: none !important; background-color: transparent !important; border: none !important; box-shadow: none !important; margin: 8px 0;">
     <a href="https://xcaliburmoon.net/themes/non-profit/" target="_blank" style="color: #66ff99; text-decoration: underline;">Non-Profit Theme</a>
-    </li>
-    <li style="margin: 8px 0;">
+  </li>
+  <li style="background: transparent !important; background-image: none !important; background-color: transparent !important; border: none !important; box-shadow: none !important; margin: 8px 0;">
     <a href="https://livingadvantageapps.com/" target="_blank" style="color: #66ff99; text-decoration: underline;">Living Advantage Apps</a>
-    </li>
+  </li>
   </ul>
 
   <div style="text-align: right; margin: 30px 0 20px 0; font-style: italic; color: #cccccc; box-sizing: border-box;">
@@ -132,7 +444,7 @@
 </div>
 
 <!-- Image Slider -->
-<div class="border_box_shadow_code">
+<!-- <div class="border_box_shadow_code">
   <div class="image-slider">
     <div class="slider-container">
       <div class="slider-track" id="sliderTrack">
@@ -142,23 +454,23 @@
       </div>
     </div>
     
-    <!-- Navigation buttons -->
+ 
     <button class="slider-btn prev-btn" onclick="changeSlide(-1)">&#8249;</button>
     <button class="slider-btn next-btn" onclick="changeSlide(1)">&#8250;</button>
     
-    <!-- Dots indicator -->
+  
     <div class="slider-dots">
       <span class="dot active" onclick="currentSlide(1)"></span>
       <span class="dot" onclick="currentSlide(2)"></span>
       <span class="dot" onclick="currentSlide(3)"></span>
     </div>
     
-    <!-- Image counter -->
+  
     <div class="slider-counter">
       <span id="currentImageNumber">1</span> / <span id="totalImages">3</span>
     </div>
   </div>
-</div>
+</div> -->
 
 <style>
 .image-slider {
