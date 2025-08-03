@@ -253,7 +253,7 @@ def deepseek(ask, temp):
             model="deepseek-chat",
             messages=[
                 {"role": "system", "content": f"{assistant_type} {time_and_location} {additional_info}"}, 
-                {"role": "user", "content": f"{i}"},
+                {"role": "user", "content": f"{ask}"},
             ],
             temperature=temp, stream=False
         )   
