@@ -305,6 +305,25 @@ a:hover {
   margin-bottom: 2.5rem;
 }
 
+/* === EDUCATION & TECHNICAL BACKGROUND === */
+.education-section {
+  margin-bottom: 2.5rem;
+}
+
+.education-block {
+  background-color: var(--secondary);
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--primary);
+  border-radius: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.education-block p {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
 .links-list {
   list-style: none;
   padding: 0;
@@ -485,6 +504,12 @@ a:hover {
       <ul class="skills-list" id="skills-list"></ul>
     </section>
 
+    <!-- Education & Technical Background -->
+    <section class="education-section" id="education-section" style="display:none;">
+      <h2 class="section-title">Education &amp; Technical Background</h2>
+      <div class="education-block" id="education-block"></div>
+    </section>
+
     <!-- Links -->
     <section class="links-section">
       <h2 class="section-title">Links</h2>
@@ -543,6 +568,7 @@ var __CRISSY_DATA__ = {
   "projects": [
     {
       "id": 1,
+      "displayOrder": 1,
       "title": "lainc.io",
       "description": "Tutorials and technical reference platform.",
       "url": "https://lainc.io/",
@@ -553,6 +579,7 @@ var __CRISSY_DATA__ = {
     },
     {
       "id": 2,
+      "displayOrder": 2,
       "title": "XcaliburMoon",
       "description": "Personal infrastructure and development projects.",
       "url": "https://xcaliburmoon.net/",
@@ -563,6 +590,7 @@ var __CRISSY_DATA__ = {
     },
     {
       "id": 3,
+      "displayOrder": 3,
       "title": "This Page Itself :)",
       "description": "This portfolio builder is written in C, Go, HTML, CSS, and Vanilla JS. It allows connecting to AI APIs to help with grammar checking and content addition. It includes a full CMS for building locally and pushing live to GitHub.",
       "url": "https://github.com/crissymoon/GitHub-Portfolio-Page-Builder",
@@ -572,6 +600,10 @@ var __CRISSY_DATA__ = {
       ]
     }
   ],
+  "education": {
+    "summary": "I am a full stack dev with solid hands on experience across web, mobile, and desktop apps. I have an EPA cert from a technical engineering program, plus a background in tech focused business development and consulting with an innovation angle, professional writing training, and an IT degree. I am currently working on a Bachelor of Computer Science and plan to keep going into a PhD focused on AI. Overall, I mix real world build experience with ongoing deep dives into advanced CS topics.",
+    "showOnPortfolio": true
+  },
   "supportLink": {
     "url": "https://square.link/u/0MsDz4Gz",
     "label": "Help support me with a coffee"
@@ -724,6 +756,14 @@ var __CRISSY_DATA__ = {
         projects.push(proj);
       }
     }
+
+    /* Sort by displayOrder */
+    projects.sort(function (a, b) {
+      var oa = (typeof a.displayOrder === "number") ? a.displayOrder : 9999;
+      var ob = (typeof b.displayOrder === "number") ? b.displayOrder : 9999;
+      return oa - ob;
+    });
+
     var totalPages = Math.ceil(projects.length / PROJECTS_PER_PAGE);
     if (currentPage > totalPages) currentPage = totalPages;
     if (currentPage < 1) currentPage = 1;
@@ -818,6 +858,20 @@ var __CRISSY_DATA__ = {
       html += "<li>" + escapeHtml(data.info.skills[i]) + "</li>";
     }
     el.innerHTML = html;
+  }
+
+  /* ---- Rendering: Education & Technical Background ---- */
+
+  function renderEducation(data) {
+    var el = document.getElementById("education-block");
+    var section = document.getElementById("education-section");
+    if (!el || !section) return;
+    if (!data.education || !data.education.showOnPortfolio || !data.education.summary) {
+      section.style.display = "none";
+      return;
+    }
+    section.style.display = "";
+    el.innerHTML = "<p>" + escapeHtml(data.education.summary) + "</p>";
   }
 
   /* ---- Rendering: Links ---- */
@@ -915,6 +969,7 @@ var __CRISSY_DATA__ = {
     renderProjects(data);
     renderInfo(data);
     renderSkills(data);
+    renderEducation(data);
     renderLinks(data);
     renderSupportLink(data);
   }
